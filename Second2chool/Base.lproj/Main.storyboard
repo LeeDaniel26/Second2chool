@@ -464,16 +464,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogw-uM-iez" userLabel="E-mail ID Stack View">
-                                <rect key="frame" x="45" y="308.66666666666669" width="300" height="33"/>
+                                <rect key="frame" x="45" y="308.66666666666669" width="300" height="29.666666666666686"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please Enter certification number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fPn-Qr-UZL">
-                                        <rect key="frame" x="0.0" y="0.0" width="235.33333333333334" height="33"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="241.66666666666666" height="29.666666666666668"/>
                                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                                         <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="De2-u6-l1x">
-                                        <rect key="frame" x="235.33333333333329" y="0.0" width="64.666666666666657" height="33"/>
+                                        <rect key="frame" x="241.66666666666671" y="0.0" width="58.333333333333343" height="29.666666666666668"/>
                                         <color key="backgroundColor" red="0.92549019610000005" green="0.38823529410000002" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="De2-u6-l1x" secondAttribute="height" multiplier="81:41" id="VWe-Kt-Ibc"/>
@@ -550,6 +550,21 @@
             <point key="canvasLocation" x="2416.9230769230767" y="-28.436018957345969"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="nDc-DU-GeM">
+            <objects>
+                <viewController id="Ue5-Cc-ghR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="efq-uF-QOz">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="VXU-GN-lT8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hVi-Ae-iZY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1694" y="-685"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="ERd-Ud-ong">
             <objects>
                 <viewController id="evC-sr-RNf" sceneMemberID="viewController">
@@ -557,79 +572,432 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="OVw-OY-OFE">
-                                <rect key="frame" x="45" y="144" width="300" height="96"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Crj-13-0EK" userLabel="Email Password Stack View">
+                                <rect key="frame" x="45" y="665" width="300" height="96"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kFN-9s-4Ay" userLabel="E-mail View">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0fd-9v-Ey9" userLabel="Login">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fIM-4g-TdB" userLabel="Your E-mail">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
-                                                <color key="backgroundColor" systemColor="systemGray2Color"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="41" id="nQF-QB-sFP"/>
-                                                    <constraint firstAttribute="width" constant="300" id="xBt-ne-WTY"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="fIM-4g-TdB" secondAttribute="trailing" id="IMj-vI-brs"/>
-                                            <constraint firstAttribute="height" constant="41" id="LcE-b4-URW"/>
-                                            <constraint firstItem="fIM-4g-TdB" firstAttribute="top" secondItem="kFN-9s-4Ay" secondAttribute="top" id="VT2-6X-Ncl"/>
-                                            <constraint firstItem="fIM-4g-TdB" firstAttribute="leading" secondItem="kFN-9s-4Ay" secondAttribute="leading" id="c1y-sp-Ddu"/>
-                                            <constraint firstAttribute="bottom" secondItem="fIM-4g-TdB" secondAttribute="bottom" id="lJh-ui-yz5"/>
-                                            <constraint firstAttribute="width" constant="300" id="t4z-V6-wEk"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2a-Mp-35j" userLabel="Password View">
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Io-Nl-xsA">
                                         <rect key="frame" x="0.0" y="55" width="300" height="41"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kUH-4W-SVP">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
-                                                <color key="backgroundColor" systemColor="systemGray2Color"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="41" id="vEi-ep-FgI"/>
-                                                    <constraint firstAttribute="width" constant="300" id="wTh-ye-Y1b"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="41" id="Evo-ZV-COF"/>
-                                            <constraint firstAttribute="bottom" secondItem="kUH-4W-SVP" secondAttribute="bottom" id="O8x-uK-btq"/>
-                                            <constraint firstAttribute="width" constant="300" id="UY7-rR-fzN"/>
-                                            <constraint firstItem="kUH-4W-SVP" firstAttribute="top" secondItem="k2a-Mp-35j" secondAttribute="top" id="ZJb-nx-5rG"/>
-                                            <constraint firstItem="kUH-4W-SVP" firstAttribute="leading" secondItem="k2a-Mp-35j" secondAttribute="leading" id="hn4-cW-ZCT"/>
-                                            <constraint firstAttribute="trailing" secondItem="kUH-4W-SVP" secondAttribute="trailing" id="ot9-Tp-fG4"/>
-                                        </constraints>
-                                    </view>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="6xH-Qc-wQX"/>
-                                    <constraint firstAttribute="height" constant="96" id="Jh7-N2-fA3"/>
+                                    <constraint firstAttribute="height" constant="96" id="E48-mM-zeP"/>
+                                    <constraint firstAttribute="width" constant="300" id="aba-jE-doB"/>
+                                    <constraint firstAttribute="width" secondItem="Crj-13-0EK" secondAttribute="height" multiplier="25:8" id="c4k-u5-pCp"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share your thoughts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Px4-7X-3LC">
+                                <rect key="frame" x="36" y="471" width="318" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="318" id="cyP-Qw-ynC"/>
+                                    <constraint firstAttribute="width" secondItem="Px4-7X-3LC" secondAttribute="height" multiplier="106:15" id="hKf-XX-xWV"/>
+                                    <constraint firstAttribute="height" constant="45" id="snY-it-dRs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LilitaOne" family="Lilita One" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="oCO-sv-Aum">
+                                <rect key="frame" x="26" y="524" width="338" height="101"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discuss and share your everyday school life" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-1r-Vio">
+                                        <rect key="frame" x="0.0" y="0.0" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="338" id="4gU-Wo-p85"/>
+                                            <constraint firstAttribute="height" constant="26" id="fAs-e7-cpw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="with various friends!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6g-Vx-HhE">
+                                        <rect key="frame" x="0.0" y="25" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="338" id="Ivo-la-5XH"/>
+                                            <constraint firstAttribute="height" constant="26" id="Zjf-iy-1Pb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you may share your tips, or ask questions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFz-Wu-b3b">
+                                        <rect key="frame" x="0.0" y="50" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="338" id="XvC-mM-6bA"/>
+                                            <constraint firstAttribute="height" constant="26" id="YDf-Py-fzq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="related with your university experience!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMT-1r-h4w">
+                                        <rect key="frame" x="0.0" y="75" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="338" id="h7K-RK-wO5"/>
+                                            <constraint firstAttribute="height" constant="26" id="t4b-5Q-Dz3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="338" id="3Vh-Bk-j9H"/>
+                                    <constraint firstAttribute="width" secondItem="oCO-sv-Aum" secondAttribute="height" multiplier="338:101" id="JVK-a4-NJf"/>
+                                    <constraint firstAttribute="height" constant="101" id="ffY-K9-vJT"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="LWd-EH-S3K">
+                                <rect key="frame" x="149" y="419" width="92" height="17"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rOJ-8Z-U9u">
+                                        <rect key="frame" x="0.0" y="0.99999999999999822" width="17.333333333333332" height="15.666666666666666"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ukx-He-u2G">
+                                        <rect key="frame" x="37.333333333333343" y="0.99999999999999822" width="17.333333333333329" height="15.666666666666666"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="pzJ-Bw-EWX">
+                                        <rect key="frame" x="74.666666666666657" y="0.99999999999999822" width="17.333333333333329" height="15.666666666666666"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="LpG-qT-U66"/>
+                                    <constraint firstAttribute="width" constant="92" id="QbZ-La-LMV"/>
+                                </constraints>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Online tech talks-bro" translatesAutoresizingMaskIntoConstraints="NO" id="AOP-sd-ZJF">
+                                <rect key="frame" x="12" y="52" width="366" height="366"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="366" id="M9a-YV-Dju"/>
+                                    <constraint firstAttribute="height" constant="366" id="d3d-jX-faz"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cQ3-Sa-cBs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cQ3-Sa-cBs" firstAttribute="trailing" secondItem="OVw-OY-OFE" secondAttribute="trailing" constant="45" id="7ac-Uu-yso"/>
-                            <constraint firstItem="OVw-OY-OFE" firstAttribute="leading" secondItem="cQ3-Sa-cBs" secondAttribute="leading" constant="45" id="UaW-uL-vaH"/>
-                            <constraint firstItem="OVw-OY-OFE" firstAttribute="top" secondItem="cQ3-Sa-cBs" secondAttribute="top" constant="97" id="WDA-xY-1Or"/>
+                            <constraint firstItem="oCO-sv-Aum" firstAttribute="leading" secondItem="cQ3-Sa-cBs" secondAttribute="leading" constant="26" id="0H8-dP-zZp"/>
+                            <constraint firstItem="AOP-sd-ZJF" firstAttribute="top" secondItem="y4g-kc-K1g" secondAttribute="topMargin" constant="5" id="2tC-6K-Zou"/>
+                            <constraint firstItem="Px4-7X-3LC" firstAttribute="leading" secondItem="cQ3-Sa-cBs" secondAttribute="leading" constant="36" id="JwI-tw-myU"/>
+                            <constraint firstItem="cQ3-Sa-cBs" firstAttribute="trailing" secondItem="oCO-sv-Aum" secondAttribute="trailing" constant="26" id="O3W-hL-AgX"/>
+                            <constraint firstItem="Px4-7X-3LC" firstAttribute="top" secondItem="LWd-EH-S3K" secondAttribute="bottom" constant="35" id="O6b-i0-PEw"/>
+                            <constraint firstAttribute="bottom" secondItem="Crj-13-0EK" secondAttribute="bottom" constant="83" id="OEN-Qs-vI3"/>
+                            <constraint firstItem="LWd-EH-S3K" firstAttribute="leading" secondItem="cQ3-Sa-cBs" secondAttribute="leading" constant="149" id="OOa-pj-vWb"/>
+                            <constraint firstItem="Crj-13-0EK" firstAttribute="top" secondItem="oCO-sv-Aum" secondAttribute="bottom" constant="40" id="XeL-L1-OUN"/>
+                            <constraint firstItem="cQ3-Sa-cBs" firstAttribute="trailing" secondItem="Crj-13-0EK" secondAttribute="trailing" constant="45" id="ZIN-jc-EkX"/>
+                            <constraint firstItem="oCO-sv-Aum" firstAttribute="top" secondItem="Px4-7X-3LC" secondAttribute="bottom" constant="8" id="e64-tV-ufK"/>
+                            <constraint firstItem="AOP-sd-ZJF" firstAttribute="leading" secondItem="cQ3-Sa-cBs" secondAttribute="leading" constant="12" id="i7l-Zr-er5"/>
+                            <constraint firstItem="cQ3-Sa-cBs" firstAttribute="trailing" secondItem="Px4-7X-3LC" secondAttribute="trailing" constant="36" id="qSc-bX-ine"/>
+                            <constraint firstItem="Crj-13-0EK" firstAttribute="leading" secondItem="cQ3-Sa-cBs" secondAttribute="leading" constant="45" id="qmL-Ma-Jkz"/>
+                            <constraint firstItem="cQ3-Sa-cBs" firstAttribute="trailing" secondItem="AOP-sd-ZJF" secondAttribute="trailing" constant="12" id="tpN-DQ-EFA"/>
+                            <constraint firstItem="oCO-sv-Aum" firstAttribute="width" secondItem="oCO-sv-Aum" secondAttribute="height" multiplier="338:101" id="yJT-gy-iUZ"/>
+                            <constraint firstItem="cQ3-Sa-cBs" firstAttribute="trailing" secondItem="LWd-EH-S3K" secondAttribute="trailing" constant="149" id="zSg-y8-gL0"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vf-aV-ANj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3112" y="-28"/>
+            <point key="canvasLocation" x="2417" y="-685"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="gxn-0t-uGs">
+            <objects>
+                <viewController id="Fu5-1C-icl" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cuc-wg-e7E">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-ve-pYx" userLabel="Email Password Stack View">
+                                <rect key="frame" x="45" y="665" width="300" height="96"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kY7-eY-nAH" userLabel="Login">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W0X-aU-a8Y">
+                                        <rect key="frame" x="0.0" y="55" width="300" height="41"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="1U4-VL-9vU"/>
+                                    <constraint firstAttribute="width" secondItem="YjH-ve-pYx" secondAttribute="height" multiplier="25:8" id="DEA-DA-9tb"/>
+                                    <constraint firstAttribute="width" constant="300" id="dGz-pe-2lp"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review your classes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmx-N8-s5D">
+                                <rect key="frame" x="36" y="471" width="318" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="318" id="S1J-PL-ZpJ"/>
+                                    <constraint firstAttribute="width" secondItem="pmx-N8-s5D" secondAttribute="height" multiplier="106:15" id="bcu-o4-Lty"/>
+                                    <constraint firstAttribute="height" constant="45" id="fio-gG-iJ9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LilitaOne" family="Lilita One" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aFt-54-Fxz">
+                                <rect key="frame" x="26" y="524" width="338" height="101"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discuss and share your everyday school life" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21a-gX-FUp">
+                                        <rect key="frame" x="0.0" y="0.0" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="338" id="Mae-XM-uDl"/>
+                                            <constraint firstAttribute="height" constant="26" id="gnt-Uh-bsE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="with various friends!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9A-Vr-fvl">
+                                        <rect key="frame" x="0.0" y="25" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="CSz-tz-89F"/>
+                                            <constraint firstAttribute="width" constant="338" id="lq0-1z-QTR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you may share your tips, or ask questions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxD-Hk-bm8">
+                                        <rect key="frame" x="0.0" y="50" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="338" id="jSc-Ll-Zaw"/>
+                                            <constraint firstAttribute="height" constant="26" id="zMC-uY-YDe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="related with your university experience!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGu-KN-1hq">
+                                        <rect key="frame" x="0.0" y="75" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="GRm-rG-wIe"/>
+                                            <constraint firstAttribute="width" constant="338" id="KBg-ZJ-jeG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="101" id="Aat-dE-IvI"/>
+                                    <constraint firstAttribute="width" secondItem="aFt-54-Fxz" secondAttribute="height" multiplier="338:101" id="jLK-LO-ywR"/>
+                                    <constraint firstAttribute="width" constant="338" id="l0d-lK-Ixk"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fEC-1S-Lac">
+                                <rect key="frame" x="149" y="419" width="92" height="17"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dzt-aI-aSn">
+                                        <rect key="frame" x="0.0" y="0.99999999999999822" width="17.333333333333332" height="15.666666666666666"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ms6-ir-J7b">
+                                        <rect key="frame" x="37.333333333333343" y="0.99999999999999822" width="17.333333333333329" height="15.666666666666666"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dbZ-tr-4vV">
+                                        <rect key="frame" x="74.666666666666657" y="0.99999999999999822" width="17.333333333333329" height="15.666666666666666"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="92" id="KIX-xf-diH"/>
+                                    <constraint firstAttribute="height" constant="17" id="iMh-YE-ryM"/>
+                                </constraints>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exams-rafiki" translatesAutoresizingMaskIntoConstraints="NO" id="qg6-hW-t9y">
+                                <rect key="frame" x="12" y="52" width="366" height="366"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="366" id="1cf-3o-dQR"/>
+                                    <constraint firstAttribute="width" constant="366" id="RkR-sO-TSo"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sSa-lu-DZ0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fEC-1S-Lac" firstAttribute="leading" secondItem="sSa-lu-DZ0" secondAttribute="leading" constant="149" id="2M5-Is-7UA"/>
+                            <constraint firstItem="sSa-lu-DZ0" firstAttribute="trailing" secondItem="YjH-ve-pYx" secondAttribute="trailing" constant="45" id="6nb-Ag-rkJ"/>
+                            <constraint firstItem="sSa-lu-DZ0" firstAttribute="trailing" secondItem="fEC-1S-Lac" secondAttribute="trailing" constant="149" id="DGn-9m-XgT"/>
+                            <constraint firstItem="sSa-lu-DZ0" firstAttribute="trailing" secondItem="aFt-54-Fxz" secondAttribute="trailing" constant="26" id="Dsw-96-tDR"/>
+                            <constraint firstAttribute="bottom" secondItem="YjH-ve-pYx" secondAttribute="bottom" constant="83" id="IMi-fb-4De"/>
+                            <constraint firstItem="pmx-N8-s5D" firstAttribute="top" secondItem="fEC-1S-Lac" secondAttribute="bottom" constant="35" id="KXC-lx-dHy"/>
+                            <constraint firstItem="sSa-lu-DZ0" firstAttribute="trailing" secondItem="pmx-N8-s5D" secondAttribute="trailing" constant="36" id="Kib-jv-WXF"/>
+                            <constraint firstItem="aFt-54-Fxz" firstAttribute="width" secondItem="aFt-54-Fxz" secondAttribute="height" multiplier="338:101" id="Mwp-zs-Ocf"/>
+                            <constraint firstItem="qg6-hW-t9y" firstAttribute="top" secondItem="Cuc-wg-e7E" secondAttribute="topMargin" constant="5" id="PTh-Iv-DgY"/>
+                            <constraint firstItem="aFt-54-Fxz" firstAttribute="leading" secondItem="sSa-lu-DZ0" secondAttribute="leading" constant="26" id="PhJ-e3-W0g"/>
+                            <constraint firstItem="sSa-lu-DZ0" firstAttribute="trailing" secondItem="qg6-hW-t9y" secondAttribute="trailing" constant="12" id="SvV-5Z-w99"/>
+                            <constraint firstItem="YjH-ve-pYx" firstAttribute="leading" secondItem="sSa-lu-DZ0" secondAttribute="leading" constant="45" id="WEj-pJ-MLj"/>
+                            <constraint firstItem="qg6-hW-t9y" firstAttribute="leading" secondItem="sSa-lu-DZ0" secondAttribute="leading" constant="12" id="gh4-HP-UHj"/>
+                            <constraint firstItem="aFt-54-Fxz" firstAttribute="top" secondItem="pmx-N8-s5D" secondAttribute="bottom" constant="8" id="klT-Ja-abf"/>
+                            <constraint firstItem="YjH-ve-pYx" firstAttribute="top" secondItem="aFt-54-Fxz" secondAttribute="bottom" constant="40" id="veK-r4-NnB"/>
+                            <constraint firstItem="pmx-N8-s5D" firstAttribute="leading" secondItem="sSa-lu-DZ0" secondAttribute="leading" constant="36" id="wM6-ki-x3h"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1H2-d9-2Bh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3128" y="-685"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="b1F-Kx-3Yz">
+            <objects>
+                <viewController id="PQO-sC-843" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QAc-hh-rsq">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="eXu-Id-YMS" userLabel="Email Password Stack View">
+                                <rect key="frame" x="45" y="665" width="300" height="96"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kA2-UV-B4e" userLabel="Login">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xqj-Qb-FtZ">
+                                        <rect key="frame" x="0.0" y="55" width="300" height="41"/>
+                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="eXu-Id-YMS" secondAttribute="height" multiplier="25:8" id="KwD-wG-KP5"/>
+                                    <constraint firstAttribute="height" constant="96" id="r89-WB-8ol"/>
+                                    <constraint firstAttribute="width" constant="300" id="rYp-hS-ArJ"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meet global friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cu9-GT-oLS">
+                                <rect key="frame" x="36" y="471" width="318" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="318" id="DhK-TE-agg"/>
+                                    <constraint firstAttribute="height" constant="45" id="VYB-vV-rGe"/>
+                                    <constraint firstAttribute="width" secondItem="cu9-GT-oLS" secondAttribute="height" multiplier="106:15" id="kQf-TC-C8L"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LilitaOne" family="Lilita One" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="iNh-6h-wKD">
+                                <rect key="frame" x="26" y="524" width="338" height="101"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discuss and share your everyday school life" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34i-iv-oCg">
+                                        <rect key="frame" x="0.0" y="0.0" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="R7N-yO-vwW"/>
+                                            <constraint firstAttribute="width" constant="338" id="gXu-zP-bpw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="with various friends!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rl-vs-oJb">
+                                        <rect key="frame" x="0.0" y="25" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="338" id="47A-xw-cMf"/>
+                                            <constraint firstAttribute="height" constant="26" id="Yei-It-x1o"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you may share your tips, or ask questions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZo-Am-Ubt">
+                                        <rect key="frame" x="0.0" y="50" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="H8g-VR-dba"/>
+                                            <constraint firstAttribute="width" constant="338" id="qGQ-xX-qhR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="related with your university experience!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70q-Bf-hrJ">
+                                        <rect key="frame" x="0.0" y="75" width="338" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="3uB-od-PsP"/>
+                                            <constraint firstAttribute="width" constant="338" id="WNk-h3-Ewp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NanumGothic" family="NanumGothic" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="338" id="5Hf-F2-9gq"/>
+                                    <constraint firstAttribute="height" constant="101" id="Ith-Vz-0bS"/>
+                                    <constraint firstAttribute="width" secondItem="iNh-6h-wKD" secondAttribute="height" multiplier="338:101" id="zn4-oK-uts"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="n7J-2t-Vyg">
+                                <rect key="frame" x="149" y="419" width="92" height="17"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mIA-sB-yqh">
+                                        <rect key="frame" x="0.0" y="0.99999999999999822" width="17.333333333333332" height="15.666666666666666"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JLx-zg-IuS">
+                                        <rect key="frame" x="37.333333333333343" y="0.99999999999999822" width="17.333333333333329" height="15.666666666666666"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="T9R-nH-K0V">
+                                        <rect key="frame" x="74.666666666666657" y="0.99999999999999822" width="17.333333333333329" height="15.666666666666666"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="92" id="6yp-HQ-7kp"/>
+                                    <constraint firstAttribute="height" constant="17" id="JLO-1o-4vA"/>
+                                </constraints>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Study abroad-pana" translatesAutoresizingMaskIntoConstraints="NO" id="Uuc-IJ-MuK">
+                                <rect key="frame" x="12" y="52" width="366" height="366"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="366" id="9lT-Dt-iUJ"/>
+                                    <constraint firstAttribute="height" constant="366" id="IhK-r2-ht9"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lhM-0D-RXD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eXu-Id-YMS" firstAttribute="top" secondItem="iNh-6h-wKD" secondAttribute="bottom" constant="40" id="4V2-YV-hXJ"/>
+                            <constraint firstItem="lhM-0D-RXD" firstAttribute="trailing" secondItem="Uuc-IJ-MuK" secondAttribute="trailing" constant="12" id="Dar-Qg-7Fb"/>
+                            <constraint firstItem="cu9-GT-oLS" firstAttribute="top" secondItem="n7J-2t-Vyg" secondAttribute="bottom" constant="35" id="E2S-WO-QMd"/>
+                            <constraint firstItem="iNh-6h-wKD" firstAttribute="top" secondItem="cu9-GT-oLS" secondAttribute="bottom" constant="8" id="F0u-WB-jmr"/>
+                            <constraint firstItem="lhM-0D-RXD" firstAttribute="trailing" secondItem="n7J-2t-Vyg" secondAttribute="trailing" constant="149" id="FpR-Sz-TFW"/>
+                            <constraint firstItem="lhM-0D-RXD" firstAttribute="trailing" secondItem="cu9-GT-oLS" secondAttribute="trailing" constant="36" id="G49-Mj-C6p"/>
+                            <constraint firstItem="Uuc-IJ-MuK" firstAttribute="top" secondItem="QAc-hh-rsq" secondAttribute="topMargin" constant="5" id="QTf-03-JdC"/>
+                            <constraint firstItem="cu9-GT-oLS" firstAttribute="leading" secondItem="lhM-0D-RXD" secondAttribute="leading" constant="36" id="YHK-l4-ZUS"/>
+                            <constraint firstItem="iNh-6h-wKD" firstAttribute="leading" secondItem="lhM-0D-RXD" secondAttribute="leading" constant="26" id="b7S-mB-yv6"/>
+                            <constraint firstItem="lhM-0D-RXD" firstAttribute="trailing" secondItem="eXu-Id-YMS" secondAttribute="trailing" constant="45" id="ccA-sU-7ug"/>
+                            <constraint firstItem="Uuc-IJ-MuK" firstAttribute="leading" secondItem="lhM-0D-RXD" secondAttribute="leading" constant="12" id="gfW-cv-6Sr"/>
+                            <constraint firstItem="eXu-Id-YMS" firstAttribute="leading" secondItem="lhM-0D-RXD" secondAttribute="leading" constant="45" id="hcj-7p-Pl8"/>
+                            <constraint firstItem="lhM-0D-RXD" firstAttribute="trailing" secondItem="iNh-6h-wKD" secondAttribute="trailing" constant="26" id="hpZ-XQ-oca"/>
+                            <constraint firstAttribute="bottom" secondItem="eXu-Id-YMS" secondAttribute="bottom" constant="83" id="idl-lZ-nEu"/>
+                            <constraint firstItem="iNh-6h-wKD" firstAttribute="width" secondItem="iNh-6h-wKD" secondAttribute="height" multiplier="338:101" id="nLq-lv-goC"/>
+                            <constraint firstItem="n7J-2t-Vyg" firstAttribute="leading" secondItem="lhM-0D-RXD" secondAttribute="leading" constant="149" id="tu0-gr-qjN"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hg5-bC-w6h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3835" y="-685"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Exams-rafiki" width="2000" height="2000"/>
+        <image name="Online tech talks-bro" width="2000" height="2000"/>
+        <image name="Study abroad-pana" width="2000" height="2000"/>
         <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
         <image name="circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
