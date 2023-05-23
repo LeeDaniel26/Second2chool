@@ -7,17 +7,10 @@
 
 import UIKit
 
-class FreeBoardViewController: UIViewController, UITableViewDelegate {
+class FreeBoardViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-//    let messages: [Message] = [
-//        Message(title: "Too many works in class of Professor Jo", subtitle: "Anonymity"),
-//        Message(title: "Where is tennis class of Professor Kim?", subtitle: "Anonymity"),
-//        Message(title: "Is there a Indian restauraunt around Sogang?", subtitle: "Anonymity"),
-//        Message(title: "Where is tennis class of Professor Kim?", subtitle: "Anonymity")
-//    ]
-    
+        
     let data = FreeBoardManager.freeboardData
     
     var currentPage = 0
@@ -29,6 +22,7 @@ class FreeBoardViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UINib(nibName: "BoardCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "LilitaOne", size: 36)!]
@@ -70,11 +64,26 @@ extension FreeBoardViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! BoardCell
+        cell.selectionStyle = UITableViewCell.SelectionStyle.default
         cell.titleLabel.text = self.data.contents[indexPath.row].title
         cell.subtitleLabel.text = (self.data.contents[indexPath.row].isAnon == false) ? self.data.contents[indexPath.row].writerName : "Anonymity"
         DispatchQueue.main.async {
             tableView.reloadData()
         }
         return cell
+    }
+}
+
+extension FreeBoardViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        print("===============================================")
+        print(data.contents[indexPath.row].title)
+        print(data.contents[indexPath.row].content)
+        print(data.contents[indexPath.row].isAnon)
+
+//        let freeboardShowVC = FreeBoardShowViewController(title: data.contents[indexPath.row].title, body: data.contents[indexPath.row].content)
+//        navigationController?.pushViewController(freeboardShowVC, animated: true)
     }
 }

@@ -37,6 +37,9 @@ class ViewController: UIViewController {
         loginButton.layer.cornerRadius = 21
         
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
@@ -61,3 +64,12 @@ class ViewController: UIViewController {
     }
 }
 
+//MARK: - UITextField Delegate
+
+extension ViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
+}

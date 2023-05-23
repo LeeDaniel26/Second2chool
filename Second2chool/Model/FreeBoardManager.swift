@@ -99,6 +99,7 @@ class FreeBoardManager {
             // GET
             contents = decodedData.data.contents
             title = decodedData.data.contents[id].title
+            content = decodedData.data.contents[id].content
             writerName = decodedData.data.contents[id].writerName
             isAnon = decodedData.data.contents[id].isAnon
             totalPages = decodedData.data.totalPages

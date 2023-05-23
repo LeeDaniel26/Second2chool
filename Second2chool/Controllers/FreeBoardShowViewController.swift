@@ -9,14 +9,34 @@ import UIKit
 
 class FreeBoardShowViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Add bottom border to 'titleView'
-        addBottomBorder()
+    let titleText: String
+    let bodyText: String
+    
+    init(title: String, body: String) {
+        self.titleText = title
+        self.bodyText = body
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var bodyLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        print(titleText)
+        print(bodyText)
+
+        setValue()
+        
+        // Add bottom border to 'titleView'
+        addBottomBorder()
+    }
     
     func addBottomBorder() {
        let thickness: CGFloat = 1.1
@@ -26,4 +46,9 @@ class FreeBoardShowViewController: UIViewController {
        titleView.layer.addSublayer(bottomBorder)
     }
 
+    
+    func setValue() {
+//        titleLabel.text = titleText
+//        bodyLabel.text = bodyText
+    }
 }
