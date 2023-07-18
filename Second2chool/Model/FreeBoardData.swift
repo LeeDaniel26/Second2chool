@@ -31,9 +31,10 @@ struct Contents: Codable {
     let isScrapped: Bool
     let isWriter: Bool
     let commentOn: Bool
-    let createdTime: String
-    let lastModifiedTime: String
+    let createdAt: String
+    let updatedAt: String
     let commentCnt: Int
     let likeCnt: Int
     let scrapCnt: Int
+    let photoCnt: Int
 }

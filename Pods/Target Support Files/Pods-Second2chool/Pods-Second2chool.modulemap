@@ -1,0 +1,6 @@
+framework module Pods_Second2chool {
+  umbrella header "Pods-Second2chool-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -848,7 +848,7 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" backgroundImage="Button2_1"/>
                                                 <connections>
-                                                    <segue destination="2Yp-mL-bJv" kind="show" id="uBx-sm-sDk"/>
+                                                    <segue destination="2Yp-mL-bJv" kind="show" id="DRk-Yh-DhX"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyG-qD-1jk">
@@ -1185,7 +1185,7 @@
                                     <segue destination="ejg-I1-smN" kind="show" id="qeD-jf-EdQ"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bFX-h2-GUm">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bFX-h2-GUm">
                                 <rect key="frame" x="35" y="222" width="320" height="440"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -1242,16 +1242,13 @@
                             </constraints>
                         </view>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="person" catalog="system" id="6Hx-fw-G9N">
-                                <connections>
-                                    <segue destination="RBV-en-Njv" kind="show" id="rVb-Nc-LKF"/>
-                                </connections>
-                            </barButtonItem>
+                            <barButtonItem title="Item" image="person" catalog="system" id="6Hx-fw-G9N"/>
                             <barButtonItem title="Item" image="bell" catalog="system" id="PK8-uk-6Tl"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="bFX-h2-GUm" id="pLq-s9-b52"/>
+                        <segue destination="RBV-en-Njv" kind="show" identifier="FreeboardToFreeboardDetails" id="Ef1-s8-vzs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zNZ-OT-UQD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1586,6 +1583,8 @@
                         <outlet property="bodyLabel" destination="BqT-1b-iSd" id="T1V-UJ-wVz"/>
                         <outlet property="titleLabel" destination="UP8-Fb-i6z" id="r1X-hr-GQL"/>
                         <outlet property="titleView" destination="dQG-ez-IXx" id="npw-bE-4gR"/>
+                        <outlet property="updatedAt" destination="WE3-D9-0QB" id="YF2-ml-2aI"/>
+                        <outlet property="writerName" destination="n2U-XN-m5U" id="RSf-Ge-Z74"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gcw-BR-LcF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

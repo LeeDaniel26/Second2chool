@@ -8,16 +8,16 @@
 import Foundation
 
 protocol FreeBoardManagerDelegate {
-    func didUpdateFreeBoard(_ freeboardManager: FreeBoardManager, dataModel: DataModel)
+    func didUpdateFreeBoard(freeboardModel: FreeBoardModel)
 }
 
 class FreeBoardManager {
-        
-    let postType: String
-    
+            
     let freeboardURL = "http://54.180.6.206:8080/api/v1/post"
     
-    var contents = [Contents(id: 0, title: "", content: "", writerName: "", isAnon: false, isLiked: false, isScrapped: false, isWriter: false, commentOn: false, createdTime: "", lastModifiedTime: "", commentCnt: 0, likeCnt: 0, scrapCnt: 0)]
+    var delegate: FreeBoardManagerDelegate?
+    
+    var contents = [Contents(id: 0, title: "", content: "", writerName: "", isAnon: false, isLiked: false, isScrapped: false, isWriter: false, commentOn: false, createdAt: "", updatedAt: "", commentCnt: 0, likeCnt: 0, scrapCnt: 0, photoCnt: 0)]
     
     var title = ""
     var content = ""
@@ -29,15 +29,12 @@ class FreeBoardManager {
     var id = 0
     var totalPages = 0
     var cellCount = 0
-
-    init(with postType: String) {
-        self.postType = postType
-    }
+    
     
     //MARK: - GET
     
-    func getRequest(page: Int, size: Int) {
-        var request = URLRequest(url: URL(string: "\(freeboardURL)/query?title=&content=&writer-name=&normal-type=FREE&page=\(page)&size=\(size)&sort=")!,timeoutInterval: Double.infinity)
+    func getRequest(page: Int, size: Int, completed: @escaping () -> ()) {
+        var request = URLRequest(url: URL(string: "\(freeboardURL)/query?title=&content=&writer-name=&normal-type=FREE&page=\(page)&size=0\(size)&sort=id,asc")!,timeoutInterval: Double.infinity)
 
         // Method
         request.httpMethod = "GET"
@@ -45,7 +42,7 @@ class FreeBoardManager {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(LoginManager.loginData.token)", forHTTPHeaderField: "Authorization")
         // Body
-        let body: [String: AnyHashable] = [:]
+//        let body: [String: AnyHashable] = [:]
 //        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -54,7 +51,12 @@ class FreeBoardManager {
                 return
             }
             print(String(data: data, encoding: .utf8)!)
-            self.parseJSON(data: data)
+            if let freeboardModel = self.parseJSON(data: data) {
+                self.delegate?.didUpdateFreeBoard(freeboardModel: freeboardModel)
+                DispatchQueue.main.async {
+                    completed()
+                }
+            }
         }
         task.resume()
     }
@@ -93,21 +95,25 @@ class FreeBoardManager {
         task.resume()
     }
     
-    func parseJSON(data: Foundation.Data) {
+    func parseJSON(data: Foundation.Data) -> FreeBoardModel? {   // *** "FreeBoardData?" why optional? --> To use "return nil" at catch.
         do {
             let decodedData = try JSONDecoder().decode(FreeBoardData.self, from: data)
+
             // GET
             contents = decodedData.data.contents
+            totalPages = decodedData.data.totalPages
+            cellCount = decodedData.data.numberOfElements
             title = decodedData.data.contents[id].title
             content = decodedData.data.contents[id].content
             writerName = decodedData.data.contents[id].writerName
             isAnon = decodedData.data.contents[id].isAnon
-            totalPages = decodedData.data.totalPages
-            cellCount = decodedData.data.numberOfElements
+            
+            let freeboardModel = FreeBoardModel(contents: contents, totalPages: totalPages, cellCount: cellCount, title: title, content: content, writerName: writerName, isAnon: isAnon)
+            
+            return freeboardModel
         } catch {
             print(error)
+            return nil
         }
     }
-    
-    static let freeboardData = FreeBoardManager(with: "FreeBoard")
 }

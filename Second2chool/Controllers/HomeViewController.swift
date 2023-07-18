@@ -9,6 +9,11 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    var freeboardManager = FreeBoardManager()
+    
+    var currentPage = 0
+    var size = 10
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
