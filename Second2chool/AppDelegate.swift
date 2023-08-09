@@ -6,14 +6,30 @@
 //
 
 import UIKit
+//import IQKeyboardManagerSwift
+import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    // GoogleSignIn
+    func application(
+            _ app: UIApplication,
+            open url: URL,
+            options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+        ) -> Bool {
+            // 이 부분이 핵심
+            if GIDSignIn.sharedInstance.handle(url) {
+            return true
+        }
+        return false
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+//        IQKeyboardManager.shared.enable = true
+        
         return true
     }
 

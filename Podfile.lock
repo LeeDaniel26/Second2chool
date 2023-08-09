@@ -13,9 +13,11 @@ PODS:
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
   - GTMSessionFetcher/Core (2.3.0)
+  - IQKeyboardManagerSwift (6.5.11)
 
 DEPENDENCIES:
   - GoogleSignIn
+  - IQKeyboardManagerSwift
 
 SPEC REPOS:
   trunk:
@@ -23,13 +25,15 @@ SPEC REPOS:
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
+    - IQKeyboardManagerSwift
 
 SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
 
-PODFILE CHECKSUM: e3c4f5570751add9ea94b8d4fc7a556e8082b3b4
+PODFILE CHECKSUM: 05255a57e3ea4aa1290a037d91efb572acd8891e
 
 COCOAPODS: 1.12.1

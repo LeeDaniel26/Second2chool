@@ -8,5 +8,6 @@ target 'Second2chool' do
   # Pods for Second2chool
 
   pod 'GoogleSignIn'
+  pod 'IQKeyboardManagerSwift'
 
 end

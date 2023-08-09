@@ -10,10 +10,13 @@ import UIKit
 class FreeBoardViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-        
+    @IBOutlet weak var prevButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    
     var freeboardManager = FreeBoardManager()
     
     var currentPage = 0
+    var totalPages = 0
     var size = 10
     var cellCount = 0
     
@@ -34,6 +37,18 @@ class FreeBoardViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "BoardCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+        
+        tableView.layer.borderWidth = 1.2
+        tableView.layer.borderColor = UIColor.label.cgColor
+        tableView.separatorColor = UIColor.label
+        
+        prevButton.layer.cornerRadius = prevButton.frame.height / 2.05
+        nextButton.layer.cornerRadius = nextButton.frame.height / 2.05
+        
+        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     // Go back to the previous ViewController while using Navigation Controller
@@ -41,20 +56,36 @@ class FreeBoardViewController: UIViewController {
 //        _ = navigationController?.popViewController(animated: true)
 //    }
     
+    
     @IBAction func notificationButtonPressed(_ sender: UIButton) {
-//        if currentPage != 0 {
-//            currentPage -= 1
-//        }
-//        freeboardManager.getRequest(page: currentPage, size: size)
-//        tableView.reloadData()
     }
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-//        currentPage += 1
-//        if currentPage == data.totalPages {
-//            currentPage = data.totalPages-1
-//        }
-//        freeboardManager.getRequest(page: currentPage, size: size)
-//        tableView.reloadData()
+    }
+    
+    @IBAction func prevButtonPressed(_ sender: UIButton) {
+        
+        if currentPage != 0 {
+            currentPage -= 1
+        }
+        freeboardManager.getRequest(page: currentPage, size: size) {
+            self.tableView.reloadData()
+        }
+    }
+    
+    @IBAction func nextButtonPressed(_ sender: UIButton) {
+        currentPage += 1
+        if currentPage == totalPages {
+            currentPage = totalPages-1
+        }
+        freeboardManager.getRequest(page: currentPage, size: size) {
+            self.tableView.reloadData()
+        }
+    }
+    
+    // ??????
+    @objc func back(sender: UIBarButtonItem) {
+//        navigationController?.popToViewController(HomeViewController(), animated: true)
+        let _ = self.navigationController?.popToViewController((self.navigationController?.viewControllers[1]) as! HomeViewController, animated: true)
     }
 }
     
@@ -76,9 +107,10 @@ extension FreeBoardViewController: UITableViewDataSource {
 }
 
 extension FreeBoardViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "FreeboardToFreeboardDetails", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -92,6 +124,7 @@ extension FreeBoardViewController: FreeBoardManagerDelegate {
     
     func didUpdateFreeBoard(freeboardModel: FreeBoardModel) {
         contents = freeboardModel.contents
+        totalPages = freeboardModel.totalPages
         cellCount = freeboardModel.cellCount
     }
 }

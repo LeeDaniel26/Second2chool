@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class ViewController: UIViewController {
 
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +42,42 @@ class ViewController: UIViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        
+        // GoogleSignIn Button
+        let googleLoginButton = UIButton(frame: CGRect(x: loginButton.frame.origin.x, y: 100, width: loginButton.frame.width, height: loginButton.frame.height))
+        self.view.addSubview(googleLoginButton)
+        googleLoginButton.backgroundColor = .label
+        googleLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        googleLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 45).isActive = true
+        googleLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 45).isActive = true
+        googleLoginButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        googleLoginButton.widthAnchor.constraint(equalToConstant: loginButton.frame.width).isActive = true
+        googleLoginButton.heightAnchor.constraint(equalToConstant: loginButton.frame.height).isActive = true
+    }
+    
+    
+    @objc func googleLogIn(sender: UIButton) {
+        
+        let config = GIDConfiguration.init(clientID: "561227145439-e1uhpali8spt5u0bl3dp6oj5lrnfq39u.apps.googleusercontent.com")
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [weak self] user, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard
+                let authentication = user?.authentication,
+                let idToken = authentication.idToken else { return }
+            guard
+                let email = user?.profile?.email,
+                let firstName = user?.profile?.givenName,
+                let lastName = user?.profile?.familyName else { return }
+            
+            print(email)
+            print(firstName)
+            print(lastName)
+        }
     }
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
@@ -53,8 +91,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func forgotPasswordButtonPressed(_ sender: UIButton) {
-//        UIApplication.shared.open (URL(string: "https://54.180.6.206:8080/oauth2/authorization/google?redirect_uri=http://54.180.6.206:8080/api/v1/test")!)
+//        googleLogIn()
     }
+    
     func setTextFieldLayer() {
         
 //        for i in 0..<loginTextField.count {

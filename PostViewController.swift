@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 class PostViewController: UIViewController {
 
@@ -14,7 +15,9 @@ class PostViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-//    let data = FreeBoardManager.freeboardData
+    var freeboard = FreeBoardManager()
+    
+    var userPickedImages = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +30,7 @@ class PostViewController: UIViewController {
 
         // TEST
         NotificationCenter.default.addObserver(self, selector: #selector(PostViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-           
+
         NotificationCenter.default.addObserver(self, selector: #selector(PostViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         
@@ -48,30 +51,42 @@ class PostViewController: UIViewController {
         // Placeholder for UITextView 'bodyTextView'
         // (--> more code at extension below..)
         
-        if bodyTextView.text.isEmpty {
-            
-        }
-        
-        bodyTextView.text = "Placeholder"
+        bodyTextView.text = "Share Some Stuff!"
         bodyTextView.textColor = UIColor.lightGray
+        
+        // Delegates
+        bodyTextView.delegate = self
         
     }
     
-//    @IBAction func gobackButtonPressed(_ sender: UIButton) {
-//
-//        _ = navigationController?.popViewController(animated: true)
-//
-//    }
+    @IBAction func notificationButtonPressed(_ sender: UIBarButtonItem) {
+        var config = PHPickerConfiguration()
+        config.selectionLimit = 0
+        
+        let phPicker = PHPickerViewController(configuration: config)
+        phPicker.delegate = self
+        present(phPicker, animated: true)
+    }
     
     @IBAction func postButtonPressed(_ sender: UIButton) {
-//        data.title = titleTextField.text!   //--> If UITextField is empty, it's not nil.. but "" instead. WTF???
-////        data.content = bodyTextField.text!
-//        data.postRequest()
+        
+        freeboard.postRequest(
+            title: titleTextField.text ?? "",
+            content: bodyTextView.text ?? "",
+            isAnon: false,
+            commentOn: true,
+            normalType: "FREE",
+            photoList: [""]
+        )
+        
+        // Upload an Image
+        
+        
+        performSegue(withIdentifier: "PostToFreeboard", sender: self)
+        
     }
     
 
-    
-    
     // TEST
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
@@ -87,8 +102,8 @@ class PostViewController: UIViewController {
 
     @objc func keyboardWillHide(notification: NSNotification) {
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-            
-        
+
+
         // reset back the content inset to zero after keyboard is gone
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
@@ -102,6 +117,24 @@ extension PostViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
+        textView.textColor = UIColor.label
     }
     
+}
+
+// Access Photo Library and select photos
+extension PostViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true)
+        for result in results {
+            result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
+                if let image = object as? UIImage {
+                    self.userPickedImages.append(image)
+                }
+            }
+        }
+        for test in userPickedImages {
+            print(test)
+        }
+    }
 }

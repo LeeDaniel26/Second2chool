@@ -25,6 +25,7 @@ class FreeBoardManager {
     var isAnon = false
     var commentOn = false
     var normalType = "FREE"
+    var photoList = [""]
     
     var id = 0
     var totalPages = 0
@@ -63,11 +64,8 @@ class FreeBoardManager {
         
     //MARK: - POST
     
-    func postRequest() {
+    func postRequest(title: String, content: String, isAnon: Bool, commentOn: Bool, normalType: String, photoList: [String]) {
         var request = URLRequest(url: URL(string: "\(freeboardURL)")!)
-        
-        // Default Value
-        isAnon = false
         
         // Method
         request.httpMethod = "POST"
@@ -80,12 +78,13 @@ class FreeBoardManager {
             "content" : content,
             "isAnon" : isAnon,
             "commentOn" : commentOn,
-            "normalType" : normalType
+            "normalType" : normalType,
+            "photoList" : photoList
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
+            guard let data = data else {            // *** "guard let data = data" --> Because, data type of 'data' is optional.
                 print(String(describing: error))
                 return
             }

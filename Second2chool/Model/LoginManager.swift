@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GoogleSignIn
 
 //protocol LoginManagerDelegate {
 //    func didUpdateLogin(_ loginManager: LoginManager)
@@ -26,6 +27,7 @@ class LoginManager {
     init(with postType: String) {
         self.postType = postType
     }
+    
     
     //MARK: - GET
 

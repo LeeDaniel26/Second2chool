@@ -2,6 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.561227145439-e1uhpali8spt5u0bl3dp6oj5lrnfq39u</string>
+			</array>
+		</dict>
+	</array>
+	<key>GIDClientID</key>
+	<string>561227145439-e1uhpali8spt5u0bl3dp6oj5lrnfq39u.apps.googleusercontent.com</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>LilitaOne-Regular</string>
+		<string>NanumGothic-Regular</string>
+		<string>NanumGothic-Bold</string>
+		<string>NanumGothic-ExtraBold</string>
+		<string>MeriendaOne-Regular</string>
+		<string>Lato-Bold</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -21,14 +43,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>LilitaOne-Regular</string>
-		<string>NanumGothic-Regular</string>
-		<string>NanumGothic-Bold</string>
-		<string>NanumGothic-ExtraBold</string>
-		<string>MeriendaOne-Regular</string>
-		<string>Lato-Bold</string>
-	</array>
 </dict>
 </plist>
