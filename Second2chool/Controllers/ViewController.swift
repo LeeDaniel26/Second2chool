@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     }
     
     
-    @objc func googleLogIn(sender: UIButton) {
+    @objc func googleLogIn() {
         
         let config = GIDConfiguration.init(clientID: "561227145439-e1uhpali8spt5u0bl3dp6oj5lrnfq39u.apps.googleusercontent.com")
         
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func forgotPasswordButtonPressed(_ sender: UIButton) {
-//        googleLogIn()
+        googleLogIn()
     }
     
     func setTextFieldLayer() {

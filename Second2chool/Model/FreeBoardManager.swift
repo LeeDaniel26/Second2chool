@@ -18,6 +18,7 @@ class FreeBoardManager {
     var delegate: FreeBoardManagerDelegate?
     
     var contents = [Contents(id: 0, title: "", content: "", writerName: "", isAnon: false, isLiked: false, isScrapped: false, isWriter: false, commentOn: false, createdAt: "", updatedAt: "", commentCnt: 0, likeCnt: 0, scrapCnt: 0, photoCnt: 0)]
+//    var contents: [Contents]?
     
     var title = ""
     var content = ""
@@ -100,8 +101,13 @@ class FreeBoardManager {
 
             // GET
             contents = decodedData.data.contents
+            if contents.isEmpty {
+                print("NO CONTENTS..")
+                return nil
+            }
             totalPages = decodedData.data.totalPages
             cellCount = decodedData.data.numberOfElements
+            
             title = decodedData.data.contents[id].title
             content = decodedData.data.contents[id].content
             writerName = decodedData.data.contents[id].writerName
