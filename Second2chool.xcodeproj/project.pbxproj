@@ -33,6 +33,7 @@
 		6B75FC2D29BF737D00090B76 /* BoardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B75FC2B29BF737D00090B76 /* BoardCell.xib */; };
 		6B75FC2F29BF783100090B76 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B75FC2E29BF783100090B76 /* Lato-Bold.ttf */; };
 		6B75FC3329BFA4C100090B76 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B75FC3229BFA4C000090B76 /* PostViewController.swift */; };
+		6B7D2B302ACDDE6500DA3670 /* ImagePresignedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D2B2F2ACDDE6500DA3670 /* ImagePresignedData.swift */; };
 		6BB4FADE29FD078A0044EAD2 /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4FADD29FD078A0044EAD2 /* LoginData.swift */; };
 		6BB4FAE029FD0BC60044EAD2 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */; };
 		6BC3E22829BF6EFF00228C5D /* FreeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */; };
@@ -72,6 +73,7 @@
 		6B75FC2B29BF737D00090B76 /* BoardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoardCell.xib; sourceTree = "<group>"; };
 		6B75FC2E29BF783100090B76 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		6B75FC3229BFA4C000090B76 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		6B7D2B2F2ACDDE6500DA3670 /* ImagePresignedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePresignedData.swift; sourceTree = "<group>"; };
 		6BB4FADD29FD078A0044EAD2 /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
 		6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */,
 				6BD2B47829DCAC7200CFCB0A /* FreeBoardData.swift */,
+				6B7D2B2F2ACDDE6500DA3670 /* ImagePresignedData.swift */,
 				40C524BD29DD575A00A1BE4F /* FreeBoardModel.swift */,
 				6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */,
 				6BB4FADD29FD078A0044EAD2 /* LoginData.swift */,
@@ -335,6 +338,7 @@
 			files = (
 				6B60F5A32A7091AE007FAFEF /* CommentCell.swift in Sources */,
 				6BD2B47929DCAC7200CFCB0A /* FreeBoardData.swift in Sources */,
+				6B7D2B302ACDDE6500DA3670 /* ImagePresignedData.swift in Sources */,
 				6B60F59D2A707685007FAFEF /* ImageManager.swift in Sources */,
 				40CAF8AB2A00F7DB00B4252F /* SignUpTwoViewController.swift in Sources */,
 				6B5E3C8E2A13F88A00E52E41 /* FreeBoardShowViewController.swift in Sources */,

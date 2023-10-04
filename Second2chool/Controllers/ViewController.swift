@@ -43,22 +43,38 @@ class ViewController: UIViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         
-        // GoogleSignIn Button
-        let googleLoginButton = UIButton(frame: CGRect(x: loginButton.frame.origin.x, y: 100, width: loginButton.frame.width, height: loginButton.frame.height))
+        
+    // GoogleSignIn Button
+        let googleLoginButton = GIDSignInButton(frame: CGRect(x: loginButton.frame.origin.x, y: 100, width: loginButton.frame.width, height: loginButton.frame.height))
         self.view.addSubview(googleLoginButton)
-        googleLoginButton.backgroundColor = .label
         googleLoginButton.translatesAutoresizingMaskIntoConstraints = false
         
+        // 'SafeAreaLayoutGuide' was intoduced in iOS 11 and above. iOS versions prior to 11, 'TopLayoutGuide' was used.
+//        let googleLoginButtonTopAnchorConstant: CGFloat = 236
+//        if #available(iOS 11, *) {
+//            let guide = self.view.safeAreaLayoutGuide
+//            NSLayoutConstraint.activate([
+//                googleLoginButton.topAnchor.constraint(equalTo: guide.topAnchor, constant: googleLoginButtonTopAnchorConstant)
+//            ])
+//        } else {
+//            let standardSpacing: CGFloat = googleLoginButtonTopAnchorConstant + topLayoutGuide.length
+//            NSLayoutConstraint.activate([
+//                googleLoginButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: standardSpacing)
+//            ])
+//        }
         googleLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 45).isActive = true
-        googleLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 45).isActive = true
-        googleLoginButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        googleLoginButton.widthAnchor.constraint(equalToConstant: loginButton.frame.width).isActive = true
+        googleLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -45).isActive = true
+        googleLoginButton.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 50).isActive = true
+//            googleLoginButton.bottomAnchor.constraint(equalTo: forgotButton.topAnchor, constant: 12).isActive = true
         googleLoginButton.heightAnchor.constraint(equalToConstant: loginButton.frame.height).isActive = true
+            
+        googleLoginButton.addTarget(self, action: #selector(googleLogIn), for: .touchUpInside)
+    // ---------------
+        
     }
     
     
     @objc func googleLogIn() {
-        
         let config = GIDConfiguration.init(clientID: "561227145439-e1uhpali8spt5u0bl3dp6oj5lrnfq39u.apps.googleusercontent.com")
         
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [weak self] user, error in
@@ -77,6 +93,7 @@ class ViewController: UIViewController {
             print(email)
             print(firstName)
             print(lastName)
+            print(idToken)
         }
     }
     

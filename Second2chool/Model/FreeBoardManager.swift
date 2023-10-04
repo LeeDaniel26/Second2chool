@@ -15,11 +15,11 @@ class FreeBoardManager {
             
     let freeboardURL = "http://54.180.6.206:8080/api/v1/post"
     
+    // Delegates
     var delegate: FreeBoardManagerDelegate?
     
+    // FreeBoardData
     var contents = [Contents(id: 0, title: "", content: "", writerName: "", isAnon: false, isLiked: false, isScrapped: false, isWriter: false, commentOn: false, createdAt: "", updatedAt: "", commentCnt: 0, likeCnt: 0, scrapCnt: 0, photoCnt: 0)]
-//    var contents: [Contents]?
-    
     var title = ""
     var content = ""
     var writerName = ""
@@ -31,6 +31,9 @@ class FreeBoardManager {
     var id = 0
     var totalPages = 0
     var cellCount = 0
+    
+    // ImagePresignedData
+    var imagePresignedData: ImagePresignedData?
     
     
     //MARK: - GET
@@ -62,11 +65,46 @@ class FreeBoardManager {
         }
         task.resume()
     }
+    
+    //MARK: - GET IMAGE PRESIGNED
+    
+    func getImagePresignedRequest() {
+        var request = URLRequest(url: URL(string: "https://ceoshomework.store/api/v1/file/presign")!,timeoutInterval: Double.infinity)
+
+        // Method
+        request.httpMethod = "GET"
+        // Header
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(LoginManager.loginData.token)", forHTTPHeaderField: "Authorization")
+        // Body
+//        let body: [String: AnyHashable] = [:]
+//        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print(String(describing: error))
+                return
+            }
+            print(String(data: data, encoding: .utf8)!)
+            self.parseJSONImagePresigned(data: data)
+        
+        }
+        task.resume()
+    }
         
     //MARK: - POST
     
     func postRequest(title: String, content: String, isAnon: Bool, commentOn: Bool, normalType: String, photoList: [String]) {
         var request = URLRequest(url: URL(string: "\(freeboardURL)")!)
+        
+        for imagePath in photoList {
+            getImagePresignedRequest()
+            guard let imageData = self.imagePresignedData else {
+                print("Error occurred while retrieving ImagePresignedData..")
+                return
+            }
+            putImageRequest(requestURL: imageData.data, imageURL: imagePath)
+        }
         
         // Method
         request.httpMethod = "POST"
@@ -95,6 +133,30 @@ class FreeBoardManager {
         task.resume()
     }
     
+    //MARK: - PUT IMAGE
+    
+    func putImageRequest(requestURL: String, imageURL: String) {
+        var request = URLRequest(url: URL(string: "\(requestURL)")!)
+                
+        // Method
+        request.httpMethod = "PUT"
+        // Header
+        request.addValue("image/png", forHTTPHeaderField: "Content-Type")
+        // Body
+        let parameters = "\(imageURL)"
+        let postData = parameters.data(using: .utf8)
+        request.httpBody = postData
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            return
+          }
+          print(String(data: data, encoding: .utf8)!)
+        }
+        task.resume()
+    }
+    
     func parseJSON(data: Foundation.Data) -> FreeBoardModel? {   // *** "FreeBoardData?" why optional? --> To use "return nil" at catch.
         do {
             let decodedData = try JSONDecoder().decode(FreeBoardData.self, from: data)
@@ -119,6 +181,15 @@ class FreeBoardManager {
         } catch {
             print(error)
             return nil
+        }
+    }
+    
+    func parseJSONImagePresigned(data: Foundation.Data) {
+        do {
+            let decodedData = try JSONDecoder().decode(ImagePresignedData.self, from: data)
+            self.imagePresignedData = decodedData
+        } catch {
+            print(error)
         }
     }
 }
