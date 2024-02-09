@@ -101,7 +101,9 @@ class PostViewController: UIViewController {
             content: bodyTextView.text ?? "",
             isAnon: false,
             commentOn: true,
-            normalType: "FREE",
+            courseId: nil,
+            postType: "FREE",
+            reviewScore: nil,
             photoList: urlStringArray
         )
         

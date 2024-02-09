@@ -13,7 +13,7 @@ protocol FreeBoardManagerDelegate {
 
 class FreeBoardManager {
             
-    let freeboardURL = "http://54.180.6.206:8080/api/v1/post"
+    let freeboardURL = "https://ceoshomework.store/api/v1/post"
     
     // Delegates
     var delegate: FreeBoardManagerDelegate?
@@ -39,7 +39,8 @@ class FreeBoardManager {
     //MARK: - GET
     
     func getRequest(page: Int, size: Int, completed: @escaping () -> ()) {
-        var request = URLRequest(url: URL(string: "\(freeboardURL)/query?title=&content=&writer-name=&normal-type=FREE&page=\(page)&size=0\(size)&sort=id,asc")!,timeoutInterval: Double.infinity)
+//        var request = URLRequest(url: URL(string: "\(freeboardURL)/query?title=&content=&writer-name=&normal-type=FREE&page=\(page)&size=0\(size)&sort=id,asc")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "\(freeboardURL)/query?title=&content=&writer-name=&post-type=FREE&course-id=&page=\(page)&size=\(size)&sort=id,asc")!,timeoutInterval: Double.infinity)
 
         // Method
         request.httpMethod = "GET"
@@ -94,7 +95,7 @@ class FreeBoardManager {
         
     //MARK: - POST
     
-    func postRequest(title: String, content: String, isAnon: Bool, commentOn: Bool, normalType: String, photoList: [String]) {
+    func postRequest(title: String, content: String, isAnon: Bool, commentOn: Bool, courseId: Int?, postType: String, reviewScore: Int?, photoList: [String]) {
         var request = URLRequest(url: URL(string: "\(freeboardURL)")!)
         
         for imagePath in photoList {
@@ -117,7 +118,10 @@ class FreeBoardManager {
             "content" : content,
             "isAnon" : isAnon,
             "commentOn" : commentOn,
-            "normalType" : normalType,
+            "courseId" : courseId,
+            "postType" : postType,
+            "reviewScore" : reviewScore,
+//            "normalType" : normalType,
             "photoList" : photoList
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)

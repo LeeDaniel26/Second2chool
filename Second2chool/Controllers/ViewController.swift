@@ -38,8 +38,6 @@ class ViewController: UIViewController {
         setTextFieldLayer()
         loginButton.layer.cornerRadius = 21
         
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
         emailTextField.delegate = self
         passwordTextField.delegate = self
         

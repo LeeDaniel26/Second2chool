@@ -16,7 +16,7 @@ class LoginManager {
         
     let postType: String
     
-    let loginURL = "http://54.180.6.206:8080/api/v1/auth"
+    let loginURL = "https://ceoshomework.store/api/v1/auth"
     
     var valid = false
     var username = ""

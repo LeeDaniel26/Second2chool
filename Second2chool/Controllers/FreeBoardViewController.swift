@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class FreeBoardViewController: UIViewController {
 
@@ -21,6 +22,8 @@ class FreeBoardViewController: UIViewController {
     var cellCount = 0
     
     var contents: [Contents]?
+    
+    var postId: Int?
     
     override func viewDidLoad() {
         
@@ -56,8 +59,15 @@ class FreeBoardViewController: UIViewController {
 //        _ = navigationController?.popViewController(animated: true)
 //    }
     
+    func openSwiftUIScreen() {
+        let swiftUIViewController = UIHostingController(rootView: SwiftUIViewTest())
+        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
+    }
     
     @IBAction func notificationButtonPressed(_ sender: UIButton) {
+    }
+    @IBAction func profileButtonPressed(_ sender: UIBarButtonItem) {
+        openSwiftUIScreen()
     }
     @IBAction func searchButtonPressed(_ sender: UIButton) {
     }
@@ -109,15 +119,18 @@ extension FreeBoardViewController: UITableViewDataSource {
 extension FreeBoardViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "FreeboardToFreeboardDetails", sender: self)
+        postId = contents![indexPath.row].id
+        let vc = FreeBoardPostViewController()
+        vc.postId = postId
+        navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? FreeBoardShowViewController {
-            destination.contents = contents![tableView.indexPathForSelectedRow!.row]
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? FreeBoardShowViewController {
+//            destination.contents = contents![tableView.indexPathForSelectedRow!.row]
+//        }
+//    }
 }
 
 extension FreeBoardViewController: FreeBoardManagerDelegate {

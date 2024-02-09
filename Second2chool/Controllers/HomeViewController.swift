@@ -17,8 +17,17 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "LilitaOne", size: 36)!]  //--> UIFont(name: "LilitaOne-Regular", size: 36) doesn't seem to work. How can I specify weight?
+//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "LilitaOne", size: 36)!]  //--> UIFont(name: "LilitaOne-Regular", size: 36) doesn't seem to work. How can I specify weight?
         
-//        navigationItem.largeTitleDisplayMode = .always
+    }
+    
+    @IBAction func didTapProfile(_ sender: UIBarButtonItem) {
+        let vc = ProfileViewController()
+        vc.title = "Profile"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    @IBAction func didTapNotification(_ sender: UIBarButtonItem) {
+        let vc = FreeBoardPostViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

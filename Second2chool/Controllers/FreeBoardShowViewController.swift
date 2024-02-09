@@ -17,6 +17,12 @@ class FreeBoardShowViewController: UIViewController {
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var countView: UIView!
+    @IBOutlet weak var countViewBottomConstraint: NSLayoutConstraint!
+    /*
+     countViewBottomConstraint가 없으면 Scroll View에 다음과 같은 에러가 뜬다:
+     "Need constraints for: Y position or height"
+    */
+
     @IBOutlet weak var commentInputView: UIView!
     @IBOutlet weak var commentInput: UIView!
     @IBOutlet weak var commentInputText: UITextView!
@@ -25,20 +31,29 @@ class FreeBoardShowViewController: UIViewController {
     @IBOutlet weak var bodyLabelBottomConstraint: NSLayoutConstraint!
     var isReply = false
     
-    
     var originalConstraint = 0.0
     
     var contents: Contents?
     
+    var commentViewBottomConstraint: NSLayoutConstraint?
+    /*
+     commentView가 생성됐을 경우 commentViewBottomConstraint가 없으면 Scroll View에 다음과 같은 에러가 발생할 것이다:
+     "Need constraints for: Y position or height".
+     commentViewBottomConstraint를 생성했을 경우 countViewBottomConstraint는 conflict를 피하기 위해 없에야 한다.
+    */
+    var commentViews: [UIView] = []    // 댓글과 대댓글 모음
+    var commentReplyButtons: [UIButton] = []    // 몇번째 댓글의 reply 버튼을 눌렀는지 확인하기 위함
     let bottomBorderCommentView = 1.1
+    
+    var commentViewReplies: [[UIView]] = []
         
-    let commentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+//    let commentStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.axis = .vertical
+//        stackView.distribution = .fillProportionally
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        return stackView
+//    }()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,42 +72,16 @@ class FreeBoardShowViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(FreeBoardShowViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(FreeBoardShowViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-//        contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: countView.bottomAnchor, constant: 54)
-//        contentViewBottomConstraint?.isActive = true
-//        previousView = countView
-        addCommentStackView()
     }
     
     @IBAction func inputButtonPressed(_ sender: UIButton) {
         addCommentView()
-//        comments.append(addCommentView())
-//        var count = comments.count
-//
-//        if count == 1 {
-//            print("This is 1 ~~~~~~~~")
-//            comments[0].topAnchor.constraint(equalTo: countView.bottomAnchor, constant: 5).isActive = true
-////            contentViewBottomConstraint?.isActive = false
-//            contentView.removeConstraint(contentViewBottomConstraint!)
-//            contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: comments[0].bottomAnchor, constant: 54)
-//            contentViewBottomConstraint?.isActive = true
-//            return
-//        }
-//
-//        comments[count-1].topAnchor.constraint(equalTo: comments[count-2].bottomAnchor, constant: 5).isActive = true
-////        contentViewBottomConstraint?.isActive = false
-//        contentView.removeConstraint(contentViewBottomConstraint!)
-//        contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: comments[count-1].bottomAnchor, constant: 54)
-//        contentViewBottomConstraint?.isActive = true
-//
-//        print(" ")
-////        print("********************** \(comments[count-1].frame.origin.y)")
-////        print("********************** \(comments[count-1])")
-//        for comment in comments {
-//            print("********************** \(comment)")
-//        }
-//        print(" ")
+        commentInputText.text = ""
     }
     
+    @objc func commentReplyButtonPressed() {
+        print("*************** Button pressed.")
+    }
     
     func addBottomBorder() {
         let thickness: CGFloat = 1.1
@@ -127,6 +116,7 @@ class FreeBoardShowViewController: UIViewController {
         updatedAt.text = contents?.updatedAt
         titleLabel.text = contents?.title
         bodyLabel.text = contents?.content
+        print("+++++++++++++++++++++++++ \(contents?.id)")
     }
     
     
@@ -150,34 +140,32 @@ class FreeBoardShowViewController: UIViewController {
     }
 
     //MARK: - SubViews
-    
-    func addCommentStackView() {
-        contentView.addSubview(commentStackView)
-        commentStackView.spacing = bottomBorderCommentView
-        NSLayoutConstraint.activate([
-            commentStackView.topAnchor.constraint(equalTo: countView.bottomAnchor),
-            commentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 54),
-            commentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            commentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        ])
-    }
-    
+        
     func addCommentView() {
         let commentView = UIView()
-        commentView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 54)
-        
-        commentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        commentStackView.addArrangedSubview(commentView)
+        commentView.frame = CGRect(x: 0, y: 200, width: self.view.frame.size.width, height: 54)
+        contentView.addSubview(commentView)
         commentView.backgroundColor = .lightGray
+        commentViews.append(commentView)
+        commentView.translatesAutoresizingMaskIntoConstraints = false
+        if commentViews.count == 1 {
+            NSLayoutConstraint.deactivate([countViewBottomConstraint!])
+            commentView.topAnchor.constraint(equalTo: countView.bottomAnchor).isActive = true
+        } else {
+            NSLayoutConstraint.deactivate([commentViewBottomConstraint!])
+            commentView.topAnchor.constraint(equalTo: commentViews[commentViews.firstIndex(of: commentView)! - 1].bottomAnchor, constant: bottomBorderCommentView).isActive = true   // -1은 다음 댓글을 이전 댓글의 bottomAnchor에 이어붙이기 위함
+        }
+        commentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: commentView.bottomAnchor, constant: 54)
         NSLayoutConstraint.activate([
-            commentView.leadingAnchor.constraint(equalTo: commentStackView.leadingAnchor),
-            commentView.trailingAnchor.constraint(equalTo: commentStackView.trailingAnchor),
+            commentViewBottomConstraint!,
+            commentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            commentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             commentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 54)
         ])
         
         let commentProfileImage = UIImageView()
         commentView.addSubview(commentProfileImage)
+        commentProfileImage.image = UIImage.init(systemName: "person.circle.fill")
         commentProfileImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             commentProfileImage.topAnchor.constraint(equalTo: commentView.topAnchor, constant :10),
@@ -185,19 +173,32 @@ class FreeBoardShowViewController: UIViewController {
             commentProfileImage.widthAnchor.constraint(equalToConstant: 34),
             commentProfileImage.heightAnchor.constraint(equalToConstant: 34)
         ])
-        commentProfileImage.image = UIImage.init(systemName: "person.circle.fill")
+        
+        let commentReplyButton = UIButton(frame: CGRect(x: 0, y: 0, width: 27, height: 27))
+        commentReplyButton.addTarget(self, action: #selector(commentReplyButtonPressed), for: .touchUpInside)
+        commentView.addSubview(commentReplyButton)
+        commentReplyButton.setBackgroundImage(UIImage.init(systemName: "bubble.left.circle"), for: .normal)
+        commentReplyButtons.append(commentReplyButton)
+        commentReplyButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            commentReplyButton.topAnchor.constraint(equalTo: commentView.topAnchor, constant: 13.5),
+            commentReplyButton.trailingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: -10),
+            commentReplyButton.widthAnchor.constraint(equalToConstant: 27),
+            commentReplyButton.heightAnchor.constraint(equalToConstant: 27),
+        ])
 
         let commentText = UILabel()
         commentView.addSubview(commentText);
-        commentText.translatesAutoresizingMaskIntoConstraints = false
-        commentText.numberOfLines = 0  // For multiline text
-//        commentText.lineBreakMode = .byWordWrapping ;// For wrapping long text into multiple lines
-        commentText.sizeToFit()
         commentText.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        commentText.numberOfLines = 0  // For multiline text
+        commentText.sizeToFit()
+        commentText.translatesAutoresizingMaskIntoConstraints = false
+//        commentText.lineBreakMode = .byWordWrapping ;// For wrapping long text into multiple lines
         NSLayoutConstraint.activate([
             commentText.topAnchor.constraint(equalTo: commentView.topAnchor, constant: 5),
             commentText.leadingAnchor.constraint(equalTo: commentProfileImage.trailingAnchor, constant: 6),
-            commentText.trailingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: 8)
+            commentText.trailingAnchor.constraint(equalTo: commentReplyButton.leadingAnchor, constant: -8)
+//            commentText.trailingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: -8)
         ])
         commentView.bottomAnchor.constraint(equalTo: commentText.bottomAnchor, constant: 10).isActive = true
         commentText.text = commentInputText.text ?? ""
@@ -205,10 +206,46 @@ class FreeBoardShowViewController: UIViewController {
         // Add Bottom Border
         let thickness: CGFloat = bottomBorderCommentView
         let bottomBorder = CALayer()
+        commentView.layoutIfNeeded() // TEST
+        print("**************************\(commentView.bounds.height)")
         bottomBorder.frame = CGRect(x:0, y: commentView.bounds.size.height, width: commentView.bounds.size.width, height: thickness)
         bottomBorder.backgroundColor = UIColor.label.cgColor
         commentView.layer.addSublayer(bottomBorder)
     }
+    
+//    func addCommentViewReply(idx: Int) {
+//        let commentViewReply = UIView()
+//        commentViewReply.frame = CGRect(x: 0, y: 200, width: self.view.frame.size.width, height: 54)
+//        contentView.addSubview(commentViewReply)
+//        commentViewReply.backgroundColor = .lightGray
+//        commentViewReplies[commentViews.firstIndex(of: commentView)!].append(commentView)
+//        commentViewReply.translatesAutoresizingMaskIntoConstraints = false
+//        if commentViews.count == 1 {
+//            NSLayoutConstraint.deactivate([countViewBottomConstraint!])
+//            commentView.topAnchor.constraint(equalTo: countView.bottomAnchor).isActive = true
+//        } else {
+//            NSLayoutConstraint.deactivate([commentViewBottomConstraint!])
+//            commentView.topAnchor.constraint(equalTo: commentViews[commentViews.firstIndex(of: commentView)! - 1].bottomAnchor, constant: bottomBorderCommentView).isActive = true   // -1은 다음 댓글을 이전 댓글의 bottomAnchor에 이어붙이기 위함
+//        }
+//        commentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: commentView.bottomAnchor, constant: 54)
+//        NSLayoutConstraint.activate([
+//            commentViewBottomConstraint!,
+//            commentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            commentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            commentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 54)
+//        ])
+//
+//        let commentProfileImage = UIImageView()
+//        commentView.addSubview(commentProfileImage)
+//        commentProfileImage.image = UIImage.init(systemName: "person.circle.fill")
+//        commentProfileImage.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            commentProfileImage.topAnchor.constraint(equalTo: commentView.topAnchor, constant :10),
+//            commentProfileImage.leadingAnchor.constraint(equalTo: commentView.leadingAnchor, constant: 8),
+//            commentProfileImage.widthAnchor.constraint(equalToConstant: 34),
+//            commentProfileImage.heightAnchor.constraint(equalToConstant: 34)
+//        ])
+//    }
     
     override func viewDidLayoutSubviews() {
 //        let fixedWidth = commentInputText.frame.size.width
