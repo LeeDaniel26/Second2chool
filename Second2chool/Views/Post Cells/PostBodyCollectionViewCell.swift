@@ -33,12 +33,19 @@ class PostBodyCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         let labelPadding: CGFloat = 23
+        let size = bodyLabel.sizeThatFits(CGSize(width: contentView.bounds.width-labelPadding, height: contentView.bounds.height))
         bodyLabel.frame = CGRect(
             x: labelPadding,
             y: 0,
-            width: contentView.width - (labelPadding)*2,
-            height: contentView.height
+            width: size.width,
+            height: size.height
         )
+//        bodyLabel.frame = CGRect(
+//            x: labelPadding,
+//            y: 0,
+//            width: contentView.width - (labelPadding)*2,
+//            height: contentView.height
+//        )
     }
 
     override func prepareForReuse() {
@@ -47,6 +54,6 @@ class PostBodyCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with viewModel: PostBodyCollectionViewCellViewModel) {
-        bodyLabel.text = viewModel.body
+        bodyLabel.text = "asdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdf"
     }
 }

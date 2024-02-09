@@ -169,6 +169,8 @@ class FreeBoardPostViewController: UIViewController, UICollectionViewDelegate, U
                 editedDate: post.data.createdAt)),
             .postTitle(viewModel: PostTitleCollectionViewCellViewModel(
                 title: post.data.title)),
+            .postBody(viewModel: PostBodyCollectionViewCellViewModel(
+                body: post.data.content)),
             .likesCount(viewModel: PostLikesCollectionViewCellViewModel(
                 likesCount: "10000",
                 commentsCount: "\(post.data.commentCnt)")),

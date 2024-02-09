@@ -12,6 +12,8 @@ protocol FreeBoardManagerDelegate {
 }
 
 class FreeBoardManager {
+    
+    static let shared = FreeBoardManager()
             
     let freeboardURL = "https://ceoshomework.store/api/v1/post"
     
@@ -38,7 +40,7 @@ class FreeBoardManager {
     
     //MARK: - GET
     
-    func getRequest(page: Int, size: Int, completed: @escaping () -> ()) {
+    func getRequest(page: Int, size: Int, completed: @escaping (FreeBoardData?) -> ()) {
 //        var request = URLRequest(url: URL(string: "\(freeboardURL)/query?title=&content=&writer-name=&normal-type=FREE&page=\(page)&size=0\(size)&sort=id,asc")!,timeoutInterval: Double.infinity)
         var request = URLRequest(url: URL(string: "\(freeboardURL)/query?title=&content=&writer-name=&post-type=FREE&course-id=&page=\(page)&size=\(size)&sort=id,asc")!,timeoutInterval: Double.infinity)
 
@@ -54,14 +56,13 @@ class FreeBoardManager {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 print(String(describing: error))
+                completed(nil)
                 return
             }
             print(String(data: data, encoding: .utf8)!)
-            if let freeboardModel = self.parseJSON(data: data) {
-                self.delegate?.didUpdateFreeBoard(freeboardModel: freeboardModel)
-                DispatchQueue.main.async {
-                    completed()
-                }
+            let decodedData = self.parseJSON(data: data)
+            DispatchQueue.main.async {
+                completed(decodedData)
             }
         }
         task.resume()
@@ -161,27 +162,10 @@ class FreeBoardManager {
         task.resume()
     }
     
-    func parseJSON(data: Foundation.Data) -> FreeBoardModel? {   // *** "FreeBoardData?" why optional? --> To use "return nil" at catch.
+    func parseJSON(data: Foundation.Data) -> FreeBoardData? {   // *** "FreeBoardData?" why optional? --> To use "return nil" at catch.
         do {
             let decodedData = try JSONDecoder().decode(FreeBoardData.self, from: data)
-
-            // GET
-            contents = decodedData.data.contents
-            if contents.isEmpty {
-                print("NO CONTENTS..")
-                return nil
-            }
-            totalPages = decodedData.data.totalPages
-            cellCount = decodedData.data.numberOfElements
-            
-            title = decodedData.data.contents[id].title
-            content = decodedData.data.contents[id].content
-            writerName = decodedData.data.contents[id].writerName
-            isAnon = decodedData.data.contents[id].isAnon
-            
-            let freeboardModel = FreeBoardModel(contents: contents, totalPages: totalPages, cellCount: cellCount, title: title, content: content, writerName: writerName, isAnon: isAnon)
-            
-            return freeboardModel
+            return decodedData
         } catch {
             print(error)
             return nil

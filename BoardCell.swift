@@ -25,4 +25,18 @@ class BoardCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = nil
+        subtitleLabel.text = nil
+        numberOfLikes.text = nil
+        numberOfComments.text = nil
+    }
+    
+    func configure(with viewModel: FreeBoardTableViewCellViewModel) {
+        titleLabel.text = viewModel.title
+        subtitleLabel.text = viewModel.subtitle
+        numberOfLikes.text = viewModel.likesCount
+        numberOfComments.text = viewModel.commentsCount
+    }
 }

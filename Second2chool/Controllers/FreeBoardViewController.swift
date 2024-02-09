@@ -8,14 +8,21 @@
 import UIKit
 import SwiftUI
 
+struct Post {
+    let title: String
+    let subtitle: String
+    let likesCount: String
+    let commentsCount: String
+}
+
 class FreeBoardViewController: UIViewController {
 
+    private var posts = [FreeBoardTableViewCellViewModel]()
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
-    
-    var freeboardManager = FreeBoardManager()
-    
+        
     var currentPage = 0
     var totalPages = 0
     var size = 10
@@ -30,16 +37,15 @@ class FreeBoardViewController: UIViewController {
         super.viewDidLoad()
                 
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "LilitaOne", size: 36)!]
-        
-        freeboardManager.delegate = self
-        
-        freeboardManager.getRequest(page: currentPage, size: size) {
-            self.tableView.reloadData()
-        }
+  
+        fetchPosts()
+//        freeboardManager.getRequest(page: currentPage, size: size) {
+//            self.tableView.reloadData()
+//        }
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: "BoardCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+        tableView.register(UINib(nibName: "BoardCell", bundle: nil), forCellReuseIdentifier: "FreeBoardCell")
         
         tableView.layer.borderWidth = 1.2
         tableView.layer.borderColor = UIColor.label.cgColor
@@ -77,9 +83,7 @@ class FreeBoardViewController: UIViewController {
         if currentPage != 0 {
             currentPage -= 1
         }
-        freeboardManager.getRequest(page: currentPage, size: size) {
-            self.tableView.reloadData()
-        }
+        fetchPosts()
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
@@ -87,9 +91,7 @@ class FreeBoardViewController: UIViewController {
         if currentPage == totalPages {
             currentPage = totalPages-1
         }
-        freeboardManager.getRequest(page: currentPage, size: size) {
-            self.tableView.reloadData()
-        }
+        fetchPosts()
     }
     
     // ??????
@@ -97,21 +99,38 @@ class FreeBoardViewController: UIViewController {
 //        navigationController?.popToViewController(HomeViewController(), animated: true)
         let _ = self.navigationController?.popToViewController((self.navigationController?.viewControllers[1]) as! HomeViewController, animated: true)
     }
+    
+    private func fetchPosts() {
+        FreeBoardManager.shared.getRequest(page: currentPage, size: size) { decodedData in
+            guard let decodedData = decodedData else {
+                print("Error in fetchPosts() decodedData: FreeBoardViewController")
+                return
+            }
+            var postsData: [FreeBoardTableViewCellViewModel] = []
+            for contents in decodedData.data.contents {
+                postsData.append(FreeBoardTableViewCellViewModel(
+                    title: contents.title,
+                    subtitle: contents.isAnon == false ? contents.writerName : "Anonymity",
+                    likesCount: "\(contents.likeCnt)",
+                    commentsCount: "\(contents.commentCnt)",
+                    id: contents.id))
+            }
+            
+            self.posts = postsData
+            self.tableView.reloadData()
+        }
+    }
 }
     
 extension FreeBoardViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellCount
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! BoardCell
-//        cell.selectionStyle = UITableViewCell.SelectionStyle.default
-
-        cell.titleLabel.text = contents![indexPath.row].title
-        cell.subtitleLabel.text = (contents![indexPath.row].isAnon == false) ? contents![indexPath.row].writerName : "Anonymity"
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FreeBoardCell", for: indexPath) as! BoardCell
+        cell.configure(with: posts[indexPath.row])
         return cell
     }
 }
@@ -119,7 +138,7 @@ extension FreeBoardViewController: UITableViewDataSource {
 extension FreeBoardViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        postId = contents![indexPath.row].id
+        postId = posts[indexPath.row].id
         let vc = FreeBoardPostViewController()
         vc.postId = postId
         navigationController?.pushViewController(vc, animated: true)
