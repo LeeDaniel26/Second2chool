@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostTitleCollectionViewCell: UICollectionViewCell {
+class PostTitleCollectionViewCell: UITableViewCell {
     static let identifier = "PostTitleCollectionViewCell"
         
     private let titleLabel: UILabel = {
@@ -26,13 +26,12 @@ class PostTitleCollectionViewCell: UICollectionViewCell {
         return layer
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLabel)
         contentView.layer.addSublayer(bottomBorder)
-        
     }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

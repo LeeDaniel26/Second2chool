@@ -27,6 +27,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // (Mock)
+        emailTextField.text = "g@test.com"
+        passwordTextField.text = "g"
+        
         loginLabel.adjustsFontSizeToFitWidth = true
         autologinLabel.adjustsFontSizeToFitWidth = true
         forgotButton.titleLabel!.adjustsFontSizeToFitWidth = true

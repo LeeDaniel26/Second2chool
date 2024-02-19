@@ -31,18 +31,14 @@ class FreeBoardViewController: UIViewController {
     var contents: [Contents]?
     
     var postId: Int?
-    
+            
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-                
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "LilitaOne", size: 36)!]
-  
-        fetchPosts()
-//        freeboardManager.getRequest(page: currentPage, size: size) {
-//            self.tableView.reloadData()
-//        }
         
+        fetchPosts()
+        
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "LilitaOne", size: 36)!]
+          
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "BoardCell", bundle: nil), forCellReuseIdentifier: "FreeBoardCell")
@@ -60,6 +56,14 @@ class FreeBoardViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchPosts()
+        // This 'fetchPosts()' seems to take some time to load just uploaded post.
+        // fetchPosts()를 viewWillAppear()에서 실행하면 viewDidAppear()에서 실행 했던것보다 빠르게 data를 GET 하지만
+        // 새로운 포스트가 추가되지 않은 상태로 로드된다. 반면, viewDidAppear()은 정상적으로 로드된다.
+    }
+    
     // Go back to the previous ViewController while using Navigation Controller
 //    @IBAction func gobackButtonPressed(_ sender: Any) {
 //        _ = navigationController?.popViewController(animated: true)
@@ -72,9 +76,13 @@ class FreeBoardViewController: UIViewController {
     
     @IBAction func notificationButtonPressed(_ sender: UIButton) {
     }
-    @IBAction func profileButtonPressed(_ sender: UIBarButtonItem) {
-        openSwiftUIScreen()
+    
+    @IBAction func didTapProfile(_ sender: UIBarButtonItem) {
+        let vc = ProfileViewController()
+        vc.title = "Profile"
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
     @IBAction func searchButtonPressed(_ sender: UIButton) {
     }
     
@@ -93,13 +101,36 @@ class FreeBoardViewController: UIViewController {
         }
         fetchPosts()
     }
+    @IBAction func didTapWritePostButton(_ sender: UIButton) {
+//        let vc = PostViewController()
+//        let navVC = UINavigationController(rootViewController: vc)
+//        navVC.modalPresentationStyle = .fullScreen
+//        present(navVC, animated: true)
+        presentToPostVC()
+    }
+    // (TEST)
+    func presentToPostVC() {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let postViewController = storyboard.instantiateViewController(withIdentifier: "PostViewController") as? PostViewController {
+//            let navVC = UINavigationController(rootViewController: postViewController)
+//            navVC.modalPresentationStyle = .fullScreen
+//            present(navVC, animated: true)
+//        }
+        let vc = WritePostViewController()
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true)
+    }
+
+    
+    
     
     // ??????
     @objc func back(sender: UIBarButtonItem) {
 //        navigationController?.popToViewController(HomeViewController(), animated: true)
         let _ = self.navigationController?.popToViewController((self.navigationController?.viewControllers[1]) as! HomeViewController, animated: true)
     }
-    
+        
     private func fetchPosts() {
         FreeBoardManager.shared.getRequest(page: currentPage, size: size) { decodedData in
             guard let decodedData = decodedData else {

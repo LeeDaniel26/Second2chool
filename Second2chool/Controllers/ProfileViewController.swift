@@ -14,6 +14,8 @@ struct ProfileCellModel {
 
 class ProfileViewController: UIViewController {
     
+    private let profileHeaderView = ProfileHeaderView()
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero,
                                     style: .grouped)
@@ -22,58 +24,12 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        // Get name (unfinished)
-        return label
-    }()
-    
-    private let majorLabel: UILabel = {     // (ask)
-        let label = UILabel()
-        // Get major (unfinished)
-        return label
-    }()
-    
-    private let totalPostsLabel: UILabel = {
-        let label = UILabel()
-        if let customFont = UIFont(name: "NanumGothicBold", size: 14) {
-            label.font = customFont
-        }
-        label.text = "Total Posts"
-        label.textColor = .yellow
-        return label
-    }()
-    
-    
-    private let totalCommentsLabel: UILabel = {
-        let label = UILabel()
-        if let customFont = UIFont(name: "NanumGothicBold", size: 14) {
-            label.font = customFont
-        }
-        label.text = "Total Comments"
-        label.textColor = .yellow
-        return label
-
-    }()
-    
-    private let countTotalPostsLabel: UILabel = {
-        let label = UILabel()
-        // Get total number of posts (unfinished)
-        return label
-    }()
-    
-    private let countTotalCommentsLabel: UILabel = {
-        let label = UILabel()
-        // Get total number of comments (unfinished)
-        return label
-    }()
-    
     private var models = [[ProfileCellModel]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureModels()
-        tableView.tableHeaderView = createTableHeaderView()
+        tableView.tableHeaderView = profileHeaderView
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -81,53 +37,13 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         tableView.frame = view.bounds
+        
+        profileHeaderView.frame = CGRect(x: 0,
+                                         y: 0,
+                                         width: view.width,
+                                         height: view.height/4.2)
+        profileHeaderView.delegate = self
     }
-    
-    private func createTableHeaderView() -> UIView {
-        let header = UIView(frame: CGRect(x: 0,
-                                          y: 0,
-                                          width: view.width,
-                                          height: view.height/4.2).integral)
-        header.backgroundColor = UIColor(rgb: 0xEB455F)
-        let size = header.height/2.1
-        let profilePhotoButton = UIButton(frame: CGRect(x: view.width - size - view.width/32,
-                                                        y: (header.height-size)/2,
-                                                        width: size,
-                                                        height: size))
-        header.addSubview(profilePhotoButton)
-        profilePhotoButton.layer.masksToBounds = true
-        profilePhotoButton.layer.cornerRadius = size/2.0
-        
-        // TEST
-        header.layer.borderWidth = 1
-        header.layer.borderColor = UIColor.label.cgColor
-        
-        profilePhotoButton.tintColor = .label
-        profilePhotoButton.addTarget(self,
-                                     action: #selector(didTapProfilePhotoButton),
-                                     for: .touchUpInside)
-        profilePhotoButton.setBackgroundImage(UIImage(systemName: "person.circle"),
-                                              for: .normal)
-        profilePhotoButton.layer.borderWidth = 1
-        profilePhotoButton.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        
-        header.addSubview(totalPostsLabel)
-        header.addSubview(totalCommentsLabel)
-        
-        var label = totalPostsLabel
-        label.sizeToFit()
-        label.frame.origin.x = header.width/16
-        label.frame.origin.y = header.height - label.frame.size.height - header.height/3.5
-        
-        label = totalCommentsLabel
-        label.sizeToFit()
-        label.frame.origin.x = totalPostsLabel.frame.origin.x + label.frame.size.width + 7
-        label.frame.origin.y = header.height - label.frame.size.height - header.height/3.5
-
-        
-        return header
-    }
-    
     
     private func configureModels() {
         models.append([
@@ -231,3 +147,53 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         models[indexPath.section][indexPath.row].handler()
     }
 }
+
+extension ProfileViewController: ProfileHeaderViewDelegate {
+    func didTapProfilePicture(_ view: ProfileHeaderView) {
+        let sheet = UIAlertController(
+            title: "Change Picture",
+            message: "Update your photo to reflect your best self.",
+            preferredStyle: .actionSheet
+        )
+
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        // Take Photo
+        
+        // Choose Photo
+        sheet.addAction(UIAlertAction(title: "Choose Photo", style: .default, handler: { [weak self] _ in
+            DispatchQueue.main.async {
+                let picker = UIImagePickerController()
+                picker.allowsEditing = true
+                picker.sourceType = .photoLibrary
+                picker.delegate = self  // This 'self' is referring to ProfileVC's 'UIImagePickerControllerDelegate' in its extension
+                self?.present(picker, animated: true)
+            }
+        }))
+        present(sheet, animated: true)
+    }
+}
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+//        StorageManager.shared.uploadProfilePicture(
+//            username: user.username,
+//            data: image.pngData()
+//        ) { [weak self] success in
+//            if success {
+//                self?.headerViewModel = nil
+//                self?.posts = []
+//                self?.fetchProfileInfo()
+//            }
+//        }
+    }
+}
+

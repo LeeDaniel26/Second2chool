@@ -99,14 +99,14 @@ class FreeBoardManager {
     func postRequest(title: String, content: String, isAnon: Bool, commentOn: Bool, courseId: Int?, postType: String, reviewScore: Int?, photoList: [String]) {
         var request = URLRequest(url: URL(string: "\(freeboardURL)")!)
         
-        for imagePath in photoList {
-            getImagePresignedRequest()
-            guard let imageData = self.imagePresignedData else {
-                print("Error occurred while retrieving ImagePresignedData..")
-                return
-            }
-            putImageRequest(requestURL: imageData.data, imageURL: imagePath)
-        }
+//        for imagePath in photoList {
+//            getImagePresignedRequest()
+//            guard let imageData = self.imagePresignedData else {
+//                print("Error occurred while retrieving ImagePresignedData..")
+//                return
+//            }
+//            putImageRequest(requestURL: imageData.data, imageURL: imagePath)
+//        }
         
         // Method
         request.httpMethod = "POST"
@@ -122,13 +122,12 @@ class FreeBoardManager {
             "courseId" : courseId,
             "postType" : postType,
             "reviewScore" : reviewScore,
-//            "normalType" : normalType,
             "photoList" : photoList
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {            // *** "guard let data = data" --> Because, data type of 'data' is optional.
+            guard let data = data, error == nil else {
                 print(String(describing: error))
                 return
             }

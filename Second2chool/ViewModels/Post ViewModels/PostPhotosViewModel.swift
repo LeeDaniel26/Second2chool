@@ -1,0 +1,12 @@
+//
+//  PostPhotosViewModel.swift
+//  Second2chool
+//
+//  Created by Daniel Lee on 2/17/24.
+//
+
+import Foundation
+
+struct PostPhotosViewModel {
+    let photoList: [String]
+}

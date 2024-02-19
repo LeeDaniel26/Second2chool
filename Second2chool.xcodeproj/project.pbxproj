@@ -33,6 +33,14 @@
 		6B60F5A42A7091AE007FAFEF /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B60F5A22A7091AE007FAFEF /* CommentCell.xib */; };
 		6B60F5A72A7091D6007FAFEF /* CommentReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60F5A52A7091D6007FAFEF /* CommentReplyCell.swift */; };
 		6B60F5A82A7091D6007FAFEF /* CommentReplyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B60F5A62A7091D6007FAFEF /* CommentReplyCell.xib */; };
+		6B6336B72B7FDA34002F37AB /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6336B62B7FDA34002F37AB /* ProfileHeaderViewModel.swift */; };
+		6B6336B92B7FDB6C002F37AB /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6336B82B7FDB6C002F37AB /* ProfileHeaderView.swift */; };
+		6B6336BB2B80014C002F37AB /* WritePostPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6336BA2B80014C002F37AB /* WritePostPhotoTableViewCell.swift */; };
+		6B6336BD2B800491002F37AB /* WritePostPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6336BC2B800491002F37AB /* WritePostPhotoViewModel.swift */; };
+		6B6336BF2B800760002F37AB /* WritePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6336BE2B800760002F37AB /* WritePostViewController.swift */; };
+		6B6336C32B80DBF0002F37AB /* PostPhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6336C22B80DBF0002F37AB /* PostPhotosTableViewCell.swift */; };
+		6B6336C52B80DC30002F37AB /* PostPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6336C42B80DC30002F37AB /* PostPhotosViewModel.swift */; };
+		6B7220EC2B7F528C005071E5 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7220EB2B7F528C005071E5 /* CameraViewController.swift */; };
 		6B75FC2C29BF737D00090B76 /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B75FC2A29BF737D00090B76 /* BoardCell.swift */; };
 		6B75FC2D29BF737D00090B76 /* BoardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B75FC2B29BF737D00090B76 /* BoardCell.xib */; };
 		6B75FC2F29BF783100090B76 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B75FC2E29BF783100090B76 /* Lato-Bold.ttf */; };
@@ -52,7 +60,6 @@
 		6B97B3FC2B71449F0065DFFD /* PostBodyCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B97B3FB2B71449F0065DFFD /* PostBodyCollectionViewCellViewModel.swift */; };
 		6B97B3FF2B715F710065DFFD /* CommentReplyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B97B3FE2B715F710065DFFD /* CommentReplyCollectionViewCell.swift */; };
 		6B97B4022B7161010065DFFD /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B97B4012B7161010065DFFD /* CommentViewModel.swift */; };
-		6B97B4042B71611C0065DFFD /* CommentReplyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B97B4032B71611C0065DFFD /* CommentReplyViewModel.swift */; };
 		6B97B4062B7165320065DFFD /* CommentBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B97B4052B7165320065DFFD /* CommentBarView.swift */; };
 		6B97B4082B71664E0065DFFD /* IGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B97B4072B71664E0065DFFD /* IGTextField.swift */; };
 		6B97B40A2B716E8F0065DFFD /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B97B4092B716E8E0065DFFD /* CommentManager.swift */; };
@@ -97,6 +104,14 @@
 		6B60F5A22A7091AE007FAFEF /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		6B60F5A52A7091D6007FAFEF /* CommentReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReplyCell.swift; sourceTree = "<group>"; };
 		6B60F5A62A7091D6007FAFEF /* CommentReplyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentReplyCell.xib; sourceTree = "<group>"; };
+		6B6336B62B7FDA34002F37AB /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		6B6336B82B7FDB6C002F37AB /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		6B6336BA2B80014C002F37AB /* WritePostPhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostPhotoTableViewCell.swift; sourceTree = "<group>"; };
+		6B6336BC2B800491002F37AB /* WritePostPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostPhotoViewModel.swift; sourceTree = "<group>"; };
+		6B6336BE2B800760002F37AB /* WritePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostViewController.swift; sourceTree = "<group>"; };
+		6B6336C22B80DBF0002F37AB /* PostPhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotosTableViewCell.swift; sourceTree = "<group>"; };
+		6B6336C42B80DC30002F37AB /* PostPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotosViewModel.swift; sourceTree = "<group>"; };
+		6B7220EB2B7F528C005071E5 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		6B75FC2A29BF737D00090B76 /* BoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
 		6B75FC2B29BF737D00090B76 /* BoardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoardCell.xib; sourceTree = "<group>"; };
 		6B75FC2E29BF783100090B76 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -116,7 +131,6 @@
 		6B97B3FB2B71449F0065DFFD /* PostBodyCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBodyCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		6B97B3FE2B715F710065DFFD /* CommentReplyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReplyCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B97B4012B7161010065DFFD /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
-		6B97B4032B71611C0065DFFD /* CommentReplyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReplyViewModel.swift; sourceTree = "<group>"; };
 		6B97B4052B7165320065DFFD /* CommentBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBarView.swift; sourceTree = "<group>"; };
 		6B97B4072B71664E0065DFFD /* IGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextField.swift; sourceTree = "<group>"; };
 		6B97B4092B716E8E0065DFFD /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
@@ -226,16 +240,26 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		6B7ACE252B70FDE800470B20 /* ViewModels */ = {
+		6B6336B52B7FD9F7002F37AB /* Post ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				6B7ACE2B2B7101F800470B20 /* PosterCollectionViewCellViewModel.swift */,
 				6B7ACE262B70FE4E00470B20 /* PostTitleCollectionViewCellViewModel.swift */,
 				6B97B3FB2B71449F0065DFFD /* PostBodyCollectionViewCellViewModel.swift */,
 				6B7ACE212B70DAC200470B20 /* PostLikesCollectionViewCellViewModel.swift */,
+				6B6336C42B80DC30002F37AB /* PostPhotosViewModel.swift */,
+				6B6336BC2B800491002F37AB /* WritePostPhotoViewModel.swift */,
+			);
+			path = "Post ViewModels";
+			sourceTree = "<group>";
+		};
+		6B7ACE252B70FDE800470B20 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6B6336B52B7FD9F7002F37AB /* Post ViewModels */,
 				6B97B4012B7161010065DFFD /* CommentViewModel.swift */,
-				6B97B4032B71611C0065DFFD /* CommentReplyViewModel.swift */,
 				6B347A9D2B7621930025B864 /* FreeBoardTableViewCellViewModel.swift */,
+				6B6336B62B7FDA34002F37AB /* ProfileHeaderViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -247,6 +271,7 @@
 				6B97B3FD2B715F440065DFFD /* Comment Cell */,
 				6B97B4052B7165320065DFFD /* CommentBarView.swift */,
 				6B97B4072B71664E0065DFFD /* IGTextField.swift */,
+				6B6336B82B7FDB6C002F37AB /* ProfileHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,6 +283,8 @@
 				6B7ACE352B712A2E00470B20 /* PostTitleCollectionViewCell.swift */,
 				6B7ACE332B71219000470B20 /* PostBodyCollectionViewCell.swift */,
 				6B7ACE372B712F1300470B20 /* PostLikesCollectionViewCell.swift */,
+				6B6336C22B80DBF0002F37AB /* PostPhotosTableViewCell.swift */,
+				6B6336BA2B80014C002F37AB /* WritePostPhotoTableViewCell.swift */,
 			);
 			path = "Post Cells";
 			sourceTree = "<group>";
@@ -283,6 +310,8 @@
 				6B56C5A42B09EEFE00D8485E /* SwiftUIViewTest.swift */,
 				6B4AAB2D2B65B40D00091C27 /* ProfileViewController.swift */,
 				6B7ACE232B70DB1300470B20 /* FreeBoardPostViewController.swift */,
+				6B7220EB2B7F528C005071E5 /* CameraViewController.swift */,
+				6B6336BE2B800760002F37AB /* WritePostViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -458,9 +487,11 @@
 				6B97B3FF2B715F710065DFFD /* CommentReplyCollectionViewCell.swift in Sources */,
 				6B7ACE342B71219000470B20 /* PostBodyCollectionViewCell.swift in Sources */,
 				6B97B40C2B7183550065DFFD /* SinglePostManager.swift in Sources */,
+				6B6336BB2B80014C002F37AB /* WritePostPhotoTableViewCell.swift in Sources */,
 				6B60F59D2A707685007FAFEF /* ImageManager.swift in Sources */,
 				6B97B3FC2B71449F0065DFFD /* PostBodyCollectionViewCellViewModel.swift in Sources */,
 				40CAF8AB2A00F7DB00B4252F /* SignUpTwoViewController.swift in Sources */,
+				6B6336B92B7FDB6C002F37AB /* ProfileHeaderView.swift in Sources */,
 				6B5E3C8E2A13F88A00E52E41 /* FreeBoardShowViewController.swift in Sources */,
 				6B24281F29A31DF5003EFB48 /* ViewController.swift in Sources */,
 				6B60F5A02A7079DC007FAFEF /* ImageData.swift in Sources */,
@@ -469,11 +500,15 @@
 				6B60F5A72A7091D6007FAFEF /* CommentReplyCell.swift in Sources */,
 				6B75FC3329BFA4C100090B76 /* PostViewController.swift in Sources */,
 				403ADD602A02575200A7B53D /* HomeViewController.swift in Sources */,
+				6B6336C52B80DC30002F37AB /* PostPhotosViewModel.swift in Sources */,
 				40CAF8AA2A00F7DB00B4252F /* SignUpOneViewController.swift in Sources */,
 				6BC3E22A29BF70C000228C5D /* Message.swift in Sources */,
+				6B6336C32B80DBF0002F37AB /* PostPhotosTableViewCell.swift in Sources */,
 				6B97B40E2B7186E40065DFFD /* SinglePostDatabase.swift in Sources */,
 				6BB4FAE029FD0BC60044EAD2 /* LoginManager.swift in Sources */,
 				6B7ACE382B712F1300470B20 /* PostLikesCollectionViewCell.swift in Sources */,
+				6B6336BF2B800760002F37AB /* WritePostViewController.swift in Sources */,
+				6B7220EC2B7F528C005071E5 /* CameraViewController.swift in Sources */,
 				6B4AAB2E2B65B40D00091C27 /* ProfileViewController.swift in Sources */,
 				6B7ACE242B70DB1300470B20 /* FreeBoardPostViewController.swift in Sources */,
 				6B7ACE272B70FE4E00470B20 /* PostTitleCollectionViewCellViewModel.swift in Sources */,
@@ -482,12 +517,13 @@
 				6B24281B29A31DF5003EFB48 /* AppDelegate.swift in Sources */,
 				6B75FC2C29BF737D00090B76 /* BoardCell.swift in Sources */,
 				6B97B4022B7161010065DFFD /* CommentViewModel.swift in Sources */,
+				6B6336B72B7FDA34002F37AB /* ProfileHeaderViewModel.swift in Sources */,
 				6B97B4082B71664E0065DFFD /* IGTextField.swift in Sources */,
 				6B7ACE2C2B7101F800470B20 /* PosterCollectionViewCellViewModel.swift in Sources */,
+				6B6336BD2B800491002F37AB /* WritePostPhotoViewModel.swift in Sources */,
 				6B97B3FA2B713BE80065DFFD /* CommentCollectionViewCell.swift in Sources */,
 				6B4AAB312B65B92D00091C27 /* Extensions.swift in Sources */,
 				6B7ACE322B7105CF00470B20 /* PosterCollectionViewCell.swift in Sources */,
-				6B97B4042B71611C0065DFFD /* CommentReplyViewModel.swift in Sources */,
 				6B56C5A52B09EEFF00D8485E /* SwiftUIViewTest.swift in Sources */,
 				6BD2B47529DC870D00CFCB0A /* FreeBoardManager.swift in Sources */,
 				6B24281D29A31DF5003EFB48 /* SceneDelegate.swift in Sources */,

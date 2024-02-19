@@ -28,7 +28,7 @@ struct SinglePostData: Codable {
     let createdAt: String
     let updatedAt: String
     let commentList: [CommentList]
-    let photoList: [URL]    // ??? It was []..?
+    let photoList: [String]    // ??? It was []..?
 }
 
 struct CommentList: Codable {
@@ -45,4 +45,9 @@ struct CommentList: Codable {
     let createdAt: String
     let updatedAt: String
     let child: [CommentList]
+}
+
+struct SinglePostPhotoDatabase: Codable {
+    let status: String
+    let data: String
 }

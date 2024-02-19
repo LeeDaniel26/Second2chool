@@ -7,10 +7,8 @@
 
 import UIKit
 
-class FreeBoardPostViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
-    private var collectionView: UICollectionView?
-    
+class FreeBoardPostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+        
     private var viewModels: [PostCellType] = []
     
     private let commentBarView = CommentBarView()
@@ -23,78 +21,195 @@ class FreeBoardPostViewController: UIViewController, UICollectionViewDelegate, U
     var contents: Contents?
     
     var postId: Int?
+    private var commentId: Int?
+    private var isReply = false
     
-//    init(
-//        post: SinglePostDatabase) {
-//        self.post = post
-//    }
+    private var bottomConstraint: NSLayoutConstraint!
+    private var originalBottomConstraint = 0.0
     
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(
+            PosterCollectionViewCell.self,
+            forCellReuseIdentifier: PosterCollectionViewCell.identifier
+        )
+        tableView.register(
+            PostTitleCollectionViewCell.self,
+            forCellReuseIdentifier: PostTitleCollectionViewCell.identifier
+        )
+        tableView.register(
+            PostBodyCollectionViewCell.self,
+            forCellReuseIdentifier: PostBodyCollectionViewCell.identifier
+        )
+        tableView.register(
+            PostPhotosTableViewCell.self,
+            forCellReuseIdentifier: PostPhotosTableViewCell.identifier
+        )
+        tableView.register(
+            PostLikesCollectionViewCell.self,
+            forCellReuseIdentifier: PostLikesCollectionViewCell.identifier
+        )
+        tableView.register(
+            CommentCollectionViewCell.self,
+            forCellReuseIdentifier: CommentCollectionViewCell.identifier
+        )
+        tableView.register(
+            CommentReplyCollectionViewCell.self,
+            forCellReuseIdentifier: CommentReplyCollectionViewCell.identifier
+        )
+        return tableView
+    }()
+    
+    private let replyReceiverUsernameLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        if let customFont = UIFont(name: "NanumGothicExtraBold", size: 12) {
+            label.font = customFont
+        }
+        label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let replyReceiverContentLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        if let customFont = UIFont(name: "NanumGothicBold", size: 12) {
+            label.font = customFont
+        }
+        label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let replyCancelButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let replyReceiverView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .secondarySystemBackground
+        view.alpha = 0.9
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let bottomWhiteSpace: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "FreeBoard"
         view.backgroundColor = .systemBackground
         
+        view.addSubview(tableView)
+        tableView.backgroundColor = .systemBackground
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        view.addSubview(replyReceiverView)
+        replyReceiverView.addSubview(replyReceiverUsernameLabel)
+        replyReceiverView.addSubview(replyReceiverContentLabel)
+        replyReceiverView.addSubview(replyCancelButton)
+        
         view.addSubview(commentBarView)
+        view.addSubview(bottomWhiteSpace)
         commentBarView.delegate = self
-        observeKeyboardChange()
         
-//        singlePostManager.delegate = self
-        
-        configureCollectionView()
-//        configureMockData()
         fetchPost()
+        
+        commentBarView.translatesAutoresizingMaskIntoConstraints = false
+        bottomConstraint = commentBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        NSLayoutConstraint.activate([
+            commentBarView.heightAnchor.constraint(greaterThanOrEqualToConstant: 52),
+            commentBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            commentBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomConstraint!
+        ])
+        
+        replyCancelButton.addTarget(self, action: #selector(didTapCancelReply), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(FreeBoardPostViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(FreeBoardPostViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionView?.frame = view.bounds
-        commentBarView.frame = CGRect(
-            x: 0,
-            y: view.height-view.safeAreaInsets.bottom-70,
-            width: view.width,
-            height: 70
-        )
+        tableView.frame = view.bounds
+        
+        bottomWhiteSpace.frame = CGRect(x: 0,
+                                        y: view.height-view.safeAreaInsets.bottom,
+                                        width: view.width,
+                                        height: view.safeAreaInsets.bottom)
     }
     
-    private func observeKeyboardChange() {
-        observer = NotificationCenter.default.addObserver(
-            forName: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil,
-            queue: .main
-        ) { notification in
-            guard let userInfo = notification.userInfo,
-                  let height = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else {
-                return
-            }
-            UIView.animate(withDuration: 0.2) {
-                self.commentBarView.frame = CGRect(
-                    x: 0,
-                    y: self.view.height-60-height,
-                    width: self.view.width,
-                    height: 70
-                )
-            }
-        }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        print()
+        
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 
-        hideObserver = NotificationCenter.default.addObserver(
-            forName: UIResponder.keyboardWillHideNotification,
-            object: nil,
-            queue: .main
-        ) { _ in
-            UIView.animate(withDuration: 0.2) {
-                self.commentBarView.frame = CGRect(
-                    x: 0,
-                    y: self.view.height-self.view.safeAreaInsets.bottom-70,
-                    width: self.view.width,
-                    height: 70
-                )
-            }
+        originalBottomConstraint = bottomConstraint.constant
+        UIView.animate(withDuration: 0.1) {
+            self.bottomConstraint.constant = -keyboardFrame.size.height + 34
+            self.view.layoutIfNeeded()
         }
     }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.bottomConstraint.constant = self.originalBottomConstraint
+        self.view.layoutIfNeeded()
+
+        UIView.animate(withDuration: 0.01) {
+        }
+    }
+
+    private func configureReplyView(receiver: String, content: String) {
+        // Configure Data
+        replyReceiverUsernameLabel.text = "Reply to \(receiver)"
+        replyReceiverContentLabel.text = content
+        replyCancelButton.addTarget(self, action: #selector(didTapCancelReply), for: .touchUpInside)
+        
+        // Set Constraints
+        let viewHeight: CGFloat = 60
+        let padding: CGFloat = 10
+        let buttonSize: CGFloat = 18
+        
+        replyReceiverUsernameLabel.sizeToFit()
+        replyReceiverContentLabel.sizeToFit()
+        
+        NSLayoutConstraint.activate([
+            replyReceiverView.heightAnchor.constraint(equalToConstant: viewHeight),
+            replyReceiverView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            replyReceiverView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            replyReceiverView.bottomAnchor.constraint(equalTo: commentBarView.topAnchor),
+
+            replyReceiverUsernameLabel.leadingAnchor.constraint(equalTo: replyReceiverView.leadingAnchor, constant: padding),
+            replyReceiverUsernameLabel.trailingAnchor.constraint(equalTo: replyReceiverView.trailingAnchor, constant: -padding),
+            replyReceiverUsernameLabel.topAnchor.constraint(equalTo: replyReceiverView.topAnchor, constant: 12),
+            
+            replyReceiverContentLabel.leadingAnchor.constraint(equalTo: replyReceiverView.leadingAnchor, constant: padding),
+            replyReceiverContentLabel.trailingAnchor.constraint(equalTo: replyReceiverView.trailingAnchor, constant: -padding),
+            replyReceiverContentLabel.topAnchor.constraint(equalTo: replyReceiverUsernameLabel.bottomAnchor, constant: 8),
+            
+            replyCancelButton.trailingAnchor.constraint(equalTo: replyReceiverView.trailingAnchor, constant: -padding-3),
+            replyCancelButton.topAnchor.constraint(equalTo: replyReceiverView.topAnchor, constant: (viewHeight - buttonSize)/2),
+            replyCancelButton.bottomAnchor.constraint(equalTo: replyReceiverView.bottomAnchor, constant: -(viewHeight - buttonSize)/2),
+        ])
+    }
+    
+    @objc private func didTapCancelReply() {
+//        replyReceiverView.removeFromSuperview()
+        replyReceiverView.isHidden = true
+    }
+    
     
     private func configureMockData() {
         let postData: [PostCellType] = [
@@ -110,22 +225,22 @@ class FreeBoardPostViewController: UIViewController, UICollectionViewDelegate, U
                 likesCount: "100000",
                 commentsCount: "10000")),
             .comment(viewModel:
-                CommentViewModel(
-                    profilePictureURL: URL(string: "www.google.com")!,
-                    id: 1,
-                    parentId: nil,
-                    ancestorId: nil,
-                    likeCnt: 0,
-                    content: "This is 1st comment.",
-                    writerName: "@Dan1",
-                    isAnon: false,
-                    isLiked: false,
-                    isWriter: false,
-                    isPostWriter: false,
-                    createdAt: "24-01-26",
-                    updatedAt: "24-01-27",
-                    child: [])
-            ),
+                        CommentViewModel(
+                            profilePictureURL: URL(string: "www.google.com")!,
+                            id: 1,
+                            parentId: nil,
+                            ancestorId: nil,
+                            likeCnt: 0,
+                            content: "This is 1st comment.",
+                            writerName: "@Dan1",
+                            isAnon: false,
+                            isLiked: false,
+                            isWriter: false,
+                            isPostWriter: false,
+                            createdAt: "24-01-26",
+                            updatedAt: "24-01-27",
+                            child: [])
+                    ),
             .comment(viewModel:              CommentViewModel(
                 profilePictureURL: URL(string: "www.google.com")!,
                 id: 2,
@@ -145,7 +260,7 @@ class FreeBoardPostViewController: UIViewController, UICollectionViewDelegate, U
         ]
         
         viewModels = postData
-        collectionView?.reloadData()
+        tableView.reloadData()
     }
     
     // (중요) post in this VC and process done in getRequet seems different
@@ -156,7 +271,7 @@ class FreeBoardPostViewController: UIViewController, UICollectionViewDelegate, U
                 return
             }
             self.createViewModel(post: decodedData)
-            self.collectionView?.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -171,6 +286,8 @@ class FreeBoardPostViewController: UIViewController, UICollectionViewDelegate, U
                 title: post.data.title)),
             .postBody(viewModel: PostBodyCollectionViewCellViewModel(
                 body: post.data.content)),
+            .postPhotos(viewModel: PostPhotosViewModel(
+                photoList: post.data.photoList )),
             .likesCount(viewModel: PostLikesCollectionViewCellViewModel(
                 likesCount: "10000",
                 commentsCount: "\(post.data.commentCnt)")),
@@ -193,196 +310,176 @@ class FreeBoardPostViewController: UIViewController, UICollectionViewDelegate, U
                     createdAt: comment.createdAt,
                     updatedAt: comment.updatedAt,
                     child: comment.child)))
+            for reply in comment.child {
+                postData.append(    // (Mock)
+                    .commentReply(viewModel: CommentViewModel(
+                        profilePictureURL: URL(string: "www.google.com")!,
+                        id: reply.id,
+                        parentId: reply.parentId,
+                        ancestorId: reply.ancestorId,
+                        likeCnt: reply.likeCnt,
+                        content: reply.content,
+                        writerName: reply.writerName,
+                        isAnon: reply.isAnon,
+                        isLiked: reply.isLiked,
+                        isWriter: reply.isWriter,
+                        isPostWriter: reply.isPostWriter,
+                        createdAt: reply.createdAt,
+                        updatedAt: reply.updatedAt,
+                        child: reply.child)))
+            }
         }
         
+        
+        
         self.viewModels = postData
-        self.collectionView?.reloadData()
+        self.tableView.reloadData()
     }
     
-    // MARK: - CollectionView
+    // MARK: - TableView
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellType = viewModels[indexPath.row]
         switch cellType {
         case .poster(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PosterCollectionViewCell.identifier,
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: PosterCollectionViewCell.identifier,
                 for: indexPath
             ) as? PosterCollectionViewCell else {
                 fatalError()
             }
-//            cell.delegate = self
+            //            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .postTitle(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PostTitleCollectionViewCell.identifier,
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: PostTitleCollectionViewCell.identifier,
                 for: indexPath
             ) as? PostTitleCollectionViewCell else {
                 fatalError()
             }
-//            cell.delegate = self
+            //            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .postBody(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PostBodyCollectionViewCell.identifier,
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: PostBodyCollectionViewCell.identifier,
                 for: indexPath
             ) as? PostBodyCollectionViewCell else {
                 fatalError()
             }
-//            cell.delegate = self
+            //            cell.delegate = self
+            cell.configure(with: viewModel)
+            return cell
+        case .postPhotos(let viewModel):
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: PostPhotosTableViewCell.identifier,
+                for: indexPath
+            ) as? PostPhotosTableViewCell else {
+                fatalError()
+            }
             cell.configure(with: viewModel)
             return cell
         case .likesCount(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PostLikesCollectionViewCell.identifier,
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: PostLikesCollectionViewCell.identifier,
                 for: indexPath
             ) as? PostLikesCollectionViewCell else {
                 fatalError()
             }
-//            cell.delegate = self
+            //            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .comment(let viewModel):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: CommentCollectionViewCell.identifier,
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: CommentCollectionViewCell.identifier,
                 for: indexPath
             ) as? CommentCollectionViewCell else {
                 fatalError()
             }
             cell.configure(with: viewModel)
             return cell
-//        case .commentReply(viewModel: let viewModel):
-//            guard let cell = collectionView.dequeueReusableCell(
-//                withReuseIdentifier: CommentReplyCollectionViewCell.identifier,
-//                for: indexPath
-//            ) as? CommentReplyCollectionViewCell else {
-//                fatalError()
-//            }
-//            return cell
+        case .commentReply(viewModel: let viewModel):
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: CommentReplyCollectionViewCell.identifier,
+                for: indexPath
+            ) as? CommentReplyCollectionViewCell else {
+                fatalError()
+            }
+            cell.configure(with: viewModel)
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cellType = viewModels[indexPath.row]
+        if case .comment(let viewModel) = cellType {
+            isReply = true
+            commentId = viewModel.id
+            
+            // This is to show "Reply to (username) .." view over BarView
+            configureReplyView(receiver: viewModel.writerName, content: viewModel.content)
+            replyReceiverView.isHidden = false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellType = viewModels[indexPath.row]
+        switch cellType {
+        case .poster(_):
+            return 60
+        case .postTitle(_):
+            return 60
+        case .postBody(_):
+            return UITableView.automaticDimension
+        case .postPhotos(_):
+            return UITableView.automaticDimension
+        case .likesCount(_):
+            return 40
+        case .comment(_):
+            return UITableView.automaticDimension
+        case .commentReply(_):
+            return UITableView.automaticDimension
         }
     }
 }
 
 extension FreeBoardPostViewController: CommentBarViewDelegate {
     func commentBarViewDidTapDone(_ commentBarView: CommentBarView, withText text: String) {
-        guard let contents = contents else {
-            print("NO CONTENTS..")
-            return
+        if isReply == true {
+            replyReceiverView.isHidden = true
+            
+            guard let commentId = commentId else {
+                print("Error: commentId is nil")
+                return
+            }
+                        
+            CommentManager.shared.postReplyRequest(
+                content: text,
+                isAnon: false,    // (Mock)
+                postId: postId!,
+                commentId: commentId) { success in
+                    self.fetchPost()
+                    self.isReply = false
+            }
         }
-        CommentManager.shared.postRequest(
-            content: text,
-            isAnon: contents.isAnon,   // (Mock)
-            postId: contents.id
-        )
-    }
-    
-    
-}
-
-extension FreeBoardPostViewController {
-    func configureCollectionView() {
-        let sectionHeight: CGFloat = 60*3 + 40 + 150
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { index, _ -> NSCollectionLayoutSection? in
-
-                // Item
-                let posterItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .fractionalWidth(1),
-                        heightDimension: .absolute(60)
-                    )
-                )
-
-                let postTitleItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .fractionalWidth(1),
-                        heightDimension: .absolute(60)
-                    )
-                )
-
-                let postBodyItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .fractionalWidth(1),
-                        heightDimension: .absolute(150)
-                    )
-                )
-
-                let likeCountItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .fractionalWidth(1),
-                        heightDimension: .absolute(40)
-                    )
-                )
-
-                let commentItem = NSCollectionLayoutItem(
-                    layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .fractionalWidth(1),
-                        heightDimension: .absolute(60)
-                    )
-                )
-
-                // Group
-                let group = NSCollectionLayoutGroup.vertical(
-                    layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .fractionalWidth(1),
-                        heightDimension: .absolute(sectionHeight)
-                    ),
-                    subitems: [
-                        posterItem,
-                        postTitleItem,
-                        postBodyItem,
-                        likeCountItem,
-                        commentItem
-                    ]
-                )
-
-                // Section
-                let section = NSCollectionLayoutSection(group: group)
-
-                section.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 0, bottom: 10, trailing: 0)
-
-                return section
-            })
-        )
-
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.delegate = self
-        collectionView.dataSource = self
-
-        collectionView.register(
-            PosterCollectionViewCell.self,
-            forCellWithReuseIdentifier: PosterCollectionViewCell.identifier
-        )
-        collectionView.register(
-            PostTitleCollectionViewCell.self,
-            forCellWithReuseIdentifier: PostTitleCollectionViewCell.identifier
-        )
-        collectionView.register(
-            PostBodyCollectionViewCell.self,
-            forCellWithReuseIdentifier: PostBodyCollectionViewCell.identifier
-        )
-        collectionView.register(
-            PostLikesCollectionViewCell.self,
-            forCellWithReuseIdentifier: PostLikesCollectionViewCell.identifier
-        )
-        collectionView.register(
-            CommentCollectionViewCell.self,
-            forCellWithReuseIdentifier: CommentCollectionViewCell.identifier)
-
-//        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-        self.collectionView = collectionView
+        else {
+            CommentManager.shared.postRequest(
+                content: text,
+                isAnon: false,   // (Mock)
+                postId: postId!) { success in
+                    self.fetchPost()
+            }
+        }
     }
 }
 

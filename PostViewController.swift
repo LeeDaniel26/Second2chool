@@ -19,9 +19,7 @@ class PostViewController: UIViewController {
     
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    var freeboard = FreeBoardManager()
-    
+        
     var userPickedImages = [UIImage]()
     var imageURL = [URL]()
     
@@ -80,33 +78,40 @@ class PostViewController: UIViewController {
         
         // Constraints
         imagePostButtonConstraints()
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
+                                                            style: .plain,  // ???
+                                                            target: self,
+                                                            action: #selector(didTapCancel))
     }
     
     @IBAction func notificationButtonPressed(_ sender: UIBarButtonItem) {
     }
     
     @IBAction func imagePostButtonPressed(_ sender: UIButton) {
-        var config = PHPickerConfiguration()
-        config.selectionLimit = 0
-        let phPicker = PHPickerViewController(configuration: config)
-        phPicker.delegate = self
-        present(phPicker, animated: true)
+        let vc = CameraViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        
+//        var config = PHPickerConfiguration()
+//        config.selectionLimit = 0
+//        let phPicker = PHPickerViewController(configuration: config)
+//        phPicker.delegate = self
+//        present(phPicker, animated: true)
     }
     
     @IBAction func postButtonPressed(_ sender: UIButton) {
-        let urlStringArray = imageURL.map { $0.absoluteString }
+//        let urlStringArray = imageURL.map { $0.absoluteString }
         
-        freeboard.postRequest(
+        FreeBoardManager.shared.postRequest(
             title: titleTextField.text ?? "",
             content: bodyTextView.text ?? "",
-            isAnon: false,
+            isAnon: false,    // (Mock)
             commentOn: true,
             courseId: nil,
             postType: "FREE",
             reviewScore: nil,
-            photoList: urlStringArray
-        )
-        
+            photoList: [])
+                
         // Upload an Image
         
         
@@ -137,6 +142,11 @@ class PostViewController: UIViewController {
         scrollView.scrollIndicatorInsets = contentInsets
     }
     
+    @objc private func didTapCancel() {
+        dismiss(animated: true,
+                completion: nil)
+    }
+    
     func imagePostButtonConstraints() {
         imagePostButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -155,72 +165,6 @@ extension PostViewController: UITextViewDelegate {
     }
 
 }
-
-//// Access Photo Library and select photos
-//extension PostViewController: PHPickerViewControllerDelegate {
-//    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-//        dismiss(animated: true)
-//
-//        self.view.addSubview(self.imageScrollView)
-//        self.imageScrollView.addSubview(imageStackView)
-//
-//        for result in results {
-//            result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
-//                if let image = object as? UIImage {
-//                    DispatchQueue.main.async {
-//                        self.userPickedImages.append(image)
-//
-//                        let scrollViewHeight = 100.0
-//
-//                        NSLayoutConstraint.activate([
-//                            self.imageScrollView.topAnchor.constraint(equalTo: self.bodyTextView.bottomAnchor, constant: 25),
-//                            self.imageScrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-//                            self.imageScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
-//                            self.imageScrollView.bottomAnchor.constraint(equalTo: self.postButton.topAnchor, constant: -23),
-//                            self.imageScrollView.heightAnchor.constraint(equalToConstant: scrollViewHeight)
-//                        ])
-//                        self.imageScrollView.backgroundColor = .lightGray
-//
-//                        if let constraint = self.bodyTextViewBottomConstraint {
-//                            constraint.isActive = false
-//                        }
-//
-//                        NSLayoutConstraint.activate([
-//                            self.imageStackView.topAnchor.constraint(equalTo: self.imageScrollView.topAnchor),
-//                            self.imageStackView.leadingAnchor.constraint(equalTo: self.imageScrollView.leadingAnchor),
-//                            self.imageStackView.trailingAnchor.constraint(equalTo: self.imageScrollView.trailingAnchor),
-//                            self.imageStackView.bottomAnchor.constraint(equalTo: self.imageScrollView.bottomAnchor)
-//                        ])
-//                        self.imageStackView.backgroundColor = .lightGray
-//
-//                        let originalHeight = image.size.height
-//                        let originalWidth = image.size.width
-//                        let scaleFactor = scrollViewHeight / originalHeight
-//
-//                        let imageView = UIImageView(image:image)
-//                        imageView.contentMode = .scaleAspectFit
-//                        imageView.clipsToBounds = true
-//                        self.imageStackView.addArrangedSubview(imageView)
-//                        NSLayoutConstraint.activate([
-//                            imageView.heightAnchor.constraint(equalToConstant: scrollViewHeight),
-//                            imageView.widthAnchor.constraint(equalToConstant: originalWidth * scaleFactor)
-//                            // (??) heightAnchor만 설정하면 이미지가 안보인다.
-//                            // (??) 'scrollViewHeight'와 같은 absolute value가 아닌 self.imageScrollView.frame.height로 하면 이미지가 안보인다. (Answer): UIKit의 LIfecycle에서 object의 constraint가 언제 calculate 되는지 알아볼 필오가 있다.
-//                        ])
-//                    }
-//                } else if let nonImageObject = object {
-//                    print("The object is not an image. It's a \(type(of: nonImageObject))")
-//                } else if error != nil {
-//                    print("An error occurred while loading the item provider: \(error!)")
-//                } else {
-//                    print("The item provider didn't return an object or an error.")
-//                }
-//            }
-//            self.imageScrollView.contentSize.width=CGFloat(userPickedImages.count*210)
-//        }
-//    }
-//}
-
 
 extension PostViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

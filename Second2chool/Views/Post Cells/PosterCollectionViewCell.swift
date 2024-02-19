@@ -12,13 +12,15 @@ protocol PosterCollectionViewCellDelegate: AnyObject {
     func posterCollectionViewCellDidTapUsername(_ cell: PosterCollectionViewCell)
 }
 
-class PosterCollectionViewCell: UICollectionViewCell {
+class PosterCollectionViewCell: UITableViewCell {
     static let identifier = "PosterCollectionViewCell"
     
-    private let imageView: UIImageView = {
+    private let profilePictureImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.fill")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
+        imageView.tintColor = .lightGray
         return imageView
     }()
 
@@ -39,12 +41,11 @@ class PosterCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.clipsToBounds = true
         contentView.backgroundColor = .systemBackground
-        contentView.addSubview(imageView)
+        contentView.addSubview(profilePictureImageView)
         contentView.addSubview(usernameLabel)
         contentView.addSubview(dateLabel)
         let tap = UITapGestureRecognizer(target: self,
@@ -52,7 +53,7 @@ class PosterCollectionViewCell: UICollectionViewCell {
         usernameLabel.isUserInteractionEnabled = true
         usernameLabel.addGestureRecognizer(tap)
         
-        contentView.backgroundColor = .red
+        contentView.backgroundColor = UIColor(rgb: 0xFCFFE7)
     }
     
     required init?(coder: NSCoder) {
@@ -67,19 +68,19 @@ class PosterCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         let imagePadding: CGFloat = 10
         let imageSize: CGFloat = contentView.height - (imagePadding * 2)
-        imageView.frame = CGRect(x: imagePadding, y: imagePadding, width: imageSize, height: imageSize)
-        imageView.layer.cornerRadius = imageSize/2
+        profilePictureImageView.frame = CGRect(x: imagePadding, y: imagePadding, width: imageSize, height: imageSize)
+        profilePictureImageView.layer.cornerRadius = imageSize/2
 
         usernameLabel.sizeToFit()
         usernameLabel.frame = CGRect(
-            x: imageView.right+11,
+            x: profilePictureImageView.right+11,
             y: imagePadding,
             width: usernameLabel.width,
             height: usernameLabel.height
         )
         dateLabel.sizeToFit()
         dateLabel.frame = CGRect(
-            x: imageView.right+11,
+            x: profilePictureImageView.right+11,
             y: contentView.height-imagePadding-dateLabel.height,
             width: dateLabel.width,
             height: dateLabel.height
@@ -88,15 +89,13 @@ class PosterCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.image = nil
+        profilePictureImageView.image = nil
         usernameLabel.text = nil
         dateLabel.text = nil
     }
 
     func configure(with viewModel: PosterCollectionViewCellViewModel) {
 //        imageView.sd_setImage(with: viewModel.profilePictureURL, completed: nil)
-        imageView.image = UIImage(systemName: "person.fill")
-        imageView.tintColor = .label
         usernameLabel.text = viewModel.username
         dateLabel.text = "\(viewModel.editedDate)"
     }

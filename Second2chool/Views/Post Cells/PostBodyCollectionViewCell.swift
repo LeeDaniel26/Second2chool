@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostBodyCollectionViewCell: UICollectionViewCell {
+class PostBodyCollectionViewCell: UITableViewCell {
     static let identifier = "PostBodyCollectionViewCell"
         
     private let bodyLabel: UILabel = {
@@ -17,43 +17,37 @@ class PostBodyCollectionViewCell: UICollectionViewCell {
         if let customFont = UIFont(name: "NanumGothicBold", size: 12) {
             label.font = customFont
         }
+        label.translatesAutoresizingMaskIntoConstraints = false // This enables Autolayout for the label
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(bodyLabel)
-        
+        contentView.backgroundColor = UIColor(rgb: 0xFCFFE7)
+        setupConstraints()
     }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    private func setupConstraints() {
         let labelPadding: CGFloat = 23
-        let size = bodyLabel.sizeThatFits(CGSize(width: contentView.bounds.width-labelPadding, height: contentView.bounds.height))
-        bodyLabel.frame = CGRect(
-            x: labelPadding,
-            y: 0,
-            width: size.width,
-            height: size.height
-        )
-//        bodyLabel.frame = CGRect(
-//            x: labelPadding,
-//            y: 0,
-//            width: contentView.width - (labelPadding)*2,
-//            height: contentView.height
-//        )
+        NSLayoutConstraint.activate([
+            bodyLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: labelPadding),
+            bodyLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -labelPadding),
+            bodyLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         bodyLabel.text = nil
     }
     
     func configure(with viewModel: PostBodyCollectionViewCellViewModel) {
-        bodyLabel.text = "asdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdfasdfjkl;asdfjkl;asdfljasdfjkl;asdfl;jkasdfjkl;asdfjklsdfaljk;asdfjkl;adsfjkl;asdfl;asdfjkl;asdfkl;'asdfkl;asdf;kl'adsfkl;asdfkl;'asdf;klasdf;kl'asdfkl;'asdfkl;'sdfakl;'asdfkl;'adsf;kl'asdfl;'kasdfkl;'asdf;kl'asdfkl;'adsfkl;'dasf;'klasdfl;'kasdfkl;'asdfkl;'adsfkl;'adsfkl;'asdfkl;'asdfkl;'asdfkl;'dfaskl;'asdfkl;'asdf;'kladsfkl;'adsfkl;'asdfkl;'asdf;'klasdfkl;'asdf'kl;dfaskl;'asdf;'kasdf"
+        bodyLabel.text = viewModel.body
     }
 }
