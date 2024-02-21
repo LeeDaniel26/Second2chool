@@ -31,7 +31,7 @@ class FreeBoardViewController: UIViewController {
     var contents: [Contents]?
     
     var postId: Int?
-            
+                
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,12 +68,7 @@ class FreeBoardViewController: UIViewController {
 //    @IBAction func gobackButtonPressed(_ sender: Any) {
 //        _ = navigationController?.popViewController(animated: true)
 //    }
-    
-    func openSwiftUIScreen() {
-        let swiftUIViewController = UIHostingController(rootView: SwiftUIViewTest())
-        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
-    }
-    
+        
     @IBAction func notificationButtonPressed(_ sender: UIButton) {
     }
     
@@ -102,33 +97,14 @@ class FreeBoardViewController: UIViewController {
         fetchPosts()
     }
     @IBAction func didTapWritePostButton(_ sender: UIButton) {
-//        let vc = PostViewController()
-//        let navVC = UINavigationController(rootViewController: vc)
-//        navVC.modalPresentationStyle = .fullScreen
-//        present(navVC, animated: true)
-        presentToPostVC()
-    }
-    // (TEST)
-    func presentToPostVC() {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        if let postViewController = storyboard.instantiateViewController(withIdentifier: "PostViewController") as? PostViewController {
-//            let navVC = UINavigationController(rootViewController: postViewController)
-//            navVC.modalPresentationStyle = .fullScreen
-//            present(navVC, animated: true)
-//        }
         let vc = WritePostViewController()
         let navVC = UINavigationController(rootViewController: vc)
         navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true)
     }
 
-    
-    
-    
-    // ??????
     @objc func back(sender: UIBarButtonItem) {
-//        navigationController?.popToViewController(HomeViewController(), animated: true)
-        let _ = self.navigationController?.popToViewController((self.navigationController?.viewControllers[1]) as! HomeViewController, animated: true)
+        navigationController?.popViewController(animated: true)
     }
         
     private func fetchPosts() {
@@ -144,7 +120,9 @@ class FreeBoardViewController: UIViewController {
                     subtitle: contents.isAnon == false ? contents.writerName : "Anonymity",
                     likesCount: "\(contents.likeCnt)",
                     commentsCount: "\(contents.commentCnt)",
-                    id: contents.id))
+                    id: contents.id,
+                    isLiked: contents.isLiked,
+                    isScrapped: contents.isScrapped))
             }
             
             self.posts = postsData
@@ -176,18 +154,57 @@ extension FreeBoardViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // (매우 중요): tableview 기능을 사용할때 해당 cell의 정보가 필요할때는 "let cell = ..."처럼 cell로 접근해서는 안되며 tableView 함수인 cellForRowAt에서 cell에 정보를 부여할때 사용한 모델에 접근하여 그 정보를 사용해야 한다. 그 이유는 cell은 tableView에서 재샤용되므로 해당 cell이 사실 재사용된 다른 cell일 수 있다. 다음은 모델에 접근하여 그 정보를 사용하는 코드이다:
+        let id = posts[indexPath.row].id
+        let isLiked = posts[indexPath.row].isLiked
+        let isScrapped = posts[indexPath.row].isScrapped
+        
+        let likeButton = UIContextualAction(style: .normal, title: nil) { [weak self] (action, view, completionHandler) in
+            guard let self = self else { return }
+            // Perform your action here.
+            if isLiked == true {
+                SinglePostManager.shared.postLike(postId: id, type: .delete) {
+                    self.fetchPosts()
+                }
+            } else {
+                SinglePostManager.shared.postLike(postId: id, type: .post) {
+                    self.fetchPosts()
+                }
+            }
+            completionHandler(true)
+        }
+        // Assign an initial image to your action.
+        likeButton.image = UIImage(systemName: isLiked ? "heart.fill" : "heart")
+        likeButton.backgroundColor = .systemPink
+        
+        let scrapButton = UIContextualAction(style: .normal, title: nil) { [weak self] (action, view, completionHandler) in
+            guard let self = self else { return }
+            if isScrapped == true {
+                SinglePostManager.shared.postScrap(postId: id, type: .delete) {
+                    self.fetchPosts()
+                }
+            } else {
+                SinglePostManager.shared.postScrap(postId: id, type: .post) {
+                    self.fetchPosts()
+                }
+            }
+            completionHandler(true)
+        }
+        scrapButton.image = UIImage(systemName: isScrapped ? "archivebox.fill" : "archivebox")
+        scrapButton.backgroundColor = .systemCyan
+        
+        tableView.reloadData()
+        
+        let configuration = UISwipeActionsConfiguration(actions: [scrapButton, likeButton])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
+
+    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if let destination = segue.destination as? FreeBoardShowViewController {
 //            destination.contents = contents![tableView.indexPathForSelectedRow!.row]
 //        }
 //    }
-}
-
-extension FreeBoardViewController: FreeBoardManagerDelegate {
-    
-    func didUpdateFreeBoard(freeboardModel: FreeBoardModel) {
-        contents = freeboardModel.contents
-        totalPages = freeboardModel.totalPages
-        cellCount = freeboardModel.cellCount
-    }
 }

@@ -7,8 +7,11 @@ target 'Second2chool' do
 
   # Pods for Second2chool
 
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
   pod 'GoogleSignIn'
   pod 'IQKeyboardManagerSwift'
   pod 'SDWebImage'
+  pod 'SwipeCellKit'
 
 end

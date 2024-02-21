@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WritePostViewController: UIViewController {
+class WritePostViewController: UIViewController, UITextViewDelegate {
 
     private var photos = [WritePostPhotoViewModel]()
     private var photoURLString = [String]()
@@ -49,6 +49,26 @@ class WritePostViewController: UIViewController {
         return textView
     }()
     
+    private let titlePlaceholderLabel: UILabel = {
+        let label = UILabel()
+        if let customFont = UIFont(name: "NanumGothicBold", size: 21) {
+            label.font = customFont
+        }
+        label.text = "Title"
+        label.textColor = .lightGray
+        return label
+    }()
+    
+    private let bodyPlaceholderLabel: UILabel = {
+        let label = UILabel()
+        if let customFont = UIFont(name: "NanumGothicRegular", size: 14) {
+            label.font = customFont
+        }
+        label.text = "Share Some Stuff!"
+        label.textColor = .lightGray
+        return label
+    }()
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(WritePostPhotoTableViewCell.self, forCellReuseIdentifier: WritePostPhotoTableViewCell.identifier)
@@ -77,14 +97,19 @@ class WritePostViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(titleTextView)
         contentView.addSubview(bodyTextView)
+        titleTextView.addSubview(titlePlaceholderLabel)
+        bodyTextView.addSubview(bodyPlaceholderLabel)
         contentView.addSubview(tableView)
         contentView.addSubview(postButton)
         contentView.addSubview(addPhotoButton)
-        contentView.backgroundColor = .purple
+        view.backgroundColor = UIColor(rgb: 0xFCFFE7)
         setupConstraints()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        titleTextView.delegate = self
+        bodyTextView.delegate = self
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                             style: .plain,
@@ -92,6 +117,14 @@ class WritePostViewController: UIViewController {
                                                             action: #selector(didTapCancel))
         postButton.addTarget(self, action: #selector(didTapPost), for: .touchUpInside)
         addPhotoButton.addTarget(self, action: #selector(didTapAddPhoto), for: .touchUpInside)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        titlePlaceholderLabel.sizeToFit()
+        bodyPlaceholderLabel.sizeToFit()
+        titlePlaceholderLabel.frame.origin = CGPoint(x: 5, y: 8)
+        bodyPlaceholderLabel.frame.origin = CGPoint(x: 5, y: 3)
     }
         
     private func setupConstraints() {
@@ -123,7 +156,7 @@ class WritePostViewController: UIViewController {
             bodyTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             bodyTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             bodyTextView.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 16),
-            
+                        
             tableViewHeightConstraint!,
             tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
@@ -147,31 +180,41 @@ class WritePostViewController: UIViewController {
     }
     
     @objc private func didTapPost() {
+        if photoURLString.count == 0 {
+            configurePost()
+            dismiss(animated: true)
+            return
+        }
         for url in photoURLString {
-            SinglePostManager.shared.getPresignedRequest() { decodedData in
+            ImageManager.shared.getPresignedRequest() { decodedData in
                 guard let decodedData = decodedData else {
                     return
                 }
                 let data = decodedData.data
-                SinglePostManager.shared.putPresignedRequest(with: url, data: data) {
+                ImageManager.shared.putPresignedRequest(with: url, data: data) {
                     if let index = data.firstIndex(of: "?") {
                         let urlString = String(data[..<index])
                         self.photoList.append(urlString)
                     }
                     if url == self.photoURLString.last {
-                        FreeBoardManager.shared.postRequest(
-                            title: self.titleTextView.text ?? "",
-                            content: self.bodyTextView.text ?? "",
-                            isAnon: false,    // (Mock)
-                            commentOn: true,
-                            courseId: nil,
-                            postType: "FREE",
-                            reviewScore: nil,
-                            photoList: self.photoList)
+                        self.configurePost()
+                        self.dismiss(animated: true)
                     }
                 }
             }
         }
+    }
+    
+    private func configurePost() {
+        FreeBoardManager.shared.postRequest(
+            title: self.titleTextView.text ?? "No Title",
+            content: self.bodyTextView.text ?? " ",
+            isAnon: false,    // (Mock)
+            commentOn: true,
+            courseId: nil,
+            postType: "FREE",
+            reviewScore: nil,
+            photoList: self.photoList)
     }
     
     @objc private func didTapAddPhoto() {
@@ -196,6 +239,11 @@ class WritePostViewController: UIViewController {
             }
         }))
         present(sheet, animated: true)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        titlePlaceholderLabel.isHidden = !titleTextView.text.isEmpty
+        bodyPlaceholderLabel.isHidden = !bodyTextView.text.isEmpty
     }
 }
 

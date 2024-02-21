@@ -9,12 +9,11 @@
 /* Begin PBXBuildFile section */
 		082A0DAEEE3F35DBA5550160 /* Pods_Second2chool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 852C43F76DB93873EB74C8A3 /* Pods_Second2chool.framework */; };
 		403ADD602A02575200A7B53D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403ADD5F2A02575200A7B53D /* HomeViewController.swift */; };
-		40C524BE29DD575A00A1BE4F /* FreeBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C524BD29DD575A00A1BE4F /* FreeBoardModel.swift */; };
-		40CAF8AA2A00F7DB00B4252F /* SignUpOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CAF8A82A00F7DB00B4252F /* SignUpOneViewController.swift */; };
+		40CAF8AA2A00F7DB00B4252F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CAF8A82A00F7DB00B4252F /* SignUpViewController.swift */; };
 		40CAF8AB2A00F7DB00B4252F /* SignUpTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CAF8A92A00F7DB00B4252F /* SignUpTwoViewController.swift */; };
 		6B24281B29A31DF5003EFB48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24281A29A31DF5003EFB48 /* AppDelegate.swift */; };
 		6B24281D29A31DF5003EFB48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24281C29A31DF5003EFB48 /* SceneDelegate.swift */; };
-		6B24281F29A31DF5003EFB48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24281E29A31DF5003EFB48 /* ViewController.swift */; };
+		6B24281F29A31DF5003EFB48 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24281E29A31DF5003EFB48 /* LoginViewController.swift */; };
 		6B24282229A31DF5003EFB48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B24282029A31DF5003EFB48 /* Main.storyboard */; };
 		6B24282429A31DF7003EFB48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B24282329A31DF7003EFB48 /* Assets.xcassets */; };
 		6B24282729A31DF7003EFB48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B24282529A31DF7003EFB48 /* LaunchScreen.storyboard */; };
@@ -23,10 +22,12 @@
 		6B24283429A346E4003EFB48 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B24283129A346E4003EFB48 /* NanumGothic-Bold.ttf */; };
 		6B24283629A4B9FC003EFB48 /* LilitaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B24283529A4B9FC003EFB48 /* LilitaOne-Regular.ttf */; };
 		6B347A9E2B7621930025B864 /* FreeBoardTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B347A9D2B7621930025B864 /* FreeBoardTableViewCellViewModel.swift */; };
+		6B4871402B84036A00889E0F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B48713F2B84036A00889E0F /* GoogleService-Info.plist */; };
+		6B4871462B855AB100889E0F /* UserDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4871452B855AB100889E0F /* UserDatabase.swift */; };
+		6B4871482B855B8600889E0F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4871472B855B8600889E0F /* UserManager.swift */; };
+		6B48714A2B855C4D00889E0F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4871492B855C4D00889E0F /* Constants.swift */; };
 		6B4AAB2E2B65B40D00091C27 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4AAB2D2B65B40D00091C27 /* ProfileViewController.swift */; };
 		6B4AAB312B65B92D00091C27 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4AAB302B65B92D00091C27 /* Extensions.swift */; };
-		6B56C5A52B09EEFF00D8485E /* SwiftUIViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56C5A42B09EEFE00D8485E /* SwiftUIViewTest.swift */; };
-		6B5E3C8E2A13F88A00E52E41 /* FreeBoardShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5E3C8D2A13F88A00E52E41 /* FreeBoardShowViewController.swift */; };
 		6B60F59D2A707685007FAFEF /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60F59C2A707685007FAFEF /* ImageManager.swift */; };
 		6B60F5A02A7079DC007FAFEF /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60F59F2A7079DC007FAFEF /* ImageData.swift */; };
 		6B60F5A32A7091AE007FAFEF /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60F5A12A7091AE007FAFEF /* CommentCell.swift */; };
@@ -70,21 +71,20 @@
 		6BC3E22829BF6EFF00228C5D /* FreeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */; };
 		6BC3E22A29BF70C000228C5D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3E22929BF70C000228C5D /* Message.swift */; };
 		6BD2B47529DC870D00CFCB0A /* FreeBoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */; };
-		6BD2B47929DCAC7200CFCB0A /* FreeBoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD2B47829DCAC7200CFCB0A /* FreeBoardData.swift */; };
+		6BD2B47929DCAC7200CFCB0A /* FreeBoardDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD2B47829DCAC7200CFCB0A /* FreeBoardDatabase.swift */; };
 		6BF2951429BCD1B7008097F0 /* MeriendaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BF2951329BCD1B7008097F0 /* MeriendaOne-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		403ADD5F2A02575200A7B53D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		40C524BD29DD575A00A1BE4F /* FreeBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardModel.swift; sourceTree = "<group>"; };
-		40CAF8A82A00F7DB00B4252F /* SignUpOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpOneViewController.swift; sourceTree = SOURCE_ROOT; };
+		40CAF8A82A00F7DB00B4252F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = SOURCE_ROOT; };
 		40CAF8A92A00F7DB00B4252F /* SignUpTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTwoViewController.swift; sourceTree = SOURCE_ROOT; };
 		54D6015C180750BAA238FAAA /* Pods-Second2chool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Second2chool.release.xcconfig"; path = "Target Support Files/Pods-Second2chool/Pods-Second2chool.release.xcconfig"; sourceTree = "<group>"; };
 		626FC5C2EEABD015D95D2849 /* Pods-Second2chool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Second2chool.debug.xcconfig"; path = "Target Support Files/Pods-Second2chool/Pods-Second2chool.debug.xcconfig"; sourceTree = "<group>"; };
 		6B24281729A31DF5003EFB48 /* Second2chool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Second2chool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B24281A29A31DF5003EFB48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B24281C29A31DF5003EFB48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6B24281E29A31DF5003EFB48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6B24281E29A31DF5003EFB48 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6B24282129A31DF5003EFB48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B24282329A31DF7003EFB48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B24282629A31DF7003EFB48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,10 +94,12 @@
 		6B24283129A346E4003EFB48 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
 		6B24283529A4B9FC003EFB48 /* LilitaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LilitaOne-Regular.ttf"; sourceTree = "<group>"; };
 		6B347A9D2B7621930025B864 /* FreeBoardTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		6B48713F2B84036A00889E0F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6B4871452B855AB100889E0F /* UserDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabase.swift; sourceTree = "<group>"; };
+		6B4871472B855B8600889E0F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		6B4871492B855C4D00889E0F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6B4AAB2D2B65B40D00091C27 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6B4AAB302B65B92D00091C27 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		6B56C5A42B09EEFE00D8485E /* SwiftUIViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewTest.swift; sourceTree = "<group>"; };
-		6B5E3C8D2A13F88A00E52E41 /* FreeBoardShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardShowViewController.swift; sourceTree = "<group>"; };
 		6B60F59C2A707685007FAFEF /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		6B60F59F2A7079DC007FAFEF /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		6B60F5A12A7091AE007FAFEF /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -141,7 +143,7 @@
 		6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardViewController.swift; sourceTree = "<group>"; };
 		6BC3E22929BF70C000228C5D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardManager.swift; sourceTree = "<group>"; };
-		6BD2B47829DCAC7200CFCB0A /* FreeBoardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardData.swift; sourceTree = "<group>"; };
+		6BD2B47829DCAC7200CFCB0A /* FreeBoardDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardDatabase.swift; sourceTree = "<group>"; };
 		6BF2951329BCD1B7008097F0 /* MeriendaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MeriendaOne-Regular.ttf"; sourceTree = "<group>"; };
 		852C43F76DB93873EB74C8A3 /* Pods_Second2chool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Second2chool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -203,6 +205,7 @@
 		6B24281929A31DF5003EFB48 /* Second2chool */ = {
 			isa = PBXGroup;
 			children = (
+				6B48713F2B84036A00889E0F /* GoogleService-Info.plist */,
 				6B7ACE252B70FDE800470B20 /* ViewModels */,
 				6BD2B47329DC85F700CFCB0A /* Models */,
 				6B7ACE2F2B71057B00470B20 /* Views */,
@@ -232,10 +235,37 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		6B4871432B855A6700889E0F /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				6B4871452B855AB100889E0F /* UserDatabase.swift */,
+				6B97B40D2B7186E40065DFFD /* SinglePostDatabase.swift */,
+				6BD2B47829DCAC7200CFCB0A /* FreeBoardDatabase.swift */,
+				6B7D2B2F2ACDDE6500DA3670 /* ImagePresignedData.swift */,
+				6BB4FADD29FD078A0044EAD2 /* LoginData.swift */,
+				6B60F59F2A7079DC007FAFEF /* ImageData.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		6B4871442B855A8000889E0F /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6B4871472B855B8600889E0F /* UserManager.swift */,
+				6B97B40B2B7183550065DFFD /* SinglePostManager.swift */,
+				6B97B4092B716E8E0065DFFD /* CommentManager.swift */,
+				6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */,
+				6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */,
+				6B60F59C2A707685007FAFEF /* ImageManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		6B4AAB2F2B65B91000091C27 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				6B4AAB302B65B92D00091C27 /* Extensions.swift */,
+				6B4871492B855C4D00889E0F /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -301,13 +331,11 @@
 		6BD2B47029DC856F00CFCB0A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6B24281E29A31DF5003EFB48 /* ViewController.swift */,
+				6B24281E29A31DF5003EFB48 /* LoginViewController.swift */,
 				40CAF8A92A00F7DB00B4252F /* SignUpTwoViewController.swift */,
-				40CAF8A82A00F7DB00B4252F /* SignUpOneViewController.swift */,
+				40CAF8A82A00F7DB00B4252F /* SignUpViewController.swift */,
 				403ADD5F2A02575200A7B53D /* HomeViewController.swift */,
 				6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */,
-				6B5E3C8D2A13F88A00E52E41 /* FreeBoardShowViewController.swift */,
-				6B56C5A42B09EEFE00D8485E /* SwiftUIViewTest.swift */,
 				6B4AAB2D2B65B40D00091C27 /* ProfileViewController.swift */,
 				6B7ACE232B70DB1300470B20 /* FreeBoardPostViewController.swift */,
 				6B7220EB2B7F528C005071E5 /* CameraViewController.swift */,
@@ -336,17 +364,8 @@
 		6BD2B47329DC85F700CFCB0A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6B97B40B2B7183550065DFFD /* SinglePostManager.swift */,
-				6B97B40D2B7186E40065DFFD /* SinglePostDatabase.swift */,
-				6B97B4092B716E8E0065DFFD /* CommentManager.swift */,
-				6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */,
-				6BD2B47829DCAC7200CFCB0A /* FreeBoardData.swift */,
-				6B7D2B2F2ACDDE6500DA3670 /* ImagePresignedData.swift */,
-				40C524BD29DD575A00A1BE4F /* FreeBoardModel.swift */,
-				6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */,
-				6BB4FADD29FD078A0044EAD2 /* LoginData.swift */,
-				6B60F59C2A707685007FAFEF /* ImageManager.swift */,
-				6B60F59F2A7079DC007FAFEF /* ImageData.swift */,
+				6B4871442B855A8000889E0F /* Manager */,
+				6B4871432B855A6700889E0F /* Database */,
 				6B7ACE292B7100DF00470B20 /* Comment.swift */,
 				6B7ACE2D2B71029200470B20 /* PostCellType.swift */,
 			);
@@ -424,6 +443,7 @@
 				6B60F5A82A7091D6007FAFEF /* CommentReplyCell.xib in Resources */,
 				6B60F5A42A7091AE007FAFEF /* CommentCell.xib in Resources */,
 				6B24283629A4B9FC003EFB48 /* LilitaOne-Regular.ttf in Resources */,
+				6B4871402B84036A00889E0F /* GoogleService-Info.plist in Resources */,
 				6B75FC2D29BF737D00090B76 /* BoardCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,22 +498,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B60F5A32A7091AE007FAFEF /* CommentCell.swift in Sources */,
-				6BD2B47929DCAC7200CFCB0A /* FreeBoardData.swift in Sources */,
+				6BD2B47929DCAC7200CFCB0A /* FreeBoardDatabase.swift in Sources */,
 				6B7D2B302ACDDE6500DA3670 /* ImagePresignedData.swift in Sources */,
 				6B97B40A2B716E8F0065DFFD /* CommentManager.swift in Sources */,
 				6B347A9E2B7621930025B864 /* FreeBoardTableViewCellViewModel.swift in Sources */,
 				6B7ACE362B712A2E00470B20 /* PostTitleCollectionViewCell.swift in Sources */,
 				6B7ACE2A2B7100DF00470B20 /* Comment.swift in Sources */,
+				6B48714A2B855C4D00889E0F /* Constants.swift in Sources */,
 				6B97B3FF2B715F710065DFFD /* CommentReplyCollectionViewCell.swift in Sources */,
 				6B7ACE342B71219000470B20 /* PostBodyCollectionViewCell.swift in Sources */,
+				6B4871462B855AB100889E0F /* UserDatabase.swift in Sources */,
 				6B97B40C2B7183550065DFFD /* SinglePostManager.swift in Sources */,
 				6B6336BB2B80014C002F37AB /* WritePostPhotoTableViewCell.swift in Sources */,
 				6B60F59D2A707685007FAFEF /* ImageManager.swift in Sources */,
 				6B97B3FC2B71449F0065DFFD /* PostBodyCollectionViewCellViewModel.swift in Sources */,
 				40CAF8AB2A00F7DB00B4252F /* SignUpTwoViewController.swift in Sources */,
 				6B6336B92B7FDB6C002F37AB /* ProfileHeaderView.swift in Sources */,
-				6B5E3C8E2A13F88A00E52E41 /* FreeBoardShowViewController.swift in Sources */,
-				6B24281F29A31DF5003EFB48 /* ViewController.swift in Sources */,
+				6B24281F29A31DF5003EFB48 /* LoginViewController.swift in Sources */,
 				6B60F5A02A7079DC007FAFEF /* ImageData.swift in Sources */,
 				6B7ACE2E2B71029200470B20 /* PostCellType.swift in Sources */,
 				6BC3E22829BF6EFF00228C5D /* FreeBoardViewController.swift in Sources */,
@@ -501,7 +522,7 @@
 				6B75FC3329BFA4C100090B76 /* PostViewController.swift in Sources */,
 				403ADD602A02575200A7B53D /* HomeViewController.swift in Sources */,
 				6B6336C52B80DC30002F37AB /* PostPhotosViewModel.swift in Sources */,
-				40CAF8AA2A00F7DB00B4252F /* SignUpOneViewController.swift in Sources */,
+				40CAF8AA2A00F7DB00B4252F /* SignUpViewController.swift in Sources */,
 				6BC3E22A29BF70C000228C5D /* Message.swift in Sources */,
 				6B6336C32B80DBF0002F37AB /* PostPhotosTableViewCell.swift in Sources */,
 				6B97B40E2B7186E40065DFFD /* SinglePostDatabase.swift in Sources */,
@@ -510,9 +531,9 @@
 				6B6336BF2B800760002F37AB /* WritePostViewController.swift in Sources */,
 				6B7220EC2B7F528C005071E5 /* CameraViewController.swift in Sources */,
 				6B4AAB2E2B65B40D00091C27 /* ProfileViewController.swift in Sources */,
+				6B4871482B855B8600889E0F /* UserManager.swift in Sources */,
 				6B7ACE242B70DB1300470B20 /* FreeBoardPostViewController.swift in Sources */,
 				6B7ACE272B70FE4E00470B20 /* PostTitleCollectionViewCellViewModel.swift in Sources */,
-				40C524BE29DD575A00A1BE4F /* FreeBoardModel.swift in Sources */,
 				6B97B4062B7165320065DFFD /* CommentBarView.swift in Sources */,
 				6B24281B29A31DF5003EFB48 /* AppDelegate.swift in Sources */,
 				6B75FC2C29BF737D00090B76 /* BoardCell.swift in Sources */,
@@ -524,7 +545,6 @@
 				6B97B3FA2B713BE80065DFFD /* CommentCollectionViewCell.swift in Sources */,
 				6B4AAB312B65B92D00091C27 /* Extensions.swift in Sources */,
 				6B7ACE322B7105CF00470B20 /* PosterCollectionViewCell.swift in Sources */,
-				6B56C5A52B09EEFF00D8485E /* SwiftUIViewTest.swift in Sources */,
 				6BD2B47529DC870D00CFCB0A /* FreeBoardManager.swift in Sources */,
 				6B24281D29A31DF5003EFB48 /* SceneDelegate.swift in Sources */,
 				6B7ACE222B70DAC200470B20 /* PostLikesCollectionViewCellViewModel.swift in Sources */,
@@ -680,6 +700,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Second2chool/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SogangBoard;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take profile picture.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to take videos.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to choose profile picture.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload the images PLEASE!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -691,7 +714,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Lee-Yeonjae.SogangBoard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lee-Yeonjae.Second2chool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -711,6 +734,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Second2chool/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SogangBoard;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take profile picture.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to take videos.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to choose profile picture.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload the images PLEASE!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -722,7 +748,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Lee-Yeonjae.SogangBoard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lee-Yeonjae.Second2chool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

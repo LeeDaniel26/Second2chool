@@ -56,3 +56,27 @@ extension UIColor {
    }
 }
 
+extension Foundation.Data {
+    // (중요): Reusable parseJSON for variety of return database types
+    func parseJSON<T: Decodable>(type: T.Type) -> T? {
+        do {
+            let decodedData = try JSONDecoder().decode(T.self, from: self)
+            return decodedData
+        } catch {
+            print("Error: parseJSON error -> singlePostManager")
+            return nil
+        }
+    }
+    
+    // (중요): console에 출력된 data response 가독성을 높이기 위한 코드이다.
+    // JSONSerialization 대신 parseJSON에서 사용한 JSONDecoder, JSONEncoder를 사용해봤지만 '.prettyPrinted'는 Dictionary, Array 구조를 갖는 data만 지원하므로 JSONDecoder를 사용하여 'struct'로 decode한 데이터에 .prettyPrinted를 적용할수 없었다. (코드는 돌아갔지만 .prettyPrinted되지 않은 결과가 나왔다.)
+    func prettyPrintJSON() {
+        if let json = try? JSONSerialization.jsonObject(with: self, options: .allowFragments),
+           let prettyData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted),
+           let prettyString = String(data: prettyData, encoding: .utf8) {
+            print(prettyString)
+        } else {
+            print("Failed to print pretty JSON")
+        }
+    }
+}

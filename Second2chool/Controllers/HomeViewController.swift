@@ -5,21 +5,31 @@
 //  Created by Daniel on 2023/05/03.
 //
 
+import GoogleSignIn
+import FirebaseAuth
 import UIKit
 
 class HomeViewController: UIViewController {
-
-    var freeboardManager = FreeBoardManager()
-    
-    var currentPage = 0
-    var size = 10
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "LilitaOne", size: 36)!]  //--> UIFont(name: "LilitaOne-Regular", size: 36) doesn't seem to work. How can I specify weight?
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        handleNotAuthenticated()
+    }
+    
+    private func handleNotAuthenticated() {
+        // Check auth status
+        if Auth.auth().currentUser == nil,
+            GIDSignIn.sharedInstance.currentUser == nil {
+            // Show login
+            performSegue(withIdentifier: "HomeToLogin", sender: self)
+        }
+    }
+
     
     @IBAction func didTapProfile(_ sender: UIBarButtonItem) {
         let vc = ProfileViewController()
@@ -27,7 +37,12 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func didTapNotification(_ sender: UIBarButtonItem) {
-        let vc = FreeBoardPostViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        guard let user = GIDSignIn.sharedInstance.currentUser else {
+            print("$$$$$$$$$$ No user is currently logged in")
+            return
+        }
+        let email = user.profile?.email
+        print("$$$$$$$$$$ Currently looged in user: \(email!)")
+        
     }
 }

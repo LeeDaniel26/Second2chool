@@ -210,59 +210,6 @@ class FreeBoardPostViewController: UIViewController, UITableViewDelegate, UITabl
         replyReceiverView.isHidden = true
     }
     
-    
-    private func configureMockData() {
-        let postData: [PostCellType] = [
-            .poster(viewModel: PosterCollectionViewCellViewModel(
-                profilePictureURL: URL(string: "www.google.com")!,
-                username: "@Danny",
-                editedDate: "2023-1-26")),
-            .postTitle(viewModel: PostTitleCollectionViewCellViewModel(
-                title: "This is Title")),
-            .postBody(viewModel: PostBodyCollectionViewCellViewModel(
-                body: "This is body text ~~~ ")),
-            .likesCount(viewModel: PostLikesCollectionViewCellViewModel(
-                likesCount: "100000",
-                commentsCount: "10000")),
-            .comment(viewModel:
-                        CommentViewModel(
-                            profilePictureURL: URL(string: "www.google.com")!,
-                            id: 1,
-                            parentId: nil,
-                            ancestorId: nil,
-                            likeCnt: 0,
-                            content: "This is 1st comment.",
-                            writerName: "@Dan1",
-                            isAnon: false,
-                            isLiked: false,
-                            isWriter: false,
-                            isPostWriter: false,
-                            createdAt: "24-01-26",
-                            updatedAt: "24-01-27",
-                            child: [])
-                    ),
-            .comment(viewModel:              CommentViewModel(
-                profilePictureURL: URL(string: "www.google.com")!,
-                id: 2,
-                parentId: nil,
-                ancestorId: nil,
-                likeCnt: 0,
-                content: "This is 2nd comment.",
-                writerName: "@Dan2",
-                isAnon: false,
-                isLiked: false,
-                isWriter: false,
-                isPostWriter: false,
-                createdAt: "24-01-26",
-                updatedAt: "24-01-27",
-                child: [])
-            )
-        ]
-        
-        viewModels = postData
-        tableView.reloadData()
-    }
-    
     // (중요) post in this VC and process done in getRequet seems different
     private func fetchPost() {
         SinglePostManager.shared.getRequest(with: postId!) { (decodedData) in

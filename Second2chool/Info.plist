@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Please allow access to take profile picture.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Please allow access to take videos.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow access to choose profile picture.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -15,7 +9,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.561227145439-e1uhpali8spt5u0bl3dp6oj5lrnfq39u</string>
+				<string>com.googleusercontent.apps.1004857287573-tqafp1okg41alhd341et5l9j4qdlq171</string>
 			</array>
 		</dict>
 		<dict>
@@ -30,7 +24,7 @@
 		</dict>
 	</array>
 	<key>GIDClientID</key>
-	<string>561227145439-e1uhpali8spt5u0bl3dp6oj5lrnfq39u.apps.googleusercontent.com</string>
+	<string>1004857287573-tqafp1okg41alhd341et5l9j4qdlq171.apps.googleusercontent.com</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>LilitaOne-Regular</string>

@@ -17,13 +17,23 @@ class ProfileHeaderView: UIView {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        // Get name (unfinished)
+        if let customFont = UIFont(name: "NanumGothicExtraBold", size: 27) {
+            label.font = customFont
+        }
+        label.textColor = .white
+        label.text = "nickname"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let majorLabel: UILabel = {     // (ask)
         let label = UILabel()
-        // Get major (unfinished)
+        if let customFont = UIFont(name: "NanumGothicBold", size: 14) {
+            label.font = customFont
+        }
+        label.textColor = .white
+        label.text = "major"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -65,7 +75,8 @@ class ProfileHeaderView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.image = UIImage(systemName: "person.circle")
-        imageView.tintColor = .label
+        imageView.tintColor = .lightGray
+        imageView.backgroundColor = UIColor(rgb: 0xFCFFE7)
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
@@ -73,10 +84,15 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(rgb: 0xEB455F)
+        addSubview(nameLabel)
+        addSubview(majorLabel)
         addSubview(profileImageView)
         addSubview(totalPostsLabel)
         addSubview(totalCommentsLabel)
 
+        fetchData()
+        setConstraints()
+        
         layer.borderWidth = 1
         layer.borderColor = UIColor.label.cgColor
         
@@ -112,13 +128,33 @@ class ProfileHeaderView: UIView {
                                           height: totalCommentsLabel.height)
     }
     
+    private func setConstraints() {
+        let labelPadding: CGFloat = 20
+        
+        nameLabel.sizeToFit()
+        majorLabel.sizeToFit()
+        NSLayoutConstraint.activate([
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: labelPadding),
+            nameLabel.trailingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant: -labelPadding),
+            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 55),
+            
+            majorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: labelPadding),
+            majorLabel.trailingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant: -labelPadding),
+            majorLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+        ])
+    }
+    
+    func fetchData() {
+        UserManager.shared.getRequest { decodedData in
+            self.nameLabel.text = decodedData.data.nickname
+            self.majorLabel.text = decodedData.data.role
+            self.profileImageView.sd_setImage(with: URL(string: decodedData.data.profileImageUrl ?? ""))
+            
+            self.setConstraints()
+        }
+    }
+    
     @objc private func didTapProfileImage() {
         delegate?.didTapProfilePicture(self)
-    }
-        
-    func configure(with viewModel: ProfileHeaderViewModel) {
-        profileImageView.sd_setImage(with: viewModel.profilePictureUrl, completed: nil)
-        countTotalPostsLabel.text = "\(viewModel.postCount)"
-        countTotalCommentsLabel.text = "\(viewModel.commentCount)"
     }
 }

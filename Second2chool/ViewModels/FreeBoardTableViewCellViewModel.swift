@@ -13,4 +13,6 @@ struct FreeBoardTableViewCellViewModel {
     let likesCount: String
     let commentsCount: String
     let id: Int
+    let isLiked: Bool
+    let isScrapped: Bool
 }

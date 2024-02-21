@@ -9,6 +9,10 @@ import UIKit
 
 class BoardCell: UITableViewCell {
 
+    var id = Int()
+    var isLiked = Bool()
+    var isScrapped = Bool()
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var numberOfLikes: UILabel!
@@ -38,5 +42,8 @@ class BoardCell: UITableViewCell {
         subtitleLabel.text = viewModel.subtitle
         numberOfLikes.text = viewModel.likesCount
         numberOfComments.text = viewModel.commentsCount
+        id = viewModel.id
+        isLiked = viewModel.isLiked
+        isScrapped = viewModel.isScrapped
     }
 }

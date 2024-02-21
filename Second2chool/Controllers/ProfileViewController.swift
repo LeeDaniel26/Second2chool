@@ -5,6 +5,7 @@
 //  Created by Daniel Lee on 2024/01/28.
 //
 
+import GoogleSignIn
 import UIKit
 
 struct ProfileCellModel {
@@ -116,7 +117,14 @@ class ProfileViewController: UIViewController {
                                             style: .cancel, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "Log Out",
                                             style: .destructive, handler: { _ in
-            // Logout process (unfinished)
+            LoginManager.shared.logOut { success in
+                if success {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                else {
+                    fatalError("Error: Faield to logout")
+                }
+            }
         }))
         
         actionSheet.popoverPresentationController?.sourceView = tableView           // ???
@@ -181,19 +189,26 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
+              let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL else {
             return
         }
-//        StorageManager.shared.uploadProfilePicture(
-//            username: user.username,
-//            data: image.pngData()
-//        ) { [weak self] success in
-//            if success {
-//                self?.headerViewModel = nil
-//                self?.posts = []
-//                self?.fetchProfileInfo()
-//            }
-//        }
+        
+        ImageManager.shared.getPresignedRequest() { decodedData in
+            guard let decodedData = decodedData else {
+                return
+            }
+            let data = decodedData.data
+            ImageManager.shared.putPresignedRequest(with: imageUrl.path, data: data) {
+                guard let index = data.firstIndex(of: "?") else {
+                    return
+                }
+                let urlString = String(data[..<index])
+                ImageManager.shared.putChangeProfileImage(profileImageUrl: urlString) {
+                    self.profileHeaderView.fetchData()
+                }
+            }
+        }
     }
 }
 
