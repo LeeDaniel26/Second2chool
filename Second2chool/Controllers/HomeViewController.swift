@@ -11,9 +11,27 @@ import UIKit
 
 class HomeViewController: UIViewController {
         
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        if let customFont = UIFont(name: "LilitaOne", size: 40) {
+            label.font = customFont
+        }
+        label.text = "Home"
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(titleLabel)
         
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(equalToConstant: titleLabel.width),
+            titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.height),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 27),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        ])
     }
     
     override func viewDidAppear(_ animated: Bool) {

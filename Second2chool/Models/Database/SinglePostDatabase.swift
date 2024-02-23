@@ -22,6 +22,7 @@ struct SinglePostData: Codable {
     let isScrapped: Bool
     let isWriter: Bool
     let commentOn: Bool
+    let likeCnt: Int
     let commentCnt: Int
     let reviewScore: Int?
     let postType: String

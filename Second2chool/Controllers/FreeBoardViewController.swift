@@ -15,9 +15,12 @@ struct Post {
     let commentsCount: String
 }
 
-class FreeBoardViewController: UIViewController {
+class FreeBoardViewController: UIViewController, UITextFieldDelegate {
 
     private var posts = [FreeBoardTableViewCellViewModel]()
+    private var filteredPosts = [FreeBoardTableViewCellViewModel]()
+    
+    private var filtered = true
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var prevButton: UIButton!
@@ -32,6 +35,8 @@ class FreeBoardViewController: UIViewController {
     
     var postId: Int?
                 
+    @IBOutlet weak var searchBarField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +44,7 @@ class FreeBoardViewController: UIViewController {
         
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "LilitaOne", size: 36)!]
           
+        searchBarField.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "BoardCell", bundle: nil), forCellReuseIdentifier: "FreeBoardCell")
@@ -117,6 +123,7 @@ class FreeBoardViewController: UIViewController {
             for contents in decodedData.data.contents {
                 postsData.append(FreeBoardTableViewCellViewModel(
                     title: contents.title,
+                    content: contents.content,
                     subtitle: contents.isAnon == false ? contents.writerName : "Anonymity",
                     likesCount: "\(contents.likeCnt)",
                     commentsCount: "\(contents.commentCnt)",
@@ -129,17 +136,49 @@ class FreeBoardViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        filterPosts(query: newText)
+        if newText.isEmpty {
+            filteredPosts.removeAll()
+        }
+        tableView.reloadData()
+        return true
+    }
+    
+    private func filterPosts(query: String) {
+        filteredPosts = posts.filter({
+            $0.title.lowercased().contains(query.lowercased()) ||
+            $0.content.lowercased().contains(query.lowercased())
+        })
+        if filteredPosts.isEmpty, !query.isEmpty {
+            filtered = false
+        } else {
+            filtered = true
+        }
+    }
+
 }
     
 extension FreeBoardViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        if !filteredPosts.isEmpty {
+            return filteredPosts.count
+        }
+        return filtered ? posts.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FreeBoardCell", for: indexPath) as! BoardCell
-        cell.configure(with: posts[indexPath.row])
+        if !filteredPosts.isEmpty {
+            cell.configure(with: filteredPosts[indexPath.row])
+        } else {
+            cell.configure(with: posts[indexPath.row])
+        }
         return cell
     }
 }
@@ -147,7 +186,11 @@ extension FreeBoardViewController: UITableViewDataSource {
 extension FreeBoardViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        postId = posts[indexPath.row].id
+        if !filteredPosts.isEmpty {
+            postId = filteredPosts[indexPath.row].id
+        } else {
+            postId = posts[indexPath.row].id
+        }
         let vc = FreeBoardPostViewController()
         vc.postId = postId
         navigationController?.pushViewController(vc, animated: true)
@@ -200,11 +243,4 @@ extension FreeBoardViewController: UITableViewDelegate {
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
-
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? FreeBoardShowViewController {
-//            destination.contents = contents![tableView.indexPathForSelectedRow!.row]
-//        }
-//    }
 }

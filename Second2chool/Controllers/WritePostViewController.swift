@@ -15,13 +15,27 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
     
     private var tableViewHeightConstraint: NSLayoutConstraint?
     
-    let scrollView: UIScrollView = {
+    private var anonymousOn = false
+    private var commentsOn = false
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        if let customFont = UIFont(name: "LilitaOne", size: 40) {
+            label.font = customFont
+        }
+        label.text = "FreeBoard"
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
-    let contentView: UIView = {
+    private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -38,6 +52,14 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
         return textView
     }()
     
+    private let bodyView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let bodyTextView: UITextView = {
         let textView = UITextView()
         textView.isScrollEnabled = false
@@ -45,7 +67,6 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
             textView.font = customFont
         }
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.layer.borderWidth = 1
         return textView
     }()
     
@@ -84,6 +105,38 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
         return button
     }()
     
+    private let anonymousSwitchLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Anonymous On"
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let commentsSwitchLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Comments On"
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let anonymousSwitch: UIButton = {
+        let button = UIButton()
+        button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.borderWidth = 1
+        return button
+    }()
+    
+    private let commentsSwitch: UIButton = {
+        let button = UIButton()
+        button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.borderWidth = 1
+        return button
+    }()
+    
     private let addPhotoButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "Image_Post_Button"), for: .normal)
@@ -93,16 +146,24 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(titleLabel)
         contentView.addSubview(titleTextView)
-        contentView.addSubview(bodyTextView)
+        contentView.addSubview(bodyView)
+        bodyView.addSubview(bodyTextView)
         titleTextView.addSubview(titlePlaceholderLabel)
         bodyTextView.addSubview(bodyPlaceholderLabel)
         contentView.addSubview(tableView)
         contentView.addSubview(postButton)
-        contentView.addSubview(addPhotoButton)
+        bodyView.addSubview(anonymousSwitchLabel)
+        bodyView.addSubview(commentsSwitchLabel)
+        bodyView.addSubview(anonymousSwitch)
+        bodyView.addSubview(commentsSwitch)
+        bodyView.addSubview(addPhotoButton)
         view.backgroundColor = UIColor(rgb: 0xFCFFE7)
+        
         setupConstraints()
         
         tableView.delegate = self
@@ -115,6 +176,8 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(didTapCancel))
+        anonymousSwitch.addTarget(self, action: #selector(didTapAnonymousSwitch), for: .touchUpInside)
+        commentsSwitch.addTarget(self, action: #selector(didTapCommentsSwitch), for: .touchUpInside)
         postButton.addTarget(self, action: #selector(didTapPost), for: .touchUpInside)
         addPhotoButton.addTarget(self, action: #selector(didTapAddPhoto), for: .touchUpInside)
     }
@@ -125,6 +188,8 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
         bodyPlaceholderLabel.sizeToFit()
         titlePlaceholderLabel.frame.origin = CGPoint(x: 5, y: 8)
         bodyPlaceholderLabel.frame.origin = CGPoint(x: 5, y: 3)
+        
+        postButton.layer.cornerRadius = postButton.height/2
     }
         
     private func setupConstraints() {
@@ -132,6 +197,7 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
         tableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 0)
         
         let buttonSize: CGFloat = 58
+        let switchSize: CGFloat = 16
         addPhotoButton.frame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
         addPhotoButton.layer.cornerRadius = buttonSize/2
         
@@ -147,36 +213,81 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            titleTextView.heightAnchor.constraint(equalToConstant: 54),
+            titleLabel.widthAnchor.constraint(equalToConstant: titleLabel.width),
+            titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.height),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            
+            titleTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: 42),
             titleTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             titleTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            titleTextView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 80),
+            titleTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
             
-            bodyTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: 484),
-            bodyTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            bodyTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            bodyTextView.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 16),
+            bodyView.heightAnchor.constraint(greaterThanOrEqualToConstant: 465),
+            bodyView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            bodyView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            bodyView.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 16),
+            
+            anonymousSwitchLabel.leadingAnchor.constraint(equalTo: bodyView.leadingAnchor, constant: 7),
+            anonymousSwitchLabel.bottomAnchor.constraint(equalTo: commentsSwitchLabel.topAnchor, constant: -7),
+            
+            commentsSwitchLabel.leadingAnchor.constraint(equalTo: bodyView.leadingAnchor, constant: 7),
+            commentsSwitchLabel.bottomAnchor.constraint(equalTo: bodyView.bottomAnchor, constant: -7),
+            
+//            bodyTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: 465),
+            bodyTextView.leadingAnchor.constraint(equalTo: bodyView.leadingAnchor),
+            bodyTextView.trailingAnchor.constraint(equalTo: bodyView.trailingAnchor),
+            bodyTextView.topAnchor.constraint(equalTo: bodyView.topAnchor),
+            bodyTextView.bottomAnchor.constraint(equalTo: anonymousSwitchLabel.topAnchor, constant: -20),
                         
             tableViewHeightConstraint!,
             tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            tableView.topAnchor.constraint(equalTo: bodyTextView.bottomAnchor, constant: 30),
+            tableView.topAnchor.constraint(equalTo: bodyView.bottomAnchor, constant: 30),
             
             postButton.heightAnchor.constraint(equalToConstant: 41),
             postButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 45),
             postButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -45),
-            postButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 30),
+            postButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 15),
             postButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+                        
+            anonymousSwitch.centerYAnchor.constraint(equalTo: anonymousSwitchLabel.centerYAnchor),
+            anonymousSwitch.widthAnchor.constraint(equalToConstant: switchSize),
+            anonymousSwitch.heightAnchor.constraint(equalToConstant: switchSize),
+            anonymousSwitch.leadingAnchor.constraint(equalTo: anonymousSwitchLabel.trailingAnchor, constant: 5),
             
+            commentsSwitch.centerXAnchor.constraint(equalTo: anonymousSwitch.centerXAnchor),
+            commentsSwitch.centerYAnchor.constraint(equalTo: commentsSwitchLabel.centerYAnchor),
+            commentsSwitch.widthAnchor.constraint(equalToConstant: switchSize),
+            commentsSwitch.heightAnchor.constraint(equalToConstant: switchSize),
+
             addPhotoButton.widthAnchor.constraint(equalToConstant: buttonSize),
             addPhotoButton.heightAnchor.constraint(equalToConstant: buttonSize),
-            addPhotoButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -27),
-            addPhotoButton.bottomAnchor.constraint(equalTo: bodyTextView.bottomAnchor, constant: -33)
+            addPhotoButton.trailingAnchor.constraint(equalTo: bodyView.trailingAnchor, constant: -7),
+            addPhotoButton.bottomAnchor.constraint(equalTo: bodyView.bottomAnchor, constant: -7)
         ])
     }
     
     @objc private func didTapCancel() {
         dismiss(animated: true)
+    }
+    
+    @objc private func didTapAnonymousSwitch() {
+        if anonymousOn == false {
+            anonymousSwitch.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        } else {
+            anonymousSwitch.setBackgroundImage(nil, for: .normal)
+        }
+        anonymousOn.toggle()
+    }
+    
+    @objc private func didTapCommentsSwitch() {
+        if commentsOn == false {
+            commentsSwitch.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        } else {
+            commentsSwitch.setBackgroundImage(nil, for: .normal)
+        }
+        commentsOn.toggle()
     }
     
     @objc private func didTapPost() {
@@ -209,8 +320,8 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
         FreeBoardManager.shared.postRequest(
             title: self.titleTextView.text ?? "No Title",
             content: self.bodyTextView.text ?? " ",
-            isAnon: false,    // (Mock)
-            commentOn: true,
+            isAnon: anonymousOn,
+            commentOn: commentsOn,
             courseId: nil,
             postType: "FREE",
             reviewScore: nil,

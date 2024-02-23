@@ -66,8 +66,11 @@ class ProfileViewController: UIViewController {
             ProfileCellModel(title: "My Posts") { [weak self] in
                 self?.didTapMyPosts()
             },
-            ProfileCellModel(title: "Favorite Posts") { [weak self] in
-                self?.didTapFavoritePosts()
+            ProfileCellModel(title: "Liked Posts") { [weak self] in
+                self?.didTapLikedPosts()
+            },
+            ProfileCellModel(title: "Scrapped Posts") { [weak self] in
+                self?.didTapScrappedPosts()
             },
             ProfileCellModel(title: "My Comments") { [weak self] in
                 self?.didTapMyComments()
@@ -101,8 +104,14 @@ class ProfileViewController: UIViewController {
         
     }
     
-    private func didTapFavoritePosts() {
-        
+    private func didTapLikedPosts() {
+        let vc = LikedPostsViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func didTapScrappedPosts() {
+        let vc = ScrappedPostsViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func didTapMyComments() {

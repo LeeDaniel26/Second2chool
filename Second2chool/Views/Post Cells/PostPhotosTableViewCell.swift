@@ -88,7 +88,7 @@ class PostPhotosTableViewCell: UITableViewCell {
     private func getImageFromURL(imageURL: URL, completed: @escaping (UIImage) -> ())  {
         let task = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
             guard let data = data else {
-                print(error)
+                print(String(describing: error))
                 return
             }
             if let image  = UIImage(data: data) {

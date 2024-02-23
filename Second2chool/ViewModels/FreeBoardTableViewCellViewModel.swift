@@ -9,6 +9,7 @@ import Foundation
 
 struct FreeBoardTableViewCellViewModel {
     let title: String
+    let content: String
     let subtitle: String
     let likesCount: String
     let commentsCount: String

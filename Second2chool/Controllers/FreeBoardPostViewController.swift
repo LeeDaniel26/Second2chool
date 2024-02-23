@@ -236,7 +236,7 @@ class FreeBoardPostViewController: UIViewController, UITableViewDelegate, UITabl
             .postPhotos(viewModel: PostPhotosViewModel(
                 photoList: post.data.photoList )),
             .likesCount(viewModel: PostLikesCollectionViewCellViewModel(
-                likesCount: "10000",
+                likesCount: "\(post.data.likeCnt)",
                 commentsCount: "\(post.data.commentCnt)")),
         ]
         

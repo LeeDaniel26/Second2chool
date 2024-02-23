@@ -68,6 +68,8 @@
 		6B97B40E2B7186E40065DFFD /* SinglePostDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B97B40D2B7186E40065DFFD /* SinglePostDatabase.swift */; };
 		6BB4FADE29FD078A0044EAD2 /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4FADD29FD078A0044EAD2 /* LoginData.swift */; };
 		6BB4FAE029FD0BC60044EAD2 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */; };
+		6BB72DBE2B86329D00B06B39 /* LikedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB72DBD2B86329D00B06B39 /* LikedPostsViewController.swift */; };
+		6BB72DC22B86C31E00B06B39 /* ScrappedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB72DC12B86C31E00B06B39 /* ScrappedPostsViewController.swift */; };
 		6BC3E22829BF6EFF00228C5D /* FreeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */; };
 		6BC3E22A29BF70C000228C5D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3E22929BF70C000228C5D /* Message.swift */; };
 		6BD2B47529DC870D00CFCB0A /* FreeBoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */; };
@@ -140,6 +142,8 @@
 		6B97B40D2B7186E40065DFFD /* SinglePostDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePostDatabase.swift; sourceTree = "<group>"; };
 		6BB4FADD29FD078A0044EAD2 /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
 		6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		6BB72DBD2B86329D00B06B39 /* LikedPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPostsViewController.swift; sourceTree = "<group>"; };
+		6BB72DC12B86C31E00B06B39 /* ScrappedPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedPostsViewController.swift; sourceTree = "<group>"; };
 		6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardViewController.swift; sourceTree = "<group>"; };
 		6BC3E22929BF70C000228C5D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardManager.swift; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 				6B7ACE232B70DB1300470B20 /* FreeBoardPostViewController.swift */,
 				6B7220EB2B7F528C005071E5 /* CameraViewController.swift */,
 				6B6336BE2B800760002F37AB /* WritePostViewController.swift */,
+				6BB72DBD2B86329D00B06B39 /* LikedPostsViewController.swift */,
+				6BB72DC12B86C31E00B06B39 /* ScrappedPostsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -517,6 +523,7 @@
 				6B24281F29A31DF5003EFB48 /* LoginViewController.swift in Sources */,
 				6B60F5A02A7079DC007FAFEF /* ImageData.swift in Sources */,
 				6B7ACE2E2B71029200470B20 /* PostCellType.swift in Sources */,
+				6BB72DBE2B86329D00B06B39 /* LikedPostsViewController.swift in Sources */,
 				6BC3E22829BF6EFF00228C5D /* FreeBoardViewController.swift in Sources */,
 				6B60F5A72A7091D6007FAFEF /* CommentReplyCell.swift in Sources */,
 				6B75FC3329BFA4C100090B76 /* PostViewController.swift in Sources */,
@@ -524,6 +531,7 @@
 				6B6336C52B80DC30002F37AB /* PostPhotosViewModel.swift in Sources */,
 				40CAF8AA2A00F7DB00B4252F /* SignUpViewController.swift in Sources */,
 				6BC3E22A29BF70C000228C5D /* Message.swift in Sources */,
+				6BB72DC22B86C31E00B06B39 /* ScrappedPostsViewController.swift in Sources */,
 				6B6336C32B80DBF0002F37AB /* PostPhotosTableViewCell.swift in Sources */,
 				6B97B40E2B7186E40065DFFD /* SinglePostDatabase.swift in Sources */,
 				6BB4FAE029FD0BC60044EAD2 /* LoginManager.swift in Sources */,
