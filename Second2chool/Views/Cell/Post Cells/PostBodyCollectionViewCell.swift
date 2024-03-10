@@ -21,9 +21,16 @@ class PostBodyCollectionViewCell: UITableViewCell {
         return label
     }()
     
+    private let paddingView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(bodyLabel)
+        contentView.addSubview(paddingView)
         contentView.backgroundColor = UIColor(rgb: 0xFCFFE7)
         setupConstraints()
     }
@@ -38,7 +45,11 @@ class PostBodyCollectionViewCell: UITableViewCell {
             bodyLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: labelPadding),
             bodyLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -labelPadding),
             bodyLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            bodyLabel.bottomAnchor.constraint(equalTo: paddingView.topAnchor),
+            
+            paddingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            paddingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            paddingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -200)
         ])
     }
     

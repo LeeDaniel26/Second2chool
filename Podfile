@@ -12,6 +12,8 @@ target 'Second2chool' do
   pod 'GoogleSignIn'
   pod 'IQKeyboardManagerSwift'
   pod 'SDWebImage'
+  pod 'Elliotable'
   pod 'SwipeCellKit'
+  pod 'DropDown'
 
 end

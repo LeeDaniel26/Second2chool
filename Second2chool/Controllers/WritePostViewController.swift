@@ -207,11 +207,11 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             titleLabel.widthAnchor.constraint(equalToConstant: titleLabel.width),
             titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.height),
@@ -291,27 +291,26 @@ class WritePostViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc private func didTapPost() {
-        if photoURLString.count == 0 {
-            configurePost()
-            dismiss(animated: true)
+        postImage(x: 0)
+    }
+    
+    private func postImage(x: Int) {
+        if x == self.photoURLString.count {
+            self.configurePost()
+            self.dismiss(animated: true)
             return
         }
-        for url in photoURLString {
-            ImageManager.shared.getPresignedRequest() { decodedData in
-                guard let decodedData = decodedData else {
-                    return
+        ImageManager.shared.getPresignedRequest() { decodedData in
+            guard let decodedData = decodedData else {
+                return
+            }
+            let data = decodedData.data
+            ImageManager.shared.putPresignedRequest(with: self.photoURLString[x], data: data) {
+                if let index = data.firstIndex(of: "?") {
+                    let urlString = String(data[..<index])
+                    self.photoList.append(urlString)
                 }
-                let data = decodedData.data
-                ImageManager.shared.putPresignedRequest(with: url, data: data) {
-                    if let index = data.firstIndex(of: "?") {
-                        let urlString = String(data[..<index])
-                        self.photoList.append(urlString)
-                    }
-                    if url == self.photoURLString.last {
-                        self.configurePost()
-                        self.dismiss(animated: true)
-                    }
-                }
+                self.postImage(x: x+1)
             }
         }
     }

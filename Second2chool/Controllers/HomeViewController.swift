@@ -41,13 +41,20 @@ class HomeViewController: UIViewController {
     
     private func handleNotAuthenticated() {
         // Check auth status
-        if Auth.auth().currentUser == nil,
+        if Auth.auth().currentUser == nil ||
             GIDSignIn.sharedInstance.currentUser == nil {
+            
+            print("$$$$$$$$$$$$$$$$$ Auth.auth(): \(Auth.auth().currentUser)")
+            print("$$$$$$$$$$$$$$$$$ GIDSignIn: \(GIDSignIn.sharedInstance.currentUser)")
             // Show login
             performSegue(withIdentifier: "HomeToLogin", sender: self)
         }
     }
 
+    @IBAction func didTapTimeTable(_ sender: UIButton) {
+        let vc = TimeTableViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     @IBAction func didTapProfile(_ sender: UIBarButtonItem) {
         let vc = ProfileViewController()

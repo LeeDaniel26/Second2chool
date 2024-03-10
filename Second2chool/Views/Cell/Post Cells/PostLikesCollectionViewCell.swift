@@ -26,7 +26,7 @@ class PostLikesCollectionViewCell: UITableViewCell {
         }
         return label
     }()
-    
+        
     private let commentsImage: UIImageView = {
         var imageView = UIImageView()
         let image = UIImage(systemName: "bubble.left.and.bubble.right",

@@ -42,8 +42,8 @@ class FreeBoardPostViewController: UIViewController, UITableViewDelegate, UITabl
             forCellReuseIdentifier: PostBodyCollectionViewCell.identifier
         )
         tableView.register(
-            PostPhotosTableViewCell.self,
-            forCellReuseIdentifier: PostPhotosTableViewCell.identifier
+            PhotoTableViewCell.self,
+            forCellReuseIdentifier: PhotoTableViewCell.identifier
         )
         tableView.register(
             PostLikesCollectionViewCell.self,
@@ -328,11 +328,12 @@ class FreeBoardPostViewController: UIViewController, UITableViewDelegate, UITabl
             return cell
         case .postPhotos(let viewModel):
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: PostPhotosTableViewCell.identifier,
+                withIdentifier: PhotoTableViewCell.identifier,
                 for: indexPath
-            ) as? PostPhotosTableViewCell else {
+            ) as? PhotoTableViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .likesCount(let viewModel):
@@ -430,3 +431,11 @@ extension FreeBoardPostViewController: CommentBarViewDelegate {
     }
 }
 
+extension FreeBoardPostViewController: PhotoTableViewCellDelegate {
+    func didSelectCell(from: PhotoTableViewCell, at index: Int, with images: [String]) {        
+        let vc = FullscreenImageViewController()
+        vc.currentImageIndex = index
+        vc.imageURL = images
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}

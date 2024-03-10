@@ -70,10 +70,22 @@
 		6BB4FAE029FD0BC60044EAD2 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */; };
 		6BB72DBE2B86329D00B06B39 /* LikedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB72DBD2B86329D00B06B39 /* LikedPostsViewController.swift */; };
 		6BB72DC22B86C31E00B06B39 /* ScrappedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB72DC12B86C31E00B06B39 /* ScrappedPostsViewController.swift */; };
+		6BB72DC42B88694E00B06B39 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB72DC32B88694D00B06B39 /* TimeTableViewController.swift */; };
+		6BB72DC62B8C960500B06B39 /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB72DC52B8C960500B06B39 /* PhotoTableViewCell.swift */; };
+		6BB72DC82B8CDD4100B06B39 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB72DC72B8CDD4100B06B39 /* PhotoCollectionViewCell.swift */; };
+		6BB72DCA2B91973400B06B39 /* FullscreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB72DC92B91973400B06B39 /* FullscreenImageViewController.swift */; };
 		6BC3E22829BF6EFF00228C5D /* FreeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */; };
 		6BC3E22A29BF70C000228C5D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3E22929BF70C000228C5D /* Message.swift */; };
 		6BD2B47529DC870D00CFCB0A /* FreeBoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */; };
 		6BD2B47929DCAC7200CFCB0A /* FreeBoardDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD2B47829DCAC7200CFCB0A /* FreeBoardDatabase.swift */; };
+		6BD9AAC62B93BCAC00C1236A /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9AAC52B93BCAC00C1236A /* AddScheduleViewController.swift */; };
+		6BD9AACA2B93C4FB00C1236A /* TimeTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9AAC92B93C4FB00C1236A /* TimeTableManager.swift */; };
+		6BD9AACC2B93D1C800C1236A /* TimeTableDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9AACB2B93D1C800C1236A /* TimeTableDatabase.swift */; };
+		6BD9AACE2B98067300C1236A /* NotificationCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9AACD2B98067300C1236A /* NotificationCellType.swift */; };
+		6BD9AAD02B9809B000C1236A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9AACF2B9809B000C1236A /* NotificationManager.swift */; };
+		6BD9AAD22B980AEF00C1236A /* NotificationDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9AAD12B980AEF00C1236A /* NotificationDatabase.swift */; };
+		6BD9AAD42B98112600C1236A /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9AAD32B98112600C1236A /* NotificationViewController.swift */; };
+		6BD9AAD72B98184A00C1236A /* CommentNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9AAD62B98184A00C1236A /* CommentNotificationTableViewCell.swift */; };
 		6BF2951429BCD1B7008097F0 /* MeriendaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BF2951329BCD1B7008097F0 /* MeriendaOne-Regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -144,10 +156,22 @@
 		6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		6BB72DBD2B86329D00B06B39 /* LikedPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPostsViewController.swift; sourceTree = "<group>"; };
 		6BB72DC12B86C31E00B06B39 /* ScrappedPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrappedPostsViewController.swift; sourceTree = "<group>"; };
+		6BB72DC32B88694D00B06B39 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
+		6BB72DC52B8C960500B06B39 /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
+		6BB72DC72B8CDD4100B06B39 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		6BB72DC92B91973400B06B39 /* FullscreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenImageViewController.swift; sourceTree = "<group>"; };
 		6BC3E22729BF6EFF00228C5D /* FreeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardViewController.swift; sourceTree = "<group>"; };
 		6BC3E22929BF70C000228C5D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardManager.swift; sourceTree = "<group>"; };
 		6BD2B47829DCAC7200CFCB0A /* FreeBoardDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeBoardDatabase.swift; sourceTree = "<group>"; };
+		6BD9AAC52B93BCAC00C1236A /* AddScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
+		6BD9AAC92B93C4FB00C1236A /* TimeTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableManager.swift; sourceTree = "<group>"; };
+		6BD9AACB2B93D1C800C1236A /* TimeTableDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableDatabase.swift; sourceTree = "<group>"; };
+		6BD9AACD2B98067300C1236A /* NotificationCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellType.swift; sourceTree = "<group>"; };
+		6BD9AACF2B9809B000C1236A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		6BD9AAD12B980AEF00C1236A /* NotificationDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDatabase.swift; sourceTree = "<group>"; };
+		6BD9AAD32B98112600C1236A /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		6BD9AAD62B98184A00C1236A /* CommentNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		6BF2951329BCD1B7008097F0 /* MeriendaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MeriendaOne-Regular.ttf"; sourceTree = "<group>"; };
 		852C43F76DB93873EB74C8A3 /* Pods_Second2chool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Second2chool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -248,6 +272,8 @@
 				6B7D2B2F2ACDDE6500DA3670 /* ImagePresignedData.swift */,
 				6BB4FADD29FD078A0044EAD2 /* LoginData.swift */,
 				6B60F59F2A7079DC007FAFEF /* ImageData.swift */,
+				6BD9AACB2B93D1C800C1236A /* TimeTableDatabase.swift */,
+				6BD9AAD12B980AEF00C1236A /* NotificationDatabase.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -261,6 +287,8 @@
 				6BD2B47429DC870D00CFCB0A /* FreeBoardManager.swift */,
 				6BB4FADF29FD0BC60044EAD2 /* LoginManager.swift */,
 				6B60F59C2A707685007FAFEF /* ImageManager.swift */,
+				6BD9AAC92B93C4FB00C1236A /* TimeTableManager.swift */,
+				6BD9AACF2B9809B000C1236A /* NotificationManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -301,8 +329,7 @@
 		6B7ACE2F2B71057B00470B20 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6B7ACE302B71059800470B20 /* Post Cells */,
-				6B97B3FD2B715F440065DFFD /* Comment Cell */,
+				6BD9AAD52B98181B00C1236A /* Cell */,
 				6B97B4052B7165320065DFFD /* CommentBarView.swift */,
 				6B97B4072B71664E0065DFFD /* IGTextField.swift */,
 				6B6336B82B7FDB6C002F37AB /* ProfileHeaderView.swift */,
@@ -319,6 +346,8 @@
 				6B7ACE372B712F1300470B20 /* PostLikesCollectionViewCell.swift */,
 				6B6336C22B80DBF0002F37AB /* PostPhotosTableViewCell.swift */,
 				6B6336BA2B80014C002F37AB /* WritePostPhotoTableViewCell.swift */,
+				6BB72DC52B8C960500B06B39 /* PhotoTableViewCell.swift */,
+				6BB72DC72B8CDD4100B06B39 /* PhotoCollectionViewCell.swift */,
 			);
 			path = "Post Cells";
 			sourceTree = "<group>";
@@ -346,6 +375,10 @@
 				6B6336BE2B800760002F37AB /* WritePostViewController.swift */,
 				6BB72DBD2B86329D00B06B39 /* LikedPostsViewController.swift */,
 				6BB72DC12B86C31E00B06B39 /* ScrappedPostsViewController.swift */,
+				6BB72DC32B88694D00B06B39 /* TimeTableViewController.swift */,
+				6BD9AAC52B93BCAC00C1236A /* AddScheduleViewController.swift */,
+				6BB72DC92B91973400B06B39 /* FullscreenImageViewController.swift */,
+				6BD9AAD32B98112600C1236A /* NotificationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -374,8 +407,19 @@
 				6B4871432B855A6700889E0F /* Database */,
 				6B7ACE292B7100DF00470B20 /* Comment.swift */,
 				6B7ACE2D2B71029200470B20 /* PostCellType.swift */,
+				6BD9AACD2B98067300C1236A /* NotificationCellType.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		6BD9AAD52B98181B00C1236A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6B7ACE302B71059800470B20 /* Post Cells */,
+				6B97B3FD2B715F440065DFFD /* Comment Cell */,
+				6BD9AAD62B98184A00C1236A /* CommentNotificationTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -513,8 +557,10 @@
 				6B48714A2B855C4D00889E0F /* Constants.swift in Sources */,
 				6B97B3FF2B715F710065DFFD /* CommentReplyCollectionViewCell.swift in Sources */,
 				6B7ACE342B71219000470B20 /* PostBodyCollectionViewCell.swift in Sources */,
+				6BD9AAC62B93BCAC00C1236A /* AddScheduleViewController.swift in Sources */,
 				6B4871462B855AB100889E0F /* UserDatabase.swift in Sources */,
 				6B97B40C2B7183550065DFFD /* SinglePostManager.swift in Sources */,
+				6BD9AACC2B93D1C800C1236A /* TimeTableDatabase.swift in Sources */,
 				6B6336BB2B80014C002F37AB /* WritePostPhotoTableViewCell.swift in Sources */,
 				6B60F59D2A707685007FAFEF /* ImageManager.swift in Sources */,
 				6B97B3FC2B71449F0065DFFD /* PostBodyCollectionViewCellViewModel.swift in Sources */,
@@ -522,20 +568,27 @@
 				6B6336B92B7FDB6C002F37AB /* ProfileHeaderView.swift in Sources */,
 				6B24281F29A31DF5003EFB48 /* LoginViewController.swift in Sources */,
 				6B60F5A02A7079DC007FAFEF /* ImageData.swift in Sources */,
+				6BB72DC42B88694E00B06B39 /* TimeTableViewController.swift in Sources */,
 				6B7ACE2E2B71029200470B20 /* PostCellType.swift in Sources */,
 				6BB72DBE2B86329D00B06B39 /* LikedPostsViewController.swift in Sources */,
 				6BC3E22829BF6EFF00228C5D /* FreeBoardViewController.swift in Sources */,
+				6BB72DC82B8CDD4100B06B39 /* PhotoCollectionViewCell.swift in Sources */,
 				6B60F5A72A7091D6007FAFEF /* CommentReplyCell.swift in Sources */,
 				6B75FC3329BFA4C100090B76 /* PostViewController.swift in Sources */,
 				403ADD602A02575200A7B53D /* HomeViewController.swift in Sources */,
 				6B6336C52B80DC30002F37AB /* PostPhotosViewModel.swift in Sources */,
 				40CAF8AA2A00F7DB00B4252F /* SignUpViewController.swift in Sources */,
+				6BB72DCA2B91973400B06B39 /* FullscreenImageViewController.swift in Sources */,
 				6BC3E22A29BF70C000228C5D /* Message.swift in Sources */,
 				6BB72DC22B86C31E00B06B39 /* ScrappedPostsViewController.swift in Sources */,
+				6BD9AAD72B98184A00C1236A /* CommentNotificationTableViewCell.swift in Sources */,
 				6B6336C32B80DBF0002F37AB /* PostPhotosTableViewCell.swift in Sources */,
+				6BD9AAD42B98112600C1236A /* NotificationViewController.swift in Sources */,
 				6B97B40E2B7186E40065DFFD /* SinglePostDatabase.swift in Sources */,
 				6BB4FAE029FD0BC60044EAD2 /* LoginManager.swift in Sources */,
+				6BB72DC62B8C960500B06B39 /* PhotoTableViewCell.swift in Sources */,
 				6B7ACE382B712F1300470B20 /* PostLikesCollectionViewCell.swift in Sources */,
+				6BD9AAD02B9809B000C1236A /* NotificationManager.swift in Sources */,
 				6B6336BF2B800760002F37AB /* WritePostViewController.swift in Sources */,
 				6B7220EC2B7F528C005071E5 /* CameraViewController.swift in Sources */,
 				6B4AAB2E2B65B40D00091C27 /* ProfileViewController.swift in Sources */,
@@ -545,6 +598,7 @@
 				6B97B4062B7165320065DFFD /* CommentBarView.swift in Sources */,
 				6B24281B29A31DF5003EFB48 /* AppDelegate.swift in Sources */,
 				6B75FC2C29BF737D00090B76 /* BoardCell.swift in Sources */,
+				6BD9AAD22B980AEF00C1236A /* NotificationDatabase.swift in Sources */,
 				6B97B4022B7161010065DFFD /* CommentViewModel.swift in Sources */,
 				6B6336B72B7FDA34002F37AB /* ProfileHeaderViewModel.swift in Sources */,
 				6B97B4082B71664E0065DFFD /* IGTextField.swift in Sources */,
@@ -556,6 +610,8 @@
 				6BD2B47529DC870D00CFCB0A /* FreeBoardManager.swift in Sources */,
 				6B24281D29A31DF5003EFB48 /* SceneDelegate.swift in Sources */,
 				6B7ACE222B70DAC200470B20 /* PostLikesCollectionViewCellViewModel.swift in Sources */,
+				6BD9AACA2B93C4FB00C1236A /* TimeTableManager.swift in Sources */,
+				6BD9AACE2B98067300C1236A /* NotificationCellType.swift in Sources */,
 				6BB4FADE29FD078A0044EAD2 /* LoginData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

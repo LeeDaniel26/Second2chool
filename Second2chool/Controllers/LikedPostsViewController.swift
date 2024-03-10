@@ -20,8 +20,8 @@ class LikedPostsViewController: UIViewController, UITextFieldDelegate {
     private let searchBarField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Search..."
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 1
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
